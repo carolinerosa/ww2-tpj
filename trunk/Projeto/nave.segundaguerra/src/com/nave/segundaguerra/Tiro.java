@@ -25,8 +25,8 @@ public class Tiro {
 		}
 	}
 	public void DrawTiro(Canvas canvas, Bitmap minhaArma, Paint paint){
-		posicaoX = minhaArma.getWidth();
-		posicaoY = minhaArma.getHeight() - posicaoInicialY;
+		posicaoX = minhaArma.getWidth() + 15;
+		posicaoY = minhaArma.getHeight() / 2 - posicaoInicialY;
 		canvas.drawBitmap(tiro, posicaoX, posicaoY, paint);
 	}
 	void update(){
