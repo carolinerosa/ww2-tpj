@@ -1,0 +1,52 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MenuActivity" >
+
+    
+    <Button
+        android:id="@+id/Batalha"
+        android:onClick="Click_Batalha"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="54dp"
+        android:text="Batalha"
+        android:width="200dp" />
+
+    <Button
+        android:id="@+id/Creditos"
+        android:onClick="Click_Creditos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Batalha"
+        android:layout_centerHorizontal="true"
+        android:text="Créditos"
+        android:width="200dp" />
+
+    <Button
+        android:id="@+id/Dicas"
+         android:onClick="Click_Dicas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/Creditos"
+        android:layout_centerHorizontal="true"
+        android:text="Dicas"
+        android:width="200dp" />
+
+    <TextView
+        android:id="@+id/Titulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:text="Segunda Guerra"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>
