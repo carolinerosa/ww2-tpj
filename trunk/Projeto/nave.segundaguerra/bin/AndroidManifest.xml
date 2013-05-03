@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.nave.segundaguerra"
     android:versionCode="1"
@@ -12,13 +13,34 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".MainActivity"
+            android:name="com.nave.segundaguerra.MainActivity"
+            android:screenOrientation="landscape"
             android:label="@string/title_activity_main" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="com.nave.segundaguerra.GrupoRicardo_activity"
+            android:label="@string/title_activity_grupo_ricardo_activity" 
+            android:screenOrientation="landscape">
+        </activity>
+        <activity
+            android:name="com.nave.segundaguerra.BatalhaActivity"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_batalha" >
+        </activity>
+        <activity
+            android:name="com.nave.segundaguerra.CreditosActivity"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_creditos" >
+        </activity>
+        <activity
+            android:name="com.nave.segundaguerra.DicasActivity"
+            android:screenOrientation="landscape"
+            android:label="@string/title_activity_dicas" >
         </activity>
     </application>
 
