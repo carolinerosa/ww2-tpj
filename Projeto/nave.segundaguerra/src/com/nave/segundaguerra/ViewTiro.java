@@ -35,6 +35,7 @@ public class ViewTiro extends View implements Runnable {
 	private int dx;
 	private int dy;
 	List<Tiro> listTiro = new CopyOnWriteArrayList(); 
+	public boolean removeu = true;
 	public ViewTiro(Context context) {
 		super(context);
 
@@ -84,11 +85,17 @@ public class ViewTiro extends View implements Runnable {
 		} else {
 			Log.e(MainActivity.TAG, "Alguem roubou a MONA LISA !!!");
 		}
+		
+		    switch(removeu){ 
+		   
+		    case true:
 			for(Tiro t : listTiro){  
 		          t.DrawTiro(canvas, monaLisa, paint);
 
 					Log.e(MainActivity.TAG, "Desenho tiro !!");
-		    }
+		    } removeu = false; break;
+		    
+		    case false : break;}
 	}
 
 	@Override
@@ -115,6 +122,7 @@ public class ViewTiro extends View implements Runnable {
 				Log.e(MainActivity.TAG, "Atirou update()");
 				if(t.posicaoY < 0){
 					listTiro.remove(t);
+					removeu = true;
 				}
 			}
 	    }
