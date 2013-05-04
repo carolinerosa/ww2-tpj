@@ -7,23 +7,49 @@ import android.graphics.PointF;
 
 public class Player 
 {
-	private PointF position;
-	private PointF destinationPosition;
+	private PointF position = new PointF();
+	private PointF destinationPosition = new PointF();
 	private Paint paint = new Paint();
 	private float speed = 3;
 
 	public Player(PointF position)
 	{
-		this.position = position;
 		paint.setColor(Color.MAGENTA);
+		
+		this.position = position;
+		destinationPosition = position;
 	}
 	
 	public void update()
 	{
 		moveTo(destinationPosition);
+		
+		//checa se está abaixo do ponto destino no eixo x
+				if(position.x < destinationPosition.x)
+				{
+					position.x += speed;
+				}
+				
+				//checa se está abaixo do ponto destino no eixo x
+				if(position.x > destinationPosition.x)
+				{
+					position.x -= speed;
+				}
+				
+				//checa se está abaixo do ponto destino no eixo y
+				if(position.y < destinationPosition.y)
+				{
+					position.y += speed;
+				}
+						
+				//checa se está abaixo do ponto destino no eixo y
+				if(position.y > destinationPosition.y)
+				{
+					position.y -= speed;
+				}
 	}
 	
-	public void Draw(Canvas canvas)
+	public void draw(Canvas canvas)
 	{
 		canvas.drawCircle(position.x, position.y, 10, paint);
 	}
@@ -36,6 +62,5 @@ public class Player
 	public void moveTo(PointF destinationPosition) 
 	{
 		this.destinationPosition = destinationPosition;
-		setPosition(destinationPosition);	
 	}
 }
