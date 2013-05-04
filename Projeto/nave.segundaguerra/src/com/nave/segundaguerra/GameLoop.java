@@ -10,7 +10,7 @@ import android.view.View;
 public class GameLoop extends View implements Runnable 
 {
 	private static final int INTERVAL = 30;
-	private static final String TAG = "Segunda Guerra";
+	public static final String TAG = "Segunda Guerra";
 	private boolean running = true;
 	public Player player;
 	
@@ -22,12 +22,22 @@ public class GameLoop extends View implements Runnable
 	
 	public void start()
 	{
+		setFocusableInTouchMode(true);
+		setClickable(true);
+		setLongClickable(true);
+		
 		player = new Player(new PointF(100, 100));
+		running = true;
+		
+		Thread gameLoop = new Thread(this);
+		gameLoop.start();
 	}
 
 	@Override
 	public void run() 
 	{
+		Log.i(TAG, "iniciou a trhead");
+		
 		while (running) 
 		{
 			try 
@@ -46,7 +56,10 @@ public class GameLoop extends View implements Runnable
 
 	private void update() 
 	{
-		player.update();
+		if(player != null)
+		{
+			player.update();
+		}
 	}
 	
 	@Override
@@ -54,23 +67,35 @@ public class GameLoop extends View implements Runnable
 	{
 		super.draw(canvas);
 		
-		Log.i(TAG, "pintou");
-		
 		if(player != null)
 		{
-			player.Draw(canvas);
+			player.draw(canvas);
 		}
 	}
 	
+	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		if(event.getAction() == MotionEvent.ACTION_DOWN)
+		int action = event.getActionMasked();
+		PointF destinationPosition;
+		
+		if(player != null)
 		{
-			PointF destinationPosition = new PointF(event.getX(), event.getY());
-			player.moveTo(destinationPosition);
-			
-			Log.i(TAG, "pegou o toquinho boladao");
-			
+			switch (action) 
+			{
+			case MotionEvent.ACTION_DOWN:
+				destinationPosition = new PointF(event.getX(), event.getY());
+				player.moveTo(destinationPosition);
+				break;
+				
+			case MotionEvent.ACTION_MOVE:
+				destinationPosition = new PointF(event.getX(), event.getY());
+				player.moveTo(destinationPosition);
+				break;
+				
+			default:
+				break;
+			}
 		}
 		
 		return super.onTouchEvent(event);
