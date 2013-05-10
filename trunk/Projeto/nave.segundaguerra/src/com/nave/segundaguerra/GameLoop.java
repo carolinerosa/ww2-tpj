@@ -1,5 +1,8 @@
 package com.nave.segundaguerra;
 
+import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
+
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.PointF;
@@ -13,6 +16,7 @@ public class GameLoop extends View implements Runnable
 	public static final String TAG = "Segunda Guerra";
 	private boolean running = true;
 	public Player player;
+	List<Tiro> listTiro = new CopyOnWriteArrayList(); 
 	
 	public GameLoop(Context context) 
 	{
@@ -33,7 +37,6 @@ public class GameLoop extends View implements Runnable
 		gameLoop.start();
 	}
 
-	@Override
 	public void run() 
 	{
 		Log.i(TAG, "iniciou a trhead");
@@ -59,6 +62,17 @@ public class GameLoop extends View implements Runnable
 		if(player != null)
 		{
 			player.update();
+			for(Tiro t : listTiro){
+				
+				if (t != null)
+				{
+		          t.update();
+					Log.e(BatalhaActivity.TAG, "Atirou update()");
+					if(t.posicaoY < 0){
+						listTiro.remove(t);
+					}
+				}
+		    }
 		}
 	}
 	
@@ -70,13 +84,20 @@ public class GameLoop extends View implements Runnable
 		if(player != null)
 		{
 			player.draw(canvas);
+			
+			for(Tiro t : listTiro)
+			{  
+		          t.DrawTiro(canvas,player.position.x,player.position.y);
+
+					Log.e("TAG", "Desenho tiro !!");
+		    }
 		}
 	}
 	
 	@Override
 	public boolean onTouchEvent(MotionEvent event)
 	{
-		int action = event.getActionMasked();
+		int action = event.getAction();
 		PointF destinationPosition;
 		
 		if(player != null)
@@ -91,6 +112,12 @@ public class GameLoop extends View implements Runnable
 			case MotionEvent.ACTION_MOVE:
 				destinationPosition = new PointF(event.getX(), event.getY());
 				player.moveTo(destinationPosition);
+				break;
+				
+			case MotionEvent.ACTION_POINTER_2_DOWN:
+				Tiro tiro = new Tiro(super.getContext(), player.position, event.getX(), event.getY());
+				listTiro.add(tiro);
+				
 				break;
 				
 			default:

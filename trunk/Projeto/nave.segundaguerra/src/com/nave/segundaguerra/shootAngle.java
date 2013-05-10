@@ -1,39 +1,43 @@
 package com.nave.segundaguerra;
 
 import android.content.Context;
+import android.graphics.PointF;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 
 public class shootAngle extends View {
 
-	float cx, cy, cw, ch;
-	float posX, posY;
+	float playerX, playerY, touchX, touchY;
+	PointF speed;
 	
-	private static float speed;
 	
-	public shootAngle(Context context) {
+	public shootAngle(Context context, float x, float y, float touchX, float touchY) {
 		super(context);
+		this.playerX = x;
+		this.playerY = y;
+		this.touchX = touchX;
+		this.touchY = touchY;
 	}
 
-	public boolean onTouchEvent(MotionEvent event) {
-		if (event.getAction() == MotionEvent.ACTION_DOWN) {
-			// Log.i(MainActivity.TAG, "down baby down !! ");
-			cx = event.getRawX();
-			cy = event.getRawY();
+
+	public PointF getSpeed()
+	{
+		float tempX = touchX - playerX;
+		float tempY = touchY - playerY;
+		
+		if (tempX > tempY)
+		{
+			speed.x = 3;
+			speed.y = tempY/tempX;
+		}else
+		{
+			speed.y = 3;
+			speed.x = tempX/tempY;
 		}
-
-		if (event.getAction() == MotionEvent.ACTION_POINTER_2_DOWN) {
-			cw = event.getRawX();
-			ch = event.getRawY();
-
-			posX = (cw - cx) * getSpeed();
-			posY = ((ch - cy) / posX) * getSpeed();
-		}
-		return super.onTouchEvent(event);
-	}
-
-	public static float getSpeed() {
+		
 		return speed;
 	}
+	
+	
 }

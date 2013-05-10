@@ -22,7 +22,8 @@ public class Nickname extends Activity {
 
 	}
 
-	public Nickname() {
+	public Nickname() 
+	{
 
 	}
 

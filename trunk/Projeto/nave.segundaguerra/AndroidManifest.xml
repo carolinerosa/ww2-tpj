@@ -22,11 +22,12 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
         <activity
-            android:name="com.nave.segundaguerra.GrupoRicardo_activity"
-            android:label="@string/title_activity_grupo_ricardo_activity" 
-            android:screenOrientation="landscape">
+            android:name="com.nave.segundaguerra.Nickname"
+            android:screenOrientation="landscape" >
         </activity>
+        
         <activity
             android:name="com.nave.segundaguerra.BatalhaActivity"
             android:screenOrientation="landscape"
