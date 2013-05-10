@@ -1,4 +1,4 @@
-package com.example.tiro;
+package com.nave.segundaguerra;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -15,13 +15,13 @@ public class Tiro {
 	private float posicaoInicialY;
 	float velocidadeTiro;
 	float posicaoY, posicaoX;
-	public Tiro(Context context, float velocidade){
-		this.velocidadeTiro = velocidade;
+	public Tiro(Context context){
+		this.velocidadeTiro = shootAngle.getSpeed();
 		try {
 			InputStream is = context.getAssets().open("quadros/monalisa.png");
 			tiro = BitmapFactory.decodeStream(is);
 		} catch (IOException e) {
-			Log.e(MainActivity.TAG, "Erro carregando imagem");
+			Log.e("hu3", "Erro carregando imagem");
 		}
 	}
 	public void DrawTiro(Canvas canvas, Bitmap minhaArma, Paint paint){

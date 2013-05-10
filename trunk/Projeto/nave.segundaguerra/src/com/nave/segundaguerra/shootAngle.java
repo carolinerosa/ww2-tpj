@@ -8,8 +8,10 @@ import android.view.View;
 public class shootAngle extends View {
 
 	float cx, cy, cw, ch;
-	float posX, posY, speed;
-
+	float posX, posY;
+	
+	private static float speed;
+	
 	public shootAngle(Context context) {
 		super(context);
 	}
@@ -25,10 +27,13 @@ public class shootAngle extends View {
 			cw = event.getRawX();
 			ch = event.getRawY();
 
-			posX = (cw - cx) * speed;
-			posY = ((ch - cy) / posX) * speed;
+			posX = (cw - cx) * getSpeed();
+			posY = ((ch - cy) / posX) * getSpeed();
 		}
 		return super.onTouchEvent(event);
 	}
 
+	public static float getSpeed() {
+		return speed;
+	}
 }
