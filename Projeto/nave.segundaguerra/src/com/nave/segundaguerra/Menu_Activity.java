@@ -1,29 +1,22 @@
-package com.nave.segundaguerra;
+package com.example.segundaguerramenu;
 
-import android.app.Activity;
-import android.content.Intent;
 import android.os.Bundle;
+import android.app.Activity;
+import android.view.Menu;
 
 public class Menu_Activity extends Activity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_menu);
 	}
-	
-	public void Click_Batalha(){
-		Intent intent = new Intent(Menu_Activity.this,BatalhaActivity.class);
-		startActivity(intent);
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		// Inflate the menu; this adds items to the action bar if it is present.
+		getMenuInflater().inflate(R.menu.menu, menu);
+		return true;
 	}
-	
-	public void Click_Creditos(){
-		Intent intent = new Intent(Menu_Activity.this,CreditosActivity.class);
-		startActivity(intent);
-	}
-	
-	public void Click_Dicas(){
-		Intent intent = new Intent(Menu_Activity.this,DicasActivity.class);
-		startActivity(intent);
-	}
-	
+
 }
