@@ -6,17 +6,24 @@ import android.view.Menu;
 
 public class Menu_Activity extends Activity {
 
-	@Override
+@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_menu);
 	}
-
-	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.menu, menu);
-		return true;
+	
+	public void Click_Batalha(){
+		Intent intent = new Intent(GrupoRicardo_activity.this,Nickname.class);
+		startActivity(intent);
+	}
+	
+	public void Click_Creditos(){
+		Intent intent = new Intent(GrupoRicardo_activity.this,CreditosActivity.class);
+		startActivity(intent);
+	}
+	
+	public void Click_Dicas(){
+		Intent intent = new Intent(GrupoRicardo_activity.this,DicasActivity.class);
+		startActivity(intent);
 	}
 
 }
