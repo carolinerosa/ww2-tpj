@@ -5,12 +5,17 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.PointF;
 
+
 public class Player 
 {
 	private PointF position = new PointF();
 	private PointF destinationPosition = new PointF();
 	private Paint paint = new Paint();
 	private float speed = 3;
+	
+	// Grupo do Thyago 
+	public static String name;
+	Nickname nick;
 
 	public Player(PointF position)
 	{
@@ -18,6 +23,10 @@ public class Player
 		
 		this.position = position;
 		destinationPosition = position;
+		
+		// Grupo do Thyago 
+		nick = new Nickname();
+		name = nick.setName();
 	}
 	
 	public void update()
