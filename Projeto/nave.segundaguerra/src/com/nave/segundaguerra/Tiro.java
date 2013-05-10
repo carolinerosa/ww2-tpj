@@ -8,28 +8,35 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
+import android.graphics.PointF;
 import android.util.Log;
 
 public class Tiro {
 	Bitmap tiro;
+	shootAngle shooter;
 	private float posicaoInicialY;
-	float velocidadeTiro;
+	float velocidadeX;
+	float velocidadeY;
 	float posicaoY, posicaoX;
-	public Tiro(Context context){
-		this.velocidadeTiro = shootAngle.getSpeed();
+	
+	public Tiro(Context context, PointF pos, float touchX, float touchY){
+		shooter = new shootAngle(context, pos.x, pos.y, touchX, touchY);
+		velocidadeX = shooter.getSpeed().x;
+		velocidadeY = shooter.getSpeed().y;
 		try {
-			InputStream is = context.getAssets().open("quadros/monalisa.png");
+			InputStream is = context.getAssets().open("projetil.png");
 			tiro = BitmapFactory.decodeStream(is);
 		} catch (IOException e) {
 			Log.e("hu3", "Erro carregando imagem");
 		}
 	}
-	public void DrawTiro(Canvas canvas, Bitmap minhaArma, Paint paint){
-		posicaoX = minhaArma.getWidth() + 15;
-		posicaoY = minhaArma.getHeight() / 2 - posicaoInicialY;
-		canvas.drawBitmap(tiro, posicaoX, posicaoY, paint);
+	public void DrawTiro(Canvas canvas, float posx, float posy){
+		posicaoX = posx + 15;
+		posicaoY = posy / 2;
+		canvas.drawBitmap(tiro, posicaoX, posicaoY, new Paint());
 	}
 	void update(){
-		posicaoInicialY += velocidadeTiro;
+		posicaoX += velocidadeX;
+		posicaoY += velocidadeY;
 	}
 }

@@ -8,7 +8,7 @@ import android.graphics.PointF;
 
 public class Player 
 {
-	private PointF position = new PointF();
+	public PointF position = new PointF();
 	private PointF destinationPosition = new PointF();
 	private Paint paint = new Paint();
 	private float speed = 3;
@@ -25,8 +25,8 @@ public class Player
 		destinationPosition = position;
 		
 		// Grupo do Thyago 
-		nick = new Nickname();
-		name = nick.setName();
+		//nick = new Nickname();
+		name = "";
 	}
 	
 	public void update()
