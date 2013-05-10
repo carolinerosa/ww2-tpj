@@ -1,4 +1,4 @@
-package com.example.tiro;
+package com.nave.segundaguerra;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -55,7 +55,7 @@ public class ViewTiro extends View implements Runnable {
 				iy2 = monaLisa.getHeight() / 2;
 			}
 		} catch (IOException e) {
-			Log.e(MainActivity.TAG, "Erro carregando imagem");
+			Log.e(BatalhaActivity.TAG, "Erro carregando imagem");
 		}
 
 		Thread thread = new Thread(this);
@@ -83,10 +83,10 @@ public class ViewTiro extends View implements Runnable {
 			canvas.drawText("dx : " + dx , 10, 60, paint);			
 			canvas.drawText("dy : " + dy , 10, 90, paint);*/
 		} else {
-			Log.e(MainActivity.TAG, "Alguem roubou a MONA LISA !!!");
+			Log.e(BatalhaActivity.TAG, "Alguem roubou a MONA LISA !!!");
 		}
 		
-		    switch(removeu){ 
+		    /*switch(removeu){ 
 		   
 		    case true:
 			for(Tiro t : listTiro){  
@@ -95,17 +95,20 @@ public class ViewTiro extends View implements Runnable {
 					Log.e(MainActivity.TAG, "Desenho tiro !!");
 		    } removeu = false; break;
 		    
-		    case false : break;}
+		    case false : break;}*/
+		for(Tiro t : listTiro){  
+		          t.DrawTiro(canvas, monaLisa, paint);
+
+					Log.e("TAG", "Desenho tiro !!");
+		    }
 	}
 
-	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		while (true) {
 			try {
 				Thread.sleep(time);
 			} catch (InterruptedException e) {
-				Log.e(MainActivity.TAG, "interrupcao do run()");
+				Log.e(BatalhaActivity.TAG, "interrupcao do run()");
 			}
 			update();
 			postInvalidate();
@@ -119,7 +122,7 @@ public class ViewTiro extends View implements Runnable {
 			if (t != null)
 			{
 	          t.update();
-				Log.e(MainActivity.TAG, "Atirou update()");
+				Log.e(BatalhaActivity.TAG, "Atirou update()");
 				if(t.posicaoY < 0){
 					listTiro.remove(t);
 					removeu = true;
@@ -143,10 +146,10 @@ public class ViewTiro extends View implements Runnable {
 		int action = event.getAction();
 		if (action == MotionEvent.ACTION_DOWN) {
 			//randomDirection();
-			Tiro tiro = new Tiro(super.getContext(),5);
+			Tiro tiro = new Tiro(super.getContext());
 			listTiro.add(tiro);
 
-			Log.e(MainActivity.TAG, "Chegou aqui hahaha !!");
+			Log.e("TAG", "Chegou aqui hahaha !!");
 			/*Tiro tiro = new Tiro(1);
 			tiro.DrawTiro(, monaLisa, paint);*/
 		}

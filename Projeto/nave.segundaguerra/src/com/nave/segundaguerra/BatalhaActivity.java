@@ -6,6 +6,8 @@ import android.view.Menu;
 
 public class BatalhaActivity extends Activity {
 
+	public static String TAG = "Teste";
+	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
