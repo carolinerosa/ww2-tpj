@@ -9,5 +9,10 @@
     <string name="title_activity_batalha">BatalhaActivity</string>
     <string name="title_activity_creditos">CreditosActivity</string>
     <string name="title_activity_dicas">DicasActivity</string>
+    <string name="title_activity_fim_de_jogo">FimDeJogoActivity</string>
+    
+    <string name="FIMDEJOGO_Nome">Nome</string>
+    <string name="FIMDEJOGO_Matou">0000</string>
+    <string name="FIMDEJOGO_Morreu">8001</string>
 
 </resources>
