@@ -1,0 +1,40 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    tools:context=".FimDeJogoActivity" >
+
+    <TextView
+        android:id="@+id/FIMDEJOGO_Nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="23dp"
+        android:text="@string/FIMDEJOGO_Nome"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/FIMDEJOGO_Matou"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/FIMDEJOGO_Nome"
+        android:layout_alignBottom="@+id/FIMDEJOGO_Nome"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="184dp"
+        android:text="@string/FIMDEJOGO_Matou"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/FIMDEJOGO_Morreu"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/FIMDEJOGO_Matou"
+        android:layout_alignBottom="@+id/FIMDEJOGO_Matou"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="45dp"
+        android:text="@string/FIMDEJOGO_Morreu"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+</RelativeLayout>

@@ -14,34 +14,37 @@
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.nave.segundaguerra.MainActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/title_activity_main" >
+            android:label="@string/title_activity_main"
+            android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        
         <activity
             android:name="com.nave.segundaguerra.Nickname"
             android:screenOrientation="landscape" >
         </activity>
-        
         <activity
             android:name="com.nave.segundaguerra.BatalhaActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/title_activity_batalha" >
+            android:label="@string/title_activity_batalha"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="com.nave.segundaguerra.CreditosActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/title_activity_creditos" >
+            android:label="@string/title_activity_creditos"
+            android:screenOrientation="landscape" >
         </activity>
         <activity
             android:name="com.nave.segundaguerra.DicasActivity"
-            android:screenOrientation="landscape"
-            android:label="@string/title_activity_dicas" >
+            android:label="@string/title_activity_dicas"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.nave.segundaguerra.FimDeJogoActivity"
+            android:label="@string/title_activity_fim_de_jogo" 
+            android:screenOrientation="landscape">
         </activity>
     </application>
 
