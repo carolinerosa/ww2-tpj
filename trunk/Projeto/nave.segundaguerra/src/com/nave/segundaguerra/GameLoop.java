@@ -62,18 +62,15 @@ public class GameLoop extends View implements Runnable
 		if(player != null)
 		{
 			player.update();
-			for(Tiro t : listTiro){
-				
-				if (t != null)
-				{
-		          t.update();
-					Log.e(BatalhaActivity.TAG, "Atirou update()");
-					if(t.posicaoY < 0){
-						listTiro.remove(t);
-					}
-				}
-		    }
 		}
+
+		for(Tiro t : listTiro){
+			t.update();
+				if(t.posicaoY < 0 || t.posicaoX < 0 || t.posicaoY > this.getHeight() || t.posicaoX > this.getWidth()){
+					listTiro.remove(t);
+					Log.i(TAG, "removeu tiro !!!");
+				}
+	    }
 	}
 	
 	@Override
@@ -85,13 +82,12 @@ public class GameLoop extends View implements Runnable
 		{
 			player.draw(canvas);
 			
-			for(Tiro t : listTiro)
-			{  
-		          t.DrawTiro(canvas,player.position.x,player.position.y);
-
-					Log.e("TAG", "Desenho tiro !!");
-		    }
 		}
+
+		for(Tiro t : listTiro)
+		{  
+	          t.DrawTiro(canvas,player.position);
+	    }
 	}
 	
 	@Override
@@ -105,8 +101,10 @@ public class GameLoop extends View implements Runnable
 			switch (action) 
 			{
 			case MotionEvent.ACTION_DOWN:
-				destinationPosition = new PointF(event.getX(), event.getY());
-				player.moveTo(destinationPosition);
+				/*destinationPosition = new PointF(event.getX(), event.getY());
+				player.moveTo(destinationPosition);*/
+				Tiro tiro = new Tiro(super.getContext(), player.position, event.getX(), event.getY());
+				listTiro.add(tiro);
 				break;
 				
 			case MotionEvent.ACTION_MOVE:
@@ -115,8 +113,8 @@ public class GameLoop extends View implements Runnable
 				break;
 				
 			case MotionEvent.ACTION_POINTER_2_DOWN:
-				Tiro tiro = new Tiro(super.getContext(), player.position, event.getX(), event.getY());
-				listTiro.add(tiro);
+				/*Tiro tiro = new Tiro(super.getContext(), player.position, event.getX(), event.getY());
+				listTiro.add(tiro);*/
 				
 				break;
 				
