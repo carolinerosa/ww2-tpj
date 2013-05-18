@@ -66,7 +66,7 @@ public class GameLoop extends View implements Runnable
 
 		for(Tiro t : listTiro){
 			t.update();
-				if(t.posicaoY < 0 || t.posicaoX < 0 || t.posicaoY > this.getHeight() || t.posicaoX > this.getWidth()){
+				if(t.posicaoTiro.y < 0 || t.posicaoTiro.x < 0 || t.posicaoTiro.y >= this.getHeight() || t.posicaoTiro.x >= this.getWidth()){
 					listTiro.remove(t);
 					Log.i(TAG, "removeu tiro !!!");
 				}
@@ -86,7 +86,7 @@ public class GameLoop extends View implements Runnable
 
 		for(Tiro t : listTiro)
 		{  
-	          t.DrawTiro(canvas,player.position);
+	          t.DrawTiro(canvas);
 	    }
 	}
 	
@@ -101,8 +101,8 @@ public class GameLoop extends View implements Runnable
 			switch (action) 
 			{
 			case MotionEvent.ACTION_DOWN:
-				/*destinationPosition = new PointF(event.getX(), event.getY());
-				player.moveTo(destinationPosition);*/
+				destinationPosition = new PointF(event.getX(), event.getY());
+				player.moveTo(destinationPosition);
 				Tiro tiro = new Tiro(super.getContext(), player.position, event.getX(), event.getY());
 				listTiro.add(tiro);
 				break;
@@ -115,6 +115,7 @@ public class GameLoop extends View implements Runnable
 			case MotionEvent.ACTION_POINTER_2_DOWN:
 				/*Tiro tiro = new Tiro(super.getContext(), player.position, event.getX(), event.getY());
 				listTiro.add(tiro);*/
+		//Aqui é o lugar correto do tiro ele foi posto no ACTION_DOWN para teste no emulador.
 				
 				break;
 				
