@@ -17,15 +17,13 @@ public class Tiro {
 	shootAngle shooter;
 	private float posicaoInicialY;
 	PointF posicaoPersonagem;
-	float velocidadeX;
-	float velocidadeY;
-	float posicaoY, posicaoX, posicaoAtualizadaX, posicaoAtualizadaY;
+	PointF posicaoTiro;
+	PointF velocidade;
 	
 	public Tiro(Context context, PointF pos, float touchX, float touchY){
 		shooter = new shootAngle(context, pos.x, pos.y, touchX, touchY);
-		posicaoPersonagem = pos;
-		this.velocidadeX = 5;
-		this.velocidadeY = 10;
+		this.posicaoTiro = new PointF(pos.x, pos.y);
+		this.velocidade = new PointF(5,0);
 		try {
 			InputStream is = context.getAssets().open("projetil.png");
 			tiro = BitmapFactory.decodeStream(is);
@@ -33,16 +31,14 @@ public class Tiro {
 			Log.e("hu3", "Erro carregando imagem");
 		}
 	}
-	public void DrawTiro(Canvas canvas, PointF posicaoPersonagem){
-		posicaoX = posicaoPersonagem.x + posicaoAtualizadaX;
-		posicaoY = posicaoPersonagem.y + posicaoAtualizadaY;
-		canvas.drawBitmap(tiro, posicaoX, posicaoY, new Paint());
+	public void DrawTiro(Canvas canvas){
+		canvas.drawBitmap(tiro, posicaoTiro.x, posicaoTiro.y, new Paint());
 
-		Log.i("Tiro", "Estou no draww !!!");
+		//Log.i("Tiro", "Estou no draww !!!");
 	}
 	void update(){
-		posicaoAtualizadaX += 5;
-		posicaoAtualizadaY += 0;
-		Log.i("Tiro", "Estou no update !!!");
+		posicaoTiro.x += this.velocidade.x; 
+		posicaoTiro.y += this.velocidade.y;
+		//Log.i("Tiro", "Estou no update !!!");
 	}
 }
