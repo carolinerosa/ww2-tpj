@@ -1,0 +1,4 @@
+INDEX VERSION 1.126+C:\Users\Vitor\Desktop\ww2-tpj\.metadata\.plugins\org.eclipse.jdt.core
+2937514299.index
+4276916360.index
+2870311659.index

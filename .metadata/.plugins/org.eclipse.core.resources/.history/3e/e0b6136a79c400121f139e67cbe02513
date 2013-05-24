@@ -27,8 +27,8 @@ public class shootAngle extends View {
 		float tempY = touchY - playerY;
 		float distance = 0;
 		
-		//tempX = tempX*tempX;
-		//tempY = tempY*tempY;
+		tempX = tempX*tempX;
+		tempY = tempY*tempY;
 		
 		
 		
