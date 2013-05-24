@@ -41,4 +41,8 @@ public class Tiro {
 		posicaoTiro.y += this.velocidade.y;
 		//Log.i("Tiro", "Estou no update !!!");
 	}
+	void shotAngle()
+	{
+		
+	}
 }
