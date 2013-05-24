@@ -25,8 +25,14 @@ public class shootAngle extends View {
 	{
 		float tempX = touchX - playerX;
 		float tempY = touchY - playerY;
+		float distance = 0;
 		
-		if (tempX > tempY)
+		tempX = tempX*tempX;
+		tempY = tempY*tempY;
+		
+		
+		
+		/*if (tempX > tempY)
 		{
 			speed.x = 3;
 			speed.y = tempY/tempX;
@@ -34,7 +40,7 @@ public class shootAngle extends View {
 		{
 			speed.y = 3;
 			speed.x = tempX/tempY;
-		}
+		}*/
 		
 		return speed;
 	}
