@@ -9,9 +9,13 @@ import android.graphics.PointF;
 public class Player 
 {
 	public PointF position = new PointF();
+	public float dano;
 	private PointF destinationPosition = new PointF();
 	private Paint paint = new Paint();
 	private float speed = 3;
+	private int life;
+	Tiro lastDagameTaken;
+	Pontos pontos;
 	
 	// Grupo do Thyago 
 	public static String name;
@@ -23,10 +27,11 @@ public class Player
 		
 		this.position = position;
 		destinationPosition = position;
+		this.life = 100;
 		
-		// Grupo do Thyago 
-		//nick = new Nickname();
 		name = "";
+		
+		pontos = new Pontos();
 	}
 	
 	public void update()
@@ -56,7 +61,22 @@ public class Player
 				{
 					position.y -= speed;
 				}
+				
+				//morreu, morreu, MORREU!
+				if(life <= 0)
+				{
+					if(lastDagameTaken.owner == this)
+					{
+						lastDagameTaken.owner.pontos.Perda();
+					}
+					else
+					{
+						lastDagameTaken.owner.pontos.Ganho();
+					}
+				}
 	}
+	
+	
 	
 	public void draw(Canvas canvas)
 	{
@@ -71,5 +91,16 @@ public class Player
 	public void moveTo(PointF destinationPosition) 
 	{
 		this.destinationPosition = destinationPosition;
+	}
+	
+	public int getLife()
+	{
+		return life;
+	}
+	
+	public void collisionTiro(Tiro tiro)
+	{
+		
+		life -= tiro.dano;
 	}
 }

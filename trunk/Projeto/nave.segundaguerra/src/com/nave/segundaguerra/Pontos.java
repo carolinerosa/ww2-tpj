@@ -1,4 +1,4 @@
-package com.example.armas;
+package com.nave.segundaguerra;
 
 
 public class Pontos{
