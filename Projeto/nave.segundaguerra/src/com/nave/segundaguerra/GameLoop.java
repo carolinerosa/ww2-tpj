@@ -103,7 +103,7 @@ public class GameLoop extends View implements Runnable
 			case MotionEvent.ACTION_DOWN:
 				destinationPosition = new PointF(event.getX(), event.getY());
 				player.moveTo(destinationPosition);
-				Tiro tiro = new Tiro(super.getContext(), player.position, event.getX(), event.getY());
+				Tiro tiro = new Tiro(super.getContext(), player.position, event.getX(), event.getY(), player.dano, player);
 				listTiro.add(tiro);
 				break;
 				

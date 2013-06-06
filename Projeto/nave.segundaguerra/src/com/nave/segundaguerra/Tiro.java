@@ -8,7 +8,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.Log;
 
@@ -19,11 +18,16 @@ public class Tiro {
 	PointF posicaoPersonagem;
 	PointF posicaoTiro;
 	PointF velocidade;
+	public float dano;
+	public Player owner;
 	
-	public Tiro(Context context, PointF pos, float touchX, float touchY){
+	public Tiro(Context context, PointF pos, float touchX, float touchY, float dano, Player owner){
 		shooter = new shootAngle(context, pos.x, pos.y, touchX, touchY);
 		this.posicaoTiro = new PointF(pos.x, pos.y);
 		this.velocidade = new PointF(5,0);
+		this.dano = dano;
+		this.owner = owner;
+		
 		try {
 			InputStream is = context.getAssets().open("projetil.png");
 			tiro = BitmapFactory.decodeStream(is);

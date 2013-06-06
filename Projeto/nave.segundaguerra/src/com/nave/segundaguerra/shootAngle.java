@@ -2,8 +2,6 @@ package com.nave.segundaguerra;
 
 import android.content.Context;
 import android.graphics.PointF;
-import android.util.Log;
-import android.view.MotionEvent;
 import android.view.View;
 
 public class shootAngle extends View {
