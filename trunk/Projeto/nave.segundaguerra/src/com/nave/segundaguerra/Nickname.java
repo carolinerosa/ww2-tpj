@@ -36,7 +36,7 @@ public class Nickname extends Activity {
 
 		if (setName().length() >= 1 && setName().length() <= 10) {
 			// Trocar de cena
-			Intent intent = new Intent(Nickname.this, BatalhaActivity.class);
+			Intent intent = new Intent(Nickname.this, TelaEscolhaDetTime.class);
 			startActivity(intent);
 		}
 	}
