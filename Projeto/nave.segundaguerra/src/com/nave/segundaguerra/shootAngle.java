@@ -4,41 +4,62 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.view.View;
 
-public class shootAngle extends View {
+public class ShootAngle {
 
 	float playerX, playerY, touchX, touchY;
-	PointF speed;
+	public PointF speed = new PointF();
 	
 	
-	public shootAngle(Context context, float x, float y, float touchX, float touchY) {
-		super(context);
+	public ShootAngle(float x, float y, float touchX, float touchY) {
 		this.playerX = x;
 		this.playerY = y;
 		this.touchX = touchX;
 		this.touchY = touchY;
+		
+		speed = getSpeed();
 	}
 
 
 	public PointF getSpeed()
 	{
-		float tempX = touchX - playerX;
-		float tempY = touchY - playerY;
-		float distance = 0;
+		float distanciaX = touchX - playerX;
+		float distanciaY = touchY - playerY;
 		
-		//tempX = tempX*tempX;
-		//tempY = tempY*tempY;
-		
-		
-		
-		/*if (tempX > tempY)
-		{
-			speed.x = 3;
-			speed.y = tempY/tempX;
-		}else
-		{
-			speed.y = 3;
-			speed.x = tempX/tempY;
-		}*/
+		float divisor;
+
+        if (distanciaX < 0)
+        {
+            distanciaX *= -1;
+        }
+
+        if (distanciaY < 0)
+        {
+            distanciaY *= -1;
+        }
+
+        if (touchX < playerX)
+        {
+            distanciaX *= -1;
+        }
+
+        if (touchY < playerY)
+        {
+            distanciaY *= -1;
+        }
+
+        if (distanciaX > distanciaY)
+        {
+            divisor = distanciaX;
+        }
+        else
+        {
+            divisor = distanciaY;
+        }
+        
+
+
+        speed.x = distanciaX / 60;
+        speed.y = distanciaY / 60;
 		
 		return speed;
 	}
