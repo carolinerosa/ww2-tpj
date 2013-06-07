@@ -6,14 +6,12 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
-import java.util.concurrent.ConcurrentLinkedQueue;
 
 import android.util.Log;
 
-import com.example.servidorecliente.rede.DepoisDeReceberDados;
-import com.example.servidorecliente.rede.Killable;
+import com.example.servidorecliente.util.ElMatador;
 
-public class Conexao implements Runnable {
+public class Conexao implements Runnable,Killable {
 
 	private static final String TAG = "conexao";
 	private BufferedReader leitor;
@@ -25,11 +23,13 @@ public class Conexao implements Runnable {
 	private Thread escutandoParaSempre;
 	private DepoisDeReceberDados depoisDeReceberDadosHandler;
 
-	public String getId() {
+	public String getId() 
+	{
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(String id) 
+	{
 		this.id = id;
 	}
 
@@ -69,6 +69,7 @@ public class Conexao implements Runnable {
 	/**
 	 * le continuamente da conexao
 	 */
+	
 	public void run() {
 		Log.i(TAG, "conexao esperando por dados : " + id);
 

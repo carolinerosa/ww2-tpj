@@ -7,8 +7,7 @@ import java.util.ArrayList;
 
 import android.util.Log;
 
-import com.example.servidorecliente.rede.DepoisDeReceberDados;
-import com.example.servidorecliente.rede.Killable;
+import com.nave.segundaguerra.DepoisDeReceberDados;
 import com.example.servidorecliente.util.RedeUtil;
 
 public class GerenteDEConexao implements Runnable {
