@@ -16,11 +16,14 @@ public class GameLoop extends View implements Runnable
 	public static final String TAG = "Segunda Guerra";
 	private boolean running = true;
 	public Player player;
+	private Player player2;
 	List<Tiro> listTiro = new CopyOnWriteArrayList(); 
 	
-	public GameLoop(Context context) 
+	public GameLoop(Context context, Player player) 
 	{
 		super(context);
+		this.player = player;
+		player2 = new Player(context,new PointF(200, 200), "Nuno");
 		start();
 	}
 	
@@ -28,9 +31,8 @@ public class GameLoop extends View implements Runnable
 	{
 		setFocusableInTouchMode(true);
 		setClickable(true);
-		setLongClickable(true);
+		setLongClickable(true);		
 		
-		player = new Player(new PointF(100, 100));
 		running = true;
 		
 		Thread gameLoop = new Thread(this);
@@ -66,9 +68,14 @@ public class GameLoop extends View implements Runnable
 
 		for(Tiro t : listTiro){
 			t.update();
-				if(t.posicaoTiro.y < 0 || t.posicaoTiro.x < 0 || t.posicaoTiro.y >= this.getHeight() || t.posicaoTiro.x >= this.getWidth()){
+				if(t.getPosition().y < 0 || t.getPosition().x < 0 || t.getPosition().y >= this.getHeight() || t.getPosition().x >= this.getWidth()){
 					listTiro.remove(t);
 					Log.i(TAG, "removeu tiro !!!");
+				}
+				if(t.checarColisao(this.player2)){
+					player2.collisionTiro(t,20,this.getWidth(), this.getHeight());
+					listTiro.remove(t);
+					Log.i(TAG, "removeu tiro batendo no player!!!");
 				}
 	    }
 	}
@@ -82,6 +89,10 @@ public class GameLoop extends View implements Runnable
 		{
 			player.draw(canvas);
 			
+		}
+		
+		if(player2 != null){
+			player2.draw(canvas);
 		}
 
 		for(Tiro t : listTiro)
@@ -103,8 +114,6 @@ public class GameLoop extends View implements Runnable
 			case MotionEvent.ACTION_DOWN:
 				destinationPosition = new PointF(event.getX(), event.getY());
 				player.moveTo(destinationPosition);
-				Tiro tiro = new Tiro(super.getContext(), player.position, event.getX(), event.getY(), player.dano, player);
-				listTiro.add(tiro);
 				break;
 				
 			case MotionEvent.ACTION_MOVE:
@@ -113,9 +122,16 @@ public class GameLoop extends View implements Runnable
 				break;
 				
 			case MotionEvent.ACTION_POINTER_2_DOWN:
-				/*Tiro tiro = new Tiro(super.getContext(), player.position, event.getX(), event.getY());
-				listTiro.add(tiro);*/
-		//Aqui é o lugar correto do tiro ele foi posto no ACTION_DOWN para teste no emulador.
+				player.definirAngulo(new PointF(event.getX(), event.getY()));
+				if(player.getMunicao() > 0){
+					Tiro tiro = new Tiro(super.getContext(), player);
+					listTiro.add(tiro);
+					player.diminuirMunicao();
+					Log.i("Municao", ""+player.getMunicao());
+				}
+				else{
+					player.Recarregar();
+				}
 				
 				break;
 				

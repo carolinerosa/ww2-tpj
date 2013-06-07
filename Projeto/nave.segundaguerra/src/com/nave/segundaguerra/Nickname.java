@@ -2,6 +2,7 @@ package com.nave.segundaguerra;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PointF;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -10,13 +11,12 @@ import android.widget.Toast;
 public class Nickname extends Activity {
 
 	TextView nick;
-
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.nickname);
 		nick = (TextView) findViewById(R.id.nick);
-
 	}
 
 	public Nickname() 
@@ -36,7 +36,8 @@ public class Nickname extends Activity {
 
 		if (setName().length() >= 1 && setName().length() <= 10) {
 			// Trocar de cena
-			Intent intent = new Intent(Nickname.this, TelaEscolhaDetTime.class);
+			BatalhaActivity.player = new Player(this,new PointF(50,50), nick.toString());
+			Intent intent = new Intent(Nickname.this, BatalhaActivity.class);
 			startActivity(intent);
 		}
 	}

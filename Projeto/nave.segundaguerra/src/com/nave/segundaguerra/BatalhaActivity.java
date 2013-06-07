@@ -9,9 +9,11 @@ import android.view.WindowManager;
 public class BatalhaActivity extends Activity {
 
 	public static String TAG = "Teste";
+	public static Player player;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		
 		// Sem Activity e em modo Fullcreen.
@@ -19,7 +21,7 @@ public class BatalhaActivity extends Activity {
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		
-		setContentView(new GameLoop(this));
+		setContentView(new GameLoop(this, player));
 		
 		
 	}
