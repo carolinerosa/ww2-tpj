@@ -4,17 +4,13 @@ import android.content.Context;
 import android.graphics.PointF;
 import android.view.View;
 
-public class ShootAngle {
+public class Angulator {
 
-	float playerX, playerY, touchX, touchY;
-	public PointF speed = new PointF();
+	public PointF player, touch, speed;
 	
-	
-	public ShootAngle(float x, float y, float touchX, float touchY) {
-		this.playerX = x;
-		this.playerY = y;
-		this.touchX = touchX;
-		this.touchY = touchY;
+	public Angulator(PointF playerPosition, PointF touch) {
+		this.player = playerPosition;
+		this.touch = touch;
 		
 		speed = getSpeed();
 	}
@@ -22,8 +18,8 @@ public class ShootAngle {
 
 	public PointF getSpeed()
 	{
-		float distanciaX = touchX - playerX;
-		float distanciaY = touchY - playerY;
+		float distanciaX = touch.x - player.x;
+		float distanciaY = touch.y - player.y;
 		
 		float divisor;
 
@@ -37,12 +33,12 @@ public class ShootAngle {
             distanciaY *= -1;
         }
 
-        if (touchX < playerX)
+        if (touch.x < player.x)
         {
             distanciaX *= -1;
         }
 
-        if (touchY < playerY)
+        if (touch.y < player.y)
         {
             distanciaY *= -1;
         }
@@ -55,8 +51,6 @@ public class ShootAngle {
         {
             divisor = distanciaY;
         }
-        
-
 
         speed.x = distanciaX / 60;
         speed.y = distanciaY / 60;
