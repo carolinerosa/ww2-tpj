@@ -1,7 +1,5 @@
 package com.example.servidorecliente.util;
 
-import java.net.UnknownHostException;
-
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
