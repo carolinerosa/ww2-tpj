@@ -12,21 +12,18 @@ import android.graphics.PointF;
 import android.util.Log;
 
 public class Tiro {
-	Bitmap tiro;
-	Angulator shooter;
+	private Bitmap tiro;
+	//private String meuDono;
 	private float posicaoInicialY;
-	PointF posicaoPersonagem;
-	PointF posicaoTiro;
-	PointF velocidade;
-	public float dano;
-	public Player owner;
+	private PointF posicaoPersonagem;
+	private PointF posicaoTiro;
+	private PointF velocidade;
+	private Player meuDono;
 	
-	public Tiro(Context context, PointF pos, float touchX, float touchY, float dano, Player owner){
-		shooter = new Angulator(context, pos.x, pos.y, touchX, touchY);
-		this.posicaoTiro = new PointF(pos.x, pos.y);
-		this.velocidade = new PointF(5,0);
-		this.dano = dano;
-		this.owner = owner;
+	public Tiro(Context context, Player player){
+		this.posicaoTiro = new PointF(player.getPosition().x + player.getImage().getWidth() / 2, player.getPosition().y + player.getImage().getHeight() / 2);
+		this.velocidade = player.getAngulo().getSpeed();
+		this.meuDono = player;
 		
 		try {
 			InputStream is = context.getAssets().open("projetil.png");
@@ -45,8 +42,29 @@ public class Tiro {
 		posicaoTiro.y += this.velocidade.y;
 		//Log.i("Tiro", "Estou no update !!!");
 	}
-	void shotAngle()
-	{
-		
+	public boolean checarColisao(Player player){
+		if(this.posicaoTiro.x >= player.getPosition().x && this.posicaoTiro.x < (player.getPosition().x + player.getImage().getWidth()) && 
+		this.posicaoTiro.y >= player.getPosition().y && this.posicaoTiro.y < (player.getPosition().y + player.getImage().getHeight())){
+			return true;
+		}
+		return false;
 	}
+	public PointF getPosition(){
+		return posicaoTiro;
+	}
+	public Player getOwner(){
+		return meuDono;
+	}
+	/*public void Resize(int tamanhoTela, int porcentagem){
+		int larguraTiro = tiro.getWidth();
+		int alturaTiro = tiro.getHeight();
+		float novaLarguraTiro;
+		float novaAlturaTiro;
+		
+		novaLarguraTiro = porcentagem * tamanhoTela / 100;
+		
+		novaAlturaTiro = (alturaTiro * novaLarguraTiro) / larguraTiro;
+		novoTiro = Bitmap.createBitmap(tiro,0, 0,(int) novaLarguraTiro, (int) novaAlturaTiro);
+		//Bitmap.createBitmap(source, x, y, width, height);
+		}*/
 }

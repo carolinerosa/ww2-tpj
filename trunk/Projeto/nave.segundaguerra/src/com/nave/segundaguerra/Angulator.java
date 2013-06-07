@@ -1,8 +1,6 @@
 package com.nave.segundaguerra;
 
-import android.content.Context;
 import android.graphics.PointF;
-import android.view.View;
 
 public class Angulator {
 
@@ -11,17 +9,14 @@ public class Angulator {
 	public Angulator(PointF playerPosition, PointF touch) {
 		this.player = playerPosition;
 		this.touch = touch;
-		
-		speed = getSpeed();
+		setSpeed();
 	}
 
 
-	public PointF getSpeed()
+	public void setSpeed()
 	{
 		float distanciaX = touch.x - player.x;
 		float distanciaY = touch.y - player.y;
-		
-		float divisor;
 
         if (distanciaX < 0)
         {
@@ -42,19 +37,9 @@ public class Angulator {
         {
             distanciaY *= -1;
         }
-
-        if (distanciaX > distanciaY)
-        {
-            divisor = distanciaX;
-        }
-        else
-        {
-            divisor = distanciaY;
-        }
-
-        speed.x = distanciaX / 60;
-        speed.y = distanciaY / 60;
-		
+        speed = new PointF(distanciaX / 15,distanciaY / 15);
+	}
+	public PointF getSpeed(){
 		return speed;
 	}
 	
