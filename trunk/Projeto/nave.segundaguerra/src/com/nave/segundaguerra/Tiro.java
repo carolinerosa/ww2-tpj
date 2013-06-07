@@ -13,7 +13,7 @@ import android.util.Log;
 
 public class Tiro {
 	Bitmap tiro;
-	shootAngle shooter;
+	ShootAngle shooter;
 	private float posicaoInicialY;
 	PointF posicaoPersonagem;
 	PointF posicaoTiro;
@@ -22,7 +22,7 @@ public class Tiro {
 	public Player owner;
 	
 	public Tiro(Context context, PointF pos, float touchX, float touchY, float dano, Player owner){
-		shooter = new shootAngle(context, pos.x, pos.y, touchX, touchY);
+		shooter = new ShootAngle(context, pos.x, pos.y, touchX, touchY);
 		this.posicaoTiro = new PointF(pos.x, pos.y);
 		this.velocidade = new PointF(5,0);
 		this.dano = dano;
