@@ -7,14 +7,15 @@
     <uses-sdk
         android:minSdkVersion="7"
         android:targetSdkVersion="15" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:icon="@drawable/ic_launcher"
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.nave.segundaguerra.MainActivity"
-            android:label="@string/title_activity_main"
+            android:name="com.nave.segundaguerra.activitys.GerenciadorActivity"
+            android:label="@string/title_activity_gerenciador"
             android:screenOrientation="landscape" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -23,28 +24,38 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.nave.segundaguerra.Nickname"
+            android:name="com.nave.segundaguerra.game.Nickname"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="com.nave.segundaguerra.BatalhaActivity"
+            android:name="com.nave.segundaguerra.activitys.BatalhaActivity"
             android:label="@string/title_activity_batalha"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="com.nave.segundaguerra.CreditosActivity"
+            android:name="com.nave.segundaguerra.activitys.CreditosActivity"
             android:label="@string/title_activity_creditos"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="com.nave.segundaguerra.DicasActivity"
+            android:name="com.nave.segundaguerra.activitys.DicasActivity"
             android:label="@string/title_activity_dicas"
             android:screenOrientation="landscape" >
         </activity>
         <activity
-            android:name="com.nave.segundaguerra.FimDeJogoActivity"
-            android:label="@string/title_activity_fim_de_jogo" 
-            android:screenOrientation="landscape">
+            android:name="com.nave.segundaguerra.activitys.FimDeJogoActivity"
+            android:label="@string/title_activity_fim_de_jogo"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+      		android:name="com.nave.segundaguerra.activitys.MenuActivity"
+            android:label="@string/title_activity_main"
+            android:screenOrientation="landscape" >
+        </activity>
+        <activity
+            android:name="com.nave.segundaguerra.activitys.ConectActivity"
+            android:label="@string/title_activity_conect"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 
