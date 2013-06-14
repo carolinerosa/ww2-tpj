@@ -36,6 +36,7 @@ public class PlayerServer
 	public Angulator anguloTiro;
 	private int altura = 3;
 	private int largura = 3;
+	private String time = "Vermelho";
 	
 	// Grupo do Thyago 
 	protected String nome;
@@ -128,6 +129,8 @@ public class PlayerServer
 	{
 		return altura;
 	}
+	
+	
 
 	public Angulator getAngulo(){
 		return anguloTiro;
@@ -141,21 +144,36 @@ public class PlayerServer
 		ammo = 20;
 	}
 	
-	private void respawn(int largura, int altura, PlayerServer player) {
+	private void respawn(int largura, int altura, PlayerServer playerServer, String tag) {
 		Random random = new Random();
 		Point novaPosicao = new Point();
-		novaPosicao.x = random.nextInt(largura);
-		novaPosicao.y = random.nextInt(altura);
-		player.setPosition(novaPosicao);
+		
+		if(tag == "Azul")
+		{
+		 novaPosicao.x = random.nextInt(largura/3);
+		 novaPosicao.y = random.nextInt(altura/3);
+		 playerServer.setPosition(novaPosicao);
+		}
+		
+		if(tag == "Vermelho")
+		{
+		 novaPosicao.x = random.nextInt(largura/3) +  ((2*largura)/3) ;
+		 novaPosicao.y = random.nextInt(altura/3) + ((2*altura)/3);
+		 playerServer.setPosition(novaPosicao);
+		}
 	}
 	
-	public void collisionTiro(TiroServer tiro, int dano, int largura, int altura)
+	public void collisionTiro(TiroServer tiro, int dano, int largura, int altura, String tagTime)
 	{
 		lastDagameTaken = tiro;
-		life -= dano;
 		
-		if(life <= 0)
-			respawn(largura - this.largura, altura - this.altura, this);
+		if(tagTime != this.time)
+		{
+			life -= dano;
+			
+			if(life <= 0)
+				respawn(largura - this.largura, altura - this.altura, this, this.time);
+		}
 	}
 	
 	
