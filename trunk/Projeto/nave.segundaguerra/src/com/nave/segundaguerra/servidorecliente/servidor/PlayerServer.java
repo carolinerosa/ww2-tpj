@@ -88,7 +88,10 @@ public class PlayerServer
 				{
 					lastDagameTaken.getOwner().pontos.Ganho();
 				}
-			}	
+			}
+			
+			
+			checkMapa();
 	}
 	
 
@@ -153,6 +156,27 @@ public class PlayerServer
 		
 		if(life <= 0)
 			respawn(largura - this.largura, altura - this.altura, this);
+	}
+	
+	
+	private void checkMapa(){
+		if(this.x <= MapaServer.getX()){
+			this.x = MapaServer.getX();
+		}
+		
+		if(this.y <= MapaServer.getY()){
+			this.y = MapaServer.getY();
+		}
+		
+		if(this.x >= MapaServer.getLargura()){
+			this.y = MapaServer.getLargura();
+		}
+		
+		if(this.y >= MapaServer.getAltura()){
+			this.y = MapaServer.getAltura();
+		}
+			
+			
 	}
 	
 }
