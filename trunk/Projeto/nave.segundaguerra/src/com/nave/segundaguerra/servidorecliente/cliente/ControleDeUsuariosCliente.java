@@ -48,6 +48,30 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 			String[] lista = linha.split(":");
 			moveTiros(origem, lista[1]);
 		}
+				
+		if(linha.startsWith(Protocolo.PROTOCOL_DAMAGE)){
+			Log.e("ReciboCliente", linha);
+		}
+		
+		if(linha.startsWith(Protocolo.PROTOCOL_RESPAWN)){
+			Log.e("ReciboCliente", linha);
+		}
+		
+		if(linha.startsWith(Protocolo.PROTOCOL_SCORE))
+		{
+			Log.e("ReciboCliente", linha);
+		}
+		
+		if(linha.startsWith(Protocolo.PROTOCOL_ITEM))
+		{
+			Log.e("ReciboCliente", linha);
+		}
+		
+		if(linha.startsWith(Protocolo.PROTOCOL_ASKITEM))
+		{
+			Log.e("ReciboCliente", linha);
+		}
+		
 	}
 	
 	// recebe do servidor no formato : nome,x,y;nome,x,y

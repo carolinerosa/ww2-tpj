@@ -62,7 +62,29 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 			adicionaTiro(origem, linha);
 		}
 		
-		informaTodosUsuarios(origem);
+		if(linha.startsWith(Protocolo.PROTOCOL_DAMAGE)){
+			modifyDamage(origem, linha);
+		}
+		
+		if(linha.startsWith(Protocolo.PROTOCOL_RESPAWN)){
+			respawn(origem, linha);
+		}
+		
+		if(linha.startsWith(Protocolo.PROTOCOL_SCORE))
+		{
+			score(origem, linha);
+		}
+		
+		if(linha.startsWith(Protocolo.PROTOCOL_ITEM))
+		{
+			addItem(origem, linha);
+		}
+		
+		if(linha.startsWith(Protocolo.PROTOCOL_ASKITEM))
+		{
+			askItem(origem, linha);
+		}
+		
 		
 		if(tiroList.size() > 0)
 		{
@@ -70,18 +92,114 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		}
 	}
 
-	private void informaTodosUsuarios(Conexao origem) {
-
+	private void informaTodosUsuarios(Conexao origem,tipoDeInformativo informacaoRecebida) 
+	{
 		StringBuffer buffer = new StringBuffer();
 		Iterator iterator = jogadores.keySet().iterator();
-		while (iterator.hasNext()) {
-			String key = (String) iterator.next();
-			JogadorServer jogador = jogadores.get(key);
-			//jogador.update();
-			buffer.append(jogador.toStringCSV());
+		String protocolType = "";
+		
+		switch(informacaoRecebida)
+		{
+			case MOVEUSUARIO:
+				
+				while (iterator.hasNext()) 
+				{
+					String key = (String) iterator.next();
+					JogadorServer jogador = jogadores.get(key);
+					protocolType = Protocolo.PROTOCOL_MOVE;
+					//jogador.update();
+					buffer.append(jogador.toStringCSV());
+				}
+				
+			break;
+			
+			
+			case DAMAGE:
+				
+				while (iterator.hasNext()) 
+				{
+					String key = (String) iterator.next();
+					JogadorServer jogador = jogadores.get(key);
+					protocolType = Protocolo.PROTOCOL_DAMAGE;
+					//jogador.update();
+					//buffer.append(jogador.toStringCSV());
+					//Send to player your life
+				}
+				
+			break;
+			
+			case SCORE:
+				
+				while (iterator.hasNext()) 
+				{
+					String key = (String) iterator.next();
+					JogadorServer jogador = jogadores.get(key);
+					protocolType = Protocolo.PROTOCOL_SCORE;
+					//jogador.update();
+					//buffer.append(jogador.toStringCSV());
+					//Send to player your score
+				}
+				
+			break;
+			
+			case ADDITEM:
+				
+				while (iterator.hasNext()) 
+				{
+					String key = (String) iterator.next();
+					JogadorServer jogador = jogadores.get(key);
+					protocolType = Protocolo.PROTOCOL_ITEM;
+					//jogador.update();
+					//buffer.append(jogador.toStringCSV());
+					//Add Item to player
+				}
+				
+			break;
+			
+			case ASKITEM:
+				
+				while (iterator.hasNext()) 
+				{
+					String key = (String) iterator.next();
+					JogadorServer jogador = jogadores.get(key);
+					protocolType = Protocolo.PROTOCOL_ASKITEM;
+					//jogador.update();
+					//buffer.append(jogador.toStringCSV());
+					//Ask item for all players
+				}
+				
+			break;
+			
+			case DIE:
+				
+				while (iterator.hasNext()) 
+				{
+					String key = (String) iterator.next();
+					JogadorServer jogador = jogadores.get(key);
+					protocolType = Protocolo.PROTOCOL_DEATH;
+					//jogador.update();
+					//buffer.append(jogador.toStringCSV());
+					//Send to player die events
+				}
+				
+			break;
+			
+			case RESPAWN:
+				
+				while (iterator.hasNext()) 
+				{
+					String key = (String) iterator.next();
+					JogadorServer jogador = jogadores.get(key);
+					protocolType = Protocolo.PROTOCOL_RESPAWN;
+					//jogador.update();
+					//buffer.append(jogador.toStringCSV());
+					//Respawn Player in the scenario
+				}
+				
+			break;
 		}
 
-		origem.write(Protocolo.PROTOCOL_MOVE + buffer.toString());
+		origem.write(protocolType + buffer.toString());
 	}
 
 	private void moveUsuario(Conexao origem, String linha) {
@@ -92,6 +210,72 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		JogadorServer jogador = jogadores.get(origem.getId());
 		jogador.setX(x);
 		jogador.setY(y);
+		
+		informaTodosUsuarios(origem,tipoDeInformativo.MOVEUSUARIO);
+	}
+	
+	private void modifyDamage(Conexao origem, String linha) 
+	{
+		String[] array = linha.split(",");
+		int damage = Integer.parseInt(array[1]);
+		JogadorServer jogador = jogadores.get(origem.getId());
+		int life = jogador.getLife();
+		
+		//jogador.setLife = life - damage;
+		
+		//if(life <= 0)
+		//{
+			//die();
+		//}
+		//else
+		//{
+			//informaTodosUsuarios(origem,tipoDeInformativo.DAMAGE);
+		//}
+	}
+
+	private void score(Conexao origem, String linha) 
+	{
+		String[] array = linha.split(",");
+		String damage = array[1];
+		JogadorServer jogador = jogadores.get(origem.getId());
+
+		//Chama a classe do grupo do Thyago.
+	}
+	
+	private void addItem(Conexao origem, String linha) 
+	{
+		String[] array = linha.split(",");
+		String item = array[1];
+		JogadorServer jogador = jogadores.get(origem.getId());
+
+		//Adciona o Item ao jogador
+	}
+	
+	private void askItem(Conexao origem, String linha) 
+	{
+		String[] array = linha.split(",");
+		String ite = array[1];
+		JogadorServer jogador = jogadores.get(origem.getId());
+		//informaTodosUsuarios(origem,tipoDeInformativo.ASKITEM);
+		//Pede aos jogadores um item
+	}
+
+	private void die()
+	{
+		//send to players that player is dead; 
+		//informaTodosUsuarios(origem,tipoDeInformativo.DIE);
+	}
+	
+ 	private void respawn(Conexao origem, String linha) 
+	{
+		String[] array = linha.split(",");
+		int x = Integer.parseInt(array[1]);
+		int y = Integer.parseInt(array[2]);
+
+		JogadorServer jogador = jogadores.get(origem.getId());
+		jogador.setX(x);
+		jogador.setY(y);
+		informaTodosUsuarios(origem,tipoDeInformativo.RESPAWN);
 	}
 
 	private void adicionaNovoUsuario(Conexao origem, String linha) {
@@ -103,6 +287,8 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		origem.setId(nome);
 		JogadorServer jogador = new JogadorServer(nome, x, y);
 		jogadores.put(nome, jogador);
+		
+		informaTodosUsuarios(origem,tipoDeInformativo.MOVEUSUARIO);
 	}
 	
 	private void adicionaTiro(Conexao origem, String linha){
@@ -133,5 +319,15 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 
 		origem.write(Protocolo.PROTOCOL_SHOOT + buffer.toString());
 	}
-
+	
+	public enum tipoDeInformativo
+	{
+		MOVEUSUARIO,
+		DAMAGE,
+		SCORE,
+		ADDITEM,
+		ASKITEM,
+		DIE,
+		RESPAWN
+	}
 }
