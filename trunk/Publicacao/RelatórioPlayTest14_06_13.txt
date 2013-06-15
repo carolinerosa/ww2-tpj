@@ -1,0 +1,5 @@
+Erros no playtest encontrados no dia 14/06/13.
+
+Criar condição de bloqueio do usuário entrar na sala do jogo, caso não tenha um nickname escrito. Nickname = null "Você não tem um nickname escrito"
+
+Usuário está conseguindo acessar o gameplay do jogo sem conexão com a rede. É exibida a mensagem "Conexão = null". Mas o game ainda assim se inicia.
