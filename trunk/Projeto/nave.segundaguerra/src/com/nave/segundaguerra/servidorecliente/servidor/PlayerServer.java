@@ -20,8 +20,7 @@ import android.graphics.PointF;
 import android.util.Log;
 
 
-public class PlayerServer 
-{
+public class PlayerServer {
 	protected int x;
 	protected int y;
 	protected Point destinationPosition = new Point();
@@ -36,68 +35,57 @@ public class PlayerServer
 	public Angulator anguloTiro;
 	private int altura = 3;
 	private int largura = 3;
-	private String time = "Vermelho";
 	
 	// Grupo do Thyago 
 	protected String nome;
 	
 	public static final String TAG = "Jogador";
 
-	public PlayerServer()
-	{
+	public PlayerServer(){
 		this.life = 100;
 		pontos = new Pontos();
 		
 	}
 	
-	public void update()
-	{
+	public void update(){
 		
 		//if(destinationPosition.x != x || destinationPosition.y != y)
 		
 			//checa se está abaixo do ponto destino no eixo x
-			if(x < destinationPosition.x)
-			{
+			if(x < destinationPosition.x){
 				x += speed;
 			}
 			
 			//checa se está abaixo do ponto destino no eixo x
-			if(x > destinationPosition.x)
-			{
+			if(x > destinationPosition.x){
 				x -= speed;
 			}
 			
 			//checa se está abaixo do ponto destino no eixo y
-			if(y < destinationPosition.y)
-			{
+			if(y < destinationPosition.y){
 				y += speed;
 			}
 					
 			//checa se está abaixo do ponto destino no eixo y
-			if(y > destinationPosition.y)
-			{
+			if(y > destinationPosition.y){
 				y -= speed;
 			}
 		
-			if(life <= 0)
-			{
-				if(lastDagameTaken.getOwner() == this)
-				{
+			if(life <= 0){
+				if(lastDagameTaken.getOwner() == this){
 					lastDagameTaken.getOwner().pontos.Perda();
-				}
-				else
-				{
+				}else{
 					lastDagameTaken.getOwner().pontos.Ganho();
 				}
 			}
 			
 			
 			checkMapa();
+			
 	}
 	
 
-	public int getLife()
-	{
+	public int getLife(){
 		return life;
 	}
 	
@@ -109,28 +97,22 @@ public class PlayerServer
 		return ammo;
 	}
 	
-	public void setPosition(Point pos)
-	{
+	public void setPosition(Point pos){
 		this.x = pos.x;
 		this.y = pos.y;
 	}
 	
-	public Point getPosition()
-	{
+	public Point getPosition(){
 		return new Point(x, y);
 	}
 	
-	public int getLargura()
-	{
+	public int getLargura(){
 		return largura;
 	}
 	
-	public int getAltura()
-	{
+	public int getAltura(){
 		return altura;
 	}
-	
-	
 
 	public Angulator getAngulo(){
 		return anguloTiro;
@@ -144,53 +126,53 @@ public class PlayerServer
 		ammo = 20;
 	}
 	
-	private void respawn(int largura, int altura, PlayerServer playerServer, String tag) {
+	private void respawn(int largura, int altura, PlayerServer player) {
 		Random random = new Random();
 		Point novaPosicao = new Point();
-		
-		if(tag == "Azul")
-		{
-		 novaPosicao.x = random.nextInt(largura/3);
-		 novaPosicao.y = random.nextInt(altura/3);
-		 playerServer.setPosition(novaPosicao);
-		}
-		
-		if(tag == "Vermelho")
-		{
-		 novaPosicao.x = random.nextInt(largura/3) +  ((2*largura)/3) ;
-		 novaPosicao.y = random.nextInt(altura/3) + ((2*altura)/3);
-		 playerServer.setPosition(novaPosicao);
-		}
+		novaPosicao.x = random.nextInt(largura);
+		novaPosicao.y = random.nextInt(altura);
+		player.setPosition(novaPosicao);
 	}
 	
-	public void collisionTiro(TiroServer tiro, int dano, int largura, int altura, String tagTime)
-	{
+	public void collisionTiro(TiroServer tiro, int dano, int largura, int altura){
 		lastDagameTaken = tiro;
+		life -= dano;
 		
-		if(tagTime != this.time)
-		{
-			life -= dano;
-			
-			if(life <= 0)
-				respawn(largura - this.largura, altura - this.altura, this, this.time);
-		}
+		if(life <= 0)
+			respawn(largura - this.largura, altura - this.altura, this);
 	}
 	
 	
 	private void checkMapa(){
-		if(this.x <= MapaServer.getX()){
+		if(this.destinationPosition.x < MapaServer.getX()){
+			this.destinationPosition.x = MapaServer.getX();
+		}
+		
+		if(this.destinationPosition.y < MapaServer.getY()){
+			this.destinationPosition.y = MapaServer.getY();
+		}
+		
+		if(this.destinationPosition.x > MapaServer.getLargura()){
+			this.destinationPosition.x = MapaServer.getLargura();
+		}
+		
+		if(this.destinationPosition.y > MapaServer.getAltura()){
+			this.destinationPosition.y = MapaServer.getAltura();
+		}
+		
+		if(this.x < MapaServer.getX()){
 			this.x = MapaServer.getX();
 		}
 		
-		if(this.y <= MapaServer.getY()){
+		if(this.y < MapaServer.getY()){
 			this.y = MapaServer.getY();
 		}
 		
-		if(this.x >= MapaServer.getLargura()){
-			this.y = MapaServer.getLargura();
+		if(this.x > MapaServer.getLargura()){
+			this.x = MapaServer.getLargura();
 		}
 		
-		if(this.y >= MapaServer.getAltura()){
+		if(this.y > MapaServer.getAltura()){
 			this.y = MapaServer.getAltura();
 		}
 			

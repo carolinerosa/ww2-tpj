@@ -34,11 +34,12 @@ public class PlayerCliente
 	// Grupo do Thyago 
 	protected String nome;
 
-	public PlayerCliente(PointF position)
+	public PlayerCliente(String nome, PointF position)
 	{
 		
 		paint.setColor(Color.BLACK);
-		
+
+		this.nome = nome;
 		this.x = (int) position.x;
 		this.y = (int) position.y;
 		
@@ -51,10 +52,15 @@ public class PlayerCliente
 	public void draw(Canvas canvas)
 	{
 		
-		canvas.drawBitmap(this.getImage(), x, y, paint);
-		
-		//canvas.drawCircle(x, y, 10, paint);
-		
+		if(this.getImage() != null){
+			
+			int tempX = this.x - this.getImage().getWidth()/2;
+			int tempY = this.y - this.getImage().getHeight()/2;
+			
+			canvas.drawBitmap(this.getImage(), tempX, tempY, paint);
+		}else{
+			canvas.drawCircle(x, y, 10, paint);
+		}
 	}
 	
 
