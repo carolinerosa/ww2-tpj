@@ -17,7 +17,7 @@ public class TiroServer {
 		
 		this.posicaoTiro = new PointF(player.getPosition().x + player.getLargura() / 2, player.getPosition().y + player.getAltura() / 2);
 		player.definirAngulo(touch);
-		this.velocidade = player.getAngulo().getSpeed();
+		this.velocidade = new PointF(touch.x/15, touch.y/15);
 		this.meuDono = player;
 		
 		

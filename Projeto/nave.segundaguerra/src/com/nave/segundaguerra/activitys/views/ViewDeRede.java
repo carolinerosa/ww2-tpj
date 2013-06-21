@@ -15,17 +15,21 @@ import android.view.MotionEvent;
 import android.view.View;
 
 import com.nave.segundaguerra.activitys.ConectActivity;
+import com.nave.segundaguerra.activitys.GerenciadorActivity;
 import com.nave.segundaguerra.game.Tiro;
 import com.nave.segundaguerra.servidorecliente.cliente.ControleDeUsuariosCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.DadosDoCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.JogadorCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.MapaCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.TiroCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.ViewPort;
 import com.nave.segundaguerra.servidorecliente.util.Conexao;
 import com.nave.segundaguerra.servidorecliente.util.ElMatador;
 import com.nave.segundaguerra.servidorecliente.util.Killable;
 import com.nave.segundaguerra.servidorecliente.util.Protocolo;
 
 public class ViewDeRede extends View implements Runnable, Killable {
+	
 	private static final String TAG = "view-rede";
 	private static final int UPDATE_TIME = 100;
 	private Paint paint;
@@ -38,27 +42,36 @@ public class ViewDeRede extends View implements Runnable, Killable {
 	private int margem = 5;
 	private int fontSize = 20;
 	private boolean ativo = true;
-
+	
+	public ViewPort viewPort;
+	public MapaCliente mapa;
+	
 	public ViewDeRede(Context context, Conexao cliente,
 			ControleDeUsuariosCliente tratadorDeDadosDoCliente) {
 
 		super(context);
 		ElMatador.getInstance().add(this);
 		
+		this.tratadorDeDadosDoCliente = tratadorDeDadosDoCliente;
+		this.tratadorDeDadosDoCliente.iniciarJogo();
 		
 		// envia estado atual do cliente para o servidor
 		dadosDoCliente = new DadosDoCliente(cliente, UPDATE_TIME);
 		Thread threadDados = new Thread(dadosDoCliente);
 		threadDados.start();
-
-		this.tratadorDeDadosDoCliente = tratadorDeDadosDoCliente;
+		
 
 		paint = new Paint();
 		paint.setColor(Color.BLACK);
 		paint.setTextSize(fontSize);
 
-		cliente.write(Protocolo.PROTOCOL_ID + "," + cliente.getId() + ",0,0");
-
+		
+		JogadorCliente meuJogador = GerenciadorActivity.GetInstance().getPlayer();
+		cliente.write(Protocolo.PROTOCOL_ID + "," + meuJogador.getNome() + ","+ meuJogador.getX() + "," + meuJogador.getY());
+		
+		this.viewPort = new ViewPort(meuJogador);
+		this.mapa = new MapaCliente();
+		
 		setFocusableInTouchMode(true);
 		setClickable(true);
 		setLongClickable(true);
@@ -70,9 +83,13 @@ public class ViewDeRede extends View implements Runnable, Killable {
 	public void draw(Canvas canvas) {
 		super.draw(canvas);
 
+		viewPort.setTela(this.getHeight(), this.getWidth());
+		viewPort.drawInViewPort(mapa, canvas);
+		//Log.i("viewPort", "o Width "+this.getWidth()+";  o Height "+this.getHeight());
+		
 		ConcurrentHashMap<String, JogadorCliente> jogadores = tratadorDeDadosDoCliente
 				.getJogadores();
-
+		
 		List<TiroCliente> tiros = tratadorDeDadosDoCliente.getListTiros();
 		
 		Iterator<String> iterator = jogadores.keySet().iterator();
@@ -80,18 +97,22 @@ public class ViewDeRede extends View implements Runnable, Killable {
 			String key = iterator.next();
 			JogadorCliente jogador = jogadores.get(key);
 			
-			jogador.draw(canvas);
-			
-			for(TiroCliente t : tiros)
-			{  
-		          t.DrawTiro(canvas);
-		    }
-			
-			canvas.drawText("<" + jogador.getNome() + ">", jogador.getX()
-					- raio, jogador.getY() + raio + margem + fontSize, paint);
+				this.viewPort.drawInViewPort(jogador, canvas);
 				
+				if(jogador.getImage() != null)
+				{
+					raio = jogador.getImage().getHeight()/2;
+				}
+			canvas.drawText("<" + jogador.getNome() + ">", viewPort.getPosPlayerDraw().x - raio*2
+					, viewPort.getPosPlayerDraw().y + raio + margem + fontSize, paint);
 			
+			canvas.drawText("X: "+ jogador.getX() + " ; Y: "+ jogador.getY(), 10, 100,  paint);
 		}
+		
+		for(TiroCliente t : tiros)
+		{  
+			this.viewPort.drawInViewPort(t, canvas);
+	    }
 
 	}
 
@@ -111,7 +132,7 @@ public class ViewDeRede extends View implements Runnable, Killable {
 
 
 	private void update() {
-		
+		this.viewPort.update();
 		
 	}
 
@@ -120,25 +141,23 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		Log.i(TAG, "ontouch: " + action);
 
 		int id = event.getPointerId(event.getAction());
-		//dadosDoCliente.sendMove((int) event.getX(id), (int) event.getY(id));
-		
-		//dadosDoCliente.setX((int) event.getX(id));
-		//dadosDoCliente.setY((int) event.getY(id));
+		Point playerDraw = viewPort.getPosPlayerDraw();
 
 		switch (action) 
 		{
 		case MotionEvent.ACTION_DOWN:
-			dadosDoCliente.setX((int) event.getX(id));
-			dadosDoCliente.setY((int) event.getY(id));
+			dadosDoCliente.setX((int) (event.getX(id) - playerDraw.x)+ dadosDoCliente.getX());
+			dadosDoCliente.setY((int) (event.getY(id) - playerDraw.y)+ dadosDoCliente.getY());
 			break;
 			
 		case MotionEvent.ACTION_MOVE:
-			dadosDoCliente.setX((int) event.getX(id));
-			dadosDoCliente.setY((int) event.getY(id));
+			dadosDoCliente.setX((int) (event.getX(id) - playerDraw.x)+ dadosDoCliente.getX());
+			dadosDoCliente.setY((int) (event.getY(id) - playerDraw.y)+ dadosDoCliente.getY());
 			break;
 			
 		case MotionEvent.ACTION_UP:
-			dadosDoCliente.sendTiro(new Point((int)event.getX(id), (int)event.getY(id)));
+			dadosDoCliente.sendTiro(new Point((int)(event.getX(id) - playerDraw.x), 
+					(int) (event.getY(id) - playerDraw.y)));
 			
 			break;
 			
@@ -150,8 +169,11 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		return super.onTouchEvent(event);
 	}
 
+	
 	public void killMeSoftly() {
 		ativo = false;
 	}
+	
+	
 
 }

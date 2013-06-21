@@ -77,6 +77,7 @@ public class ConectActivity extends Activity implements Killable {
 
 			DepoisDeReceberDados tratadorDeDadosDoCliente = new ControleDeUsuariosCliente();
 
+			usuario = GerenciadorActivity.GetInstance().getPlayer().getNome();
 			Socket s = null;
 			s = new Socket("127.0.0.1", PORTA_PADRAO);
 			conexao = new Conexao(s, usuario, tratadorDeDadosDoCliente);
@@ -104,7 +105,7 @@ public class ConectActivity extends Activity implements Killable {
 
 	public void Click_salvarUsuario(View sender) {
 		ViewUtil.closeKeyboard(this);
-		usuario = editUsuario.getText().toString();
+		GerenciadorActivity.GetInstance().getPlayer().setNome(editUsuario.getText().toString());
 		Log.i(TAG, "usuario salvo:" + usuario);
 	}
 
@@ -121,7 +122,8 @@ public class ConectActivity extends Activity implements Killable {
 
 			try {
 				DepoisDeReceberDados tratadorDeDadosDoCliente = new ControleDeUsuariosCliente();
-
+				
+				usuario = GerenciadorActivity.GetInstance().getPlayer().getNome();
 				Socket s = new Socket(ip, PORTA_PADRAO);
 				conexao = new Conexao(s, usuario, tratadorDeDadosDoCliente);
 

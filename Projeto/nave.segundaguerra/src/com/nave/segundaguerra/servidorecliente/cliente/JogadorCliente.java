@@ -9,11 +9,8 @@ public class JogadorCliente extends PlayerCliente {
 	//private String nome;
 
 	public JogadorCliente(String nome, int x, int y) {
-		super(new PointF(x, y));
+		super(nome, new PointF(x, y));
 		
-		this.nome = nome;
-		this.x = x;
-		this.y = y;
 	}
 
 	public String toString() {
