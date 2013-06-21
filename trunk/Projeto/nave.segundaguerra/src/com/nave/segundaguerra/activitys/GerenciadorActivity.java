@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.sql.Struct;
 
 import com.nave.segundaguerra.servidorecliente.cliente.ControleDeUsuariosCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.JogadorCliente;
 import com.nave.segundaguerra.servidorecliente.util.Conexao;
 import com.nave.segundaguerra.servidorecliente.util.DepoisDeReceberDados;
 import com.nave.segundaguerra.servidorecliente.util.ElMatador;
@@ -29,6 +30,8 @@ public class GerenciadorActivity extends Activity implements Killable {
 	public static final String TAG = "GerenteCenas";
 	private Bitmap imagemPlayer;
 	private Bitmap imagemBala;
+	private Bitmap imagemMapa;
+	private static JogadorCliente meuPlayer;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,7 @@ public class GerenciadorActivity extends Activity implements Killable {
 		GerenciadorActivity Inst = this;
 		Instance = Inst;
 		//setContentView(R.layout.activity_main);
+		
 		CenaMenu();
 		
 		try {
@@ -60,6 +64,15 @@ public class GerenciadorActivity extends Activity implements Killable {
 			Log.e("hu3", "Erro carregando imagem");
 		}
 		
+		try {
+			InputStream is = this.getAssets().open("Cenario1.jpg");
+			imagemMapa = BitmapFactory.decodeStream(is);
+			//imagemPlayer = Bitmap.createBitmap(b, 0, 0, 10, 10);
+		} catch (IOException e) {
+			Log.e("hu3", "Erro carregando imagem");
+		}
+		
+		meuPlayer = new JogadorCliente("MyPlayer", 100, 50);
 	}
 	
 	
@@ -75,6 +88,10 @@ public class GerenciadorActivity extends Activity implements Killable {
 	
 	public Bitmap getImageBala(){
 		return imagemBala;
+	}
+	
+	public Bitmap getImageMapa(){
+		return imagemMapa;
 	}
 	
 	public void CenaMenu(){
@@ -114,6 +131,11 @@ public class GerenciadorActivity extends Activity implements Killable {
 	public void CenaEscolhaTime(){
 		Intent intent = new Intent(GerenciadorActivity.this, TelaEscolhaDeTimes_Activity.class);
 		startActivity(intent);
+	}
+	
+	
+	public JogadorCliente getPlayer(){
+		return meuPlayer;
 	}
 
 	public void onBackPressed() {
