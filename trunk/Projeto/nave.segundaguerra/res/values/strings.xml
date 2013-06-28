@@ -13,6 +13,8 @@
     <string name="FIMDEJOGO_Nome">Nome</string>
     <string name="FIMDEJOGO_Matou">0000</string>
     <string name="FIMDEJOGO_Morreu">8001</string>
+    <string name="CREDITOS_Nome">Nome do Integrante</string>
+    <string name="CREDITOS_Funcao">Função</string>
     <string name="title_activity_conect">Conect</string>
     <string name="action_settings">Settings</string>
 
