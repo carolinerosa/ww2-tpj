@@ -153,7 +153,7 @@ public class GerenciadorActivity extends Activity implements Killable {
 								killMeSoftly();
 							}
 
-						}).setNegativeButton("Então tá, fico + um pouco", null)
+						}).setNegativeButton("Entao ta, fico + um pouco", null)
 				.show();
 	}
 
