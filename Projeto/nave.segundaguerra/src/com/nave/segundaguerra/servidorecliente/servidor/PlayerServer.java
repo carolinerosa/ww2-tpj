@@ -36,7 +36,7 @@ public class PlayerServer {
 	private int largura = 3;
 
 	// Grupo do Thyago
-	
+	protected String nome;
 	public static String time;
 
 	public static final String TAG = "Jogador";
