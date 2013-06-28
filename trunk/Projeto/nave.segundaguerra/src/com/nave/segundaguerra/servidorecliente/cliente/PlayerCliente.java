@@ -49,7 +49,7 @@ public class PlayerCliente
 		this.imagemPlayer = GerenciadorActivity.GetInstance().getImagePlayer();
 		
 		
-		sprite = new Sprite(this.imagemPlayer, 3, 3);
+		sprite = new Sprite(this.imagemPlayer, 1, 3);
 		
 		
 	}
