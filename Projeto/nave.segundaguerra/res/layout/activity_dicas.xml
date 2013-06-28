@@ -4,11 +4,44 @@
     android:layout_height="fill_parent"
     tools:context=".DicasActivity" >
 
-    <TextView
+    <Button
+        android:id="@+id/DICAS_retroceder"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:text="@string/DICAS_Retroceder"
+        android:onClick="trocaDica_Retroceder"
+         />
+
+    <Button
+        android:id="@+id/DICAS_avancar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/DICAS_retroceder"
+        android:layout_alignBottom="@+id/DICAS_retroceder"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="18dp"
+        android:text="@string/DICAS_Avancar" 
+        android:onClick="trocaDica_Avancar"
+        />
+
+    <ImageView
+        android:id="@+id/DICAS_imagem"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/DICAS_avancar"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/mina_terrestre" />
+
+    <TextView
+        android:id="@+id/DICAS_texto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/DICAS_imagem"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:text="@string/DICAS_Texto"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>

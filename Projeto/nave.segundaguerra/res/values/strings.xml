@@ -17,5 +17,8 @@
     <string name="CREDITOS_Funcao">Função</string>
     <string name="title_activity_conect">Conect</string>
     <string name="action_settings">Settings</string>
+    <string name="DICAS_Retroceder">Retroceder</string>
+    <string name="DICAS_Avancar">Avançar</string>
+    <string name="DICAS_Texto">Cuidado ao detonar a mina. Um aliado pode estar lá…</string>
 
 </resources>
