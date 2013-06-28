@@ -49,7 +49,7 @@ public class GerenciadorActivity extends Activity implements Killable {
 		CenaMenu();
 		
 		try {
-			InputStream is = this.getAssets().open("player.png");
+			InputStream is = this.getAssets().open("soldado.png");
 			imagemPlayer = BitmapFactory.decodeStream(is);
 			//imagemPlayer = Bitmap.createBitmap(b, 0, 0, 10, 10);
 		} catch (IOException e) {
