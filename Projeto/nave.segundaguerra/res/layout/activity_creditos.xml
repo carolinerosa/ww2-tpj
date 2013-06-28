@@ -5,10 +5,25 @@
     tools:context=".CreditosActivity" >
 
     <TextView
+        android:id="@+id/creditos_nome"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:text="@string/hello_world" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="25dp"
+        android:layout_marginTop="30dp"
+        android:text="@string/CREDITOS_Nome"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/creditos_funcao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/creditos_nome"
+        android:layout_alignBottom="@+id/creditos_nome"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="73dp"
+        android:text="@string/CREDITOS_Funcao"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
 
 </RelativeLayout>
