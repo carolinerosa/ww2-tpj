@@ -83,15 +83,27 @@ public class ConectActivity extends Activity implements Killable {
 			conexao = new Conexao(s, usuario, tratadorDeDadosDoCliente);
 
 			String serverIp = RedeUtil.getLocalIpAddress();
-			DialogHelper.message(this, "endereco do servidor : " + serverIp);
-			setTitle("servidor : " + serverIp);
-
-			// garante que view possa recuperar a lista de usuarios atual e
-			// enviar dados pela rede
 			
-			viewDoJogo = new ViewDeRede(this, conexao, (ControleDeUsuariosCliente) tratadorDeDadosDoCliente);
-			setContentView(viewDoJogo);
+			String serverIp = RedeUtil.getLocalIpAddress();
+			
 
+			if(serverIp == null)
+			{
+				
+				DialogHelper.message(this, "Conecte-se a alguma rede");
+				
+			}else {
+				
+				DialogHelper.message(this, "endereco do servidor : " + serverIp);
+				setTitle("servidor : " + serverIp);
+				
+				// garante que view possa recuperar a lista de usuarios atual e
+				// enviar dados pela rede
+				
+				viewDoJogo = new ViewDeRede(this, conexao, (ControleDeUsuariosCliente) tratadorDeDadosDoCliente);
+				setContentView(viewDoJogo);
+				
+			
 		} catch (UnknownHostException e) {
 			DialogHelper.error(this, "Erro ao conectar com o servidor",
 					ConectActivity.TAG, e);
