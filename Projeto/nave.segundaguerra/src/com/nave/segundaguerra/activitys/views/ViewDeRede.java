@@ -146,18 +146,21 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		switch (action) 
 		{
 		case MotionEvent.ACTION_DOWN:
-			dadosDoCliente.setX((int) (event.getX(id) - playerDraw.x)+ dadosDoCliente.getX());
-			dadosDoCliente.setY((int) (event.getY(id) - playerDraw.y)+ dadosDoCliente.getY());
+			dadosDoCliente.setX((int) (event.getX(id) - playerDraw.x));
+			dadosDoCliente.setY((int) (event.getY(id) - playerDraw.y));
 			break;
 			
 		case MotionEvent.ACTION_MOVE:
-			dadosDoCliente.setX((int) (event.getX(id) - playerDraw.x)+ dadosDoCliente.getX());
-			dadosDoCliente.setY((int) (event.getY(id) - playerDraw.y)+ dadosDoCliente.getY());
+			dadosDoCliente.setX((int) (event.getX(id) - playerDraw.x));
+			dadosDoCliente.setY((int) (event.getY(id) - playerDraw.y));
 			break;
 			
 		case MotionEvent.ACTION_UP:
 			dadosDoCliente.sendTiro(new Point((int)(event.getX(id) - playerDraw.x), 
 					(int) (event.getY(id) - playerDraw.y)));
+			dadosDoCliente.setX(0);
+			dadosDoCliente.setY(0);
+			
 			
 			break;
 			

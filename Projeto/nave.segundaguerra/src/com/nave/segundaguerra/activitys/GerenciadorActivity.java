@@ -26,12 +26,12 @@ import android.view.WindowManager;
 
 public class GerenciadorActivity extends Activity implements Killable {
 
-	private static GerenciadorActivity Instance;
+	public static GerenciadorActivity Instance;
 	public static final String TAG = "GerenteCenas";
 	private Bitmap imagemPlayer;
 	private Bitmap imagemBala;
 	private Bitmap imagemMapa;
-	private static JogadorCliente meuPlayer;
+	private JogadorCliente meuPlayer;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
