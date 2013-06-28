@@ -8,11 +8,13 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 
 public class MenuActivity extends Activity {
 
@@ -30,6 +32,16 @@ public class MenuActivity extends Activity {
 		setContentView(R.layout.activity_menu);
 		gerente = GerenciadorActivity.GetInstance();
 		
+//		Typeface tf = Typeface.createFromAsset(getAssets(), "aha.TTF");
+//		
+//		Button batalha = (Button)findViewById(R.id.Batalha);
+//		batalha.setTypeface(tf);
+//		
+//		Button creditos = (Button)findViewById(R.id.Creditos);
+//		creditos.setTypeface(tf);
+//		
+//		Button dicas = (Button)findViewById(R.id.Creditos);
+//		dicas.setTypeface(tf);
 	}
 	
 	public void Click_Batalha(View v){

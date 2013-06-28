@@ -9,17 +9,21 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 
 import com.nave.segundaguerra.R;
 import com.nave.segundaguerra.activitys.views.ViewDeRede;
 import com.nave.segundaguerra.servidorecliente.cliente.ControleDeUsuariosCliente;
 import com.nave.segundaguerra.servidorecliente.servidor.ControleDeUsuariosServidor;
 import com.nave.segundaguerra.servidorecliente.servidor.GerenteDEConexao;
+import com.nave.segundaguerra.servidorecliente.servidor.PlayerServer;
 import com.nave.segundaguerra.servidorecliente.util.Conexao;
 import com.nave.segundaguerra.servidorecliente.util.DepoisDeReceberDados;
 import com.nave.segundaguerra.servidorecliente.util.DialogHelper;
@@ -56,9 +60,19 @@ public class ConectActivity extends Activity implements Killable {
 		setContentView(R.layout.activity_conect);
 
 		editIP = (EditText) findViewById(R.id.editText1);
-		editUsuario = (EditText) findViewById(R.id.editText2);
+		editUsuario = (EditText) findViewById(R.id.EditText01);
 
 		gerenteCenas = GerenciadorActivity.GetInstance();
+	}
+	
+	public void OnClickAzul(View sender)
+	{
+		PlayerServer.time = "Azul";
+	}
+
+	public void OnClickVermelho(View sender)
+	{
+		PlayerServer.time = "Vermelho";
 	}
 
 	public void Click_criarServidor(View sender) {

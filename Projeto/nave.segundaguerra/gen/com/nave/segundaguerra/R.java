@@ -23,36 +23,43 @@ public final class R {
         public static final int padding_small=0x7f040000;
     }
     public static final class drawable {
-        public static final int fundo=0x7f020000;
-        public static final int ic_action_search=0x7f020001;
-        public static final int ic_launcher=0x7f020002;
-        public static final int player=0x7f020003;
-        public static final int projetil=0x7f020004;
+        public static final int botao=0x7f020000;
+        public static final int botao_arma=0x7f020001;
+        public static final int fundo=0x7f020002;
+        public static final int fundomenu=0x7f020003;
+        public static final int ic_action_search=0x7f020004;
+        public static final int ic_launcher=0x7f020005;
+        public static final int titulo_principal=0x7f020006;
     }
     public static final class id {
-        public static final int Batalha=0x7f080009;
-        public static final int Button01=0x7f080012;
-        public static final int Button02=0x7f080011;
-        public static final int Button03=0x7f080010;
-        public static final int Button04=0x7f08000f;
-        public static final int Button05=0x7f08000e;
-        public static final int Button06=0x7f08000d;
-        public static final int Creditos=0x7f08000a;
-        public static final int Dicas=0x7f08000b;
-        public static final int FIMDEJOGO_Matou=0x7f080007;
-        public static final int FIMDEJOGO_Morreu=0x7f080008;
-        public static final int FIMDEJOGO_Nome=0x7f080006;
-        public static final int Titulo=0x7f08000c;
-        public static final int action_settings=0x7f080016;
+        public static final int Batalha=0x7f080011;
+        public static final int Button01=0x7f080017;
+        public static final int Button02=0x7f080016;
+        public static final int Button03=0x7f080015;
+        public static final int Button04=0x7f080014;
+        public static final int Button05=0x7f080013;
+        public static final int Button06=0x7f080012;
+        public static final int Creditos=0x7f080010;
+        public static final int Dicas=0x7f08000f;
+        public static final int EditText01=0x7f080003;
+        public static final int FIMDEJOGO_Matou=0x7f08000c;
+        public static final int FIMDEJOGO_Morreu=0x7f08000d;
+        public static final int FIMDEJOGO_Nome=0x7f08000b;
+        public static final int action_settings=0x7f08001b;
         public static final int button1=0x7f080000;
         public static final int button2=0x7f080001;
-        public static final int button3=0x7f080002;
-        public static final int editText1=0x7f080004;
-        public static final int editText2=0x7f080003;
-        public static final int menu_settings=0x7f080015;
-        public static final int nick=0x7f080014;
-        public static final int textNick=0x7f080013;
+        public static final int button3=0x7f080006;
+        public static final int editText1=0x7f080002;
+        public static final int imageView1=0x7f08000e;
+        public static final int menu_settings=0x7f08001a;
+        public static final int nick=0x7f080019;
+        public static final int radio0=0x7f080008;
+        public static final int radio1=0x7f080009;
+        public static final int radioGroup1=0x7f080007;
+        public static final int textNick=0x7f080018;
+        public static final int textView1=0x7f080004;
         public static final int textView2=0x7f080005;
+        public static final int textView3=0x7f08000a;
     }
     public static final class layout {
         public static final int activity_batalha=0x7f030000;
