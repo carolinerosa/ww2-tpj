@@ -70,7 +70,6 @@ public class GerenteDEConexao implements Runnable, Killable {
 			ativo = false;
 			Log.e(TAG, "erro ao iniciar servidor", e);
 		}
-
 	}
 
 	public void run() {
@@ -89,7 +88,6 @@ public class GerenteDEConexao implements Runnable, Killable {
 				Log.e(TAG, "erro ao aguardar nova conexao", e);
 				ativo = false;
 			}
-
 		}
 	}
 
@@ -118,6 +116,4 @@ public class GerenteDEConexao implements Runnable, Killable {
 
 		Log.i(TAG, "adeus() -- conexao encerrada.");
 	}
-
-
 }
