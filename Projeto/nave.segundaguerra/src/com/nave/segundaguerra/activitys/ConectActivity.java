@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
 import android.util.Log;
@@ -32,10 +33,8 @@ import com.nave.segundaguerra.servidorecliente.util.Killable;
 import com.nave.segundaguerra.servidorecliente.util.RedeUtil;
 import com.nave.segundaguerra.servidorecliente.util.ViewUtil;
 
-
-
 public class ConectActivity extends Activity implements Killable {
-	
+
 	public static final String TAG = "rede";
 	private static final int PORTA_PADRAO = 2121;
 	private GerenteDEConexao gerente;
@@ -47,20 +46,20 @@ public class ConectActivity extends Activity implements Killable {
 	private Conexao conexao;
 
 	GerenciadorActivity gerenteCenas = null;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		//this.requestWindowFeature(Window.FEATURE_NO_TITLE);
+
+		// this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		
+
 		setContentView(R.layout.activity_conect);
 
-		editIP = (EditText) findViewById(R.id.editText1);
-		editUsuario = (EditText) findViewById(R.id.EditText01);
+		editIP = (EditText) findViewById(R.id.IP); // IP
+		editUsuario = (EditText) findViewById(R.id.Name); // Nickname
 
 		gerenteCenas = GerenciadorActivity.GetInstance();
 	}
@@ -117,7 +116,11 @@ public class ConectActivity extends Activity implements Killable {
 				viewDoJogo = new ViewDeRede(this, conexao, (ControleDeUsuariosCliente) tratadorDeDadosDoCliente);
 				setContentView(viewDoJogo);
 				
-			
+
+			viewDoJogo = new ViewDeRede(this, conexao,
+					(ControleDeUsuariosCliente) tratadorDeDadosDoCliente);
+			setContentView(viewDoJogo);
+
 		} catch (UnknownHostException e) {
 			DialogHelper.error(this, "Erro ao conectar com o servidor",
 					ConectActivity.TAG, e);
@@ -126,13 +129,30 @@ public class ConectActivity extends Activity implements Killable {
 			DialogHelper.error(this, "Erro ao comunicar com o servidor",
 					ConectActivity.TAG, e);
 		}
-
 	}
 
 	public void Click_salvarUsuario(View sender) {
-		ViewUtil.closeKeyboard(this);
-		GerenciadorActivity.GetInstance().getPlayer().setNome(editUsuario.getText().toString());
-		Log.i(TAG, "usuario salvo:" + usuario);
+			
+				if (setName().length() == 0) {
+				DialogHelper.message(this, "Insira um nickname.");
+				}
+				
+				if (setName().length() > 10) {
+					DialogHelper.message(this, "Insira um nickname menor.");
+				}
+
+				if (setName().length() >= 1 && setName().length() <= 10) {
+					ViewUtil.closeKeyboard(this);
+					GerenciadorActivity.GetInstance().getPlayer()
+							.setNome(editUsuario.getText().toString());
+					Log.i(TAG, "usuario salvo:" + usuario);
+					
+				}
+		}
+
+
+	public String setName() {
+		return editUsuario.getText().toString();
 	}
 
 	public void Click_conectar(View sender) {
@@ -148,17 +168,19 @@ public class ConectActivity extends Activity implements Killable {
 
 			try {
 				DepoisDeReceberDados tratadorDeDadosDoCliente = new ControleDeUsuariosCliente();
-				
-				usuario = GerenciadorActivity.GetInstance().getPlayer().getNome();
+
+				usuario = GerenciadorActivity.GetInstance().getPlayer()
+						.getNome();
 				Socket s = new Socket(ip, PORTA_PADRAO);
 				conexao = new Conexao(s, usuario, tratadorDeDadosDoCliente);
 
 				// garante que view possa recuperar a lista de usuarios atual e
 				// enviar dados pela rede
 
-				viewDoJogo = new ViewDeRede(this, conexao, (ControleDeUsuariosCliente) tratadorDeDadosDoCliente);
+				viewDoJogo = new ViewDeRede(this, conexao,
+						(ControleDeUsuariosCliente) tratadorDeDadosDoCliente);
 				setContentView(viewDoJogo);
-				
+
 			} catch (UnknownHostException e) {
 				DialogHelper.error(this, "Erro ao conectar com o servidor",
 						ConectActivity.TAG, e);
@@ -176,7 +198,7 @@ public class ConectActivity extends Activity implements Killable {
 	 *      -that-the-user-wishes-to-exit-an-android-activity
 	 */
 	public void onBackPressed() {
-		Log.i(TAG,"--------- back pressed");
+		Log.i(TAG, "--------- back pressed");
 
 		new AlertDialog.Builder(this)
 				.setIcon(android.R.drawable.ic_dialog_alert)
@@ -190,8 +212,8 @@ public class ConectActivity extends Activity implements Killable {
 								killMeSoftly();
 							}
 
-						}).setNegativeButton("Então tá, fico + um pouco", null)
-				.show();
+						})
+				.setNegativeButton("Então tá, fico + um pouco", null).show();
 	}
 
 	/**

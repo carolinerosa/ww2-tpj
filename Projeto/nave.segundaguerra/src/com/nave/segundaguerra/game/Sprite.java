@@ -35,7 +35,14 @@ public class Sprite
 		
 		paint = new Paint();
 	}
-	
+	public void setConfig(Bitmap bitmap,int frameNr, int fps){
+		this.spriteWidth = bitmap.getWidth() / frameNr;
+		this.spriteHeight = bitmap.getHeight();
+		this.frameNr = frameNr;
+		this.framePeriod = 1000/fps;
+		this.selectRect = new Rect(0,0, spriteWidth / frameNr, spriteHeight);
+		this.bitmap = bitmap;
+	}
 	
 	
 	public void Update(long deltaTime)
