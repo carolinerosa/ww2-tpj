@@ -115,7 +115,7 @@ public class ConectActivity extends Activity implements Killable {
 
 		if (ip.trim().length() == 0) {
 			DialogHelper.message(this,
-					"endereço do servidor não pode ser vazio");
+					"endereco do servidor nao pode ser vazio");
 
 		} else {
 			ViewUtil.closeKeyboard(this);
@@ -141,9 +141,7 @@ public class ConectActivity extends Activity implements Killable {
 				DialogHelper.error(this, "Erro ao comunicar com o servidor",
 						ConectActivity.TAG, e);
 			}
-
 		}
-
 	}
 
 	/**
