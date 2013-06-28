@@ -51,7 +51,7 @@ public class PlayerServer {
 
 		// if(destinationPosition.x != x || destinationPosition.y != y)
 
-		// checa se está abaixo do ponto destino no eixo x
+		/*/ checa se está abaixo do ponto destino no eixo x
 		if (x < destinationPosition.x) {
 			x += speed;
 		}
@@ -70,6 +70,8 @@ public class PlayerServer {
 		if (y > destinationPosition.y) {
 			y -= speed;
 		}
+		*/
+		
 		if (life <= 0) {
 			if (lastDagameTaken.getOwner() == this) {
 				lastDagameTaken.getOwner().pontos.ComunicacaoScore(time,
@@ -82,6 +84,9 @@ public class PlayerServer {
 
 		checkMapa();
 
+		this.x += destinationPosition.x/20;
+		this.y += destinationPosition.y/20;
+		
 	}
 
 	public int getLife() {
@@ -142,22 +147,7 @@ public class PlayerServer {
 	}
 
 	private void checkMapa() {
-		if (this.destinationPosition.x < MapaServer.getX()) {
-			this.destinationPosition.x = MapaServer.getX();
-		}
-
-		if (this.destinationPosition.y < MapaServer.getY()) {
-			this.destinationPosition.y = MapaServer.getY();
-		}
-
-		if (this.destinationPosition.x > MapaServer.getLargura()) {
-			this.destinationPosition.x = MapaServer.getLargura();
-		}
-
-		if (this.destinationPosition.y > MapaServer.getAltura()) {
-			this.destinationPosition.y = MapaServer.getAltura();
-		}
-
+		
 		if (this.x < MapaServer.getX()) {
 			this.x = MapaServer.getX();
 		}
