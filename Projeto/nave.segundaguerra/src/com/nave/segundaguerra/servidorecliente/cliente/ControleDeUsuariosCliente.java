@@ -6,6 +6,7 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.Log;
 
@@ -83,7 +84,7 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 			int y = Integer.parseInt(separado[1]);
 			
 			
-			tiroList.add(i, new TiroCliente(new PointF(x, y)));
+			tiroList.add(i, new TiroCliente(new Point(x, y)));
 			i++;
 		}
 	}

@@ -1,5 +1,7 @@
 package com.nave.segundaguerra.game;
 
+import com.nave.segundaguerra.activitys.GerenciadorActivity;
+
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -9,18 +11,18 @@ public class Sprite
 {
 	private static final String TAG = "SPRITE SHEET DRAW";
 	
-	private Bitmap bitmap;
-	private Rect selectRect;
+	protected Bitmap bitmap;
+	protected Rect selectRect;
 	private int frameNr;
 	private int currentFrame;
 	private long spriteTime;
 	private double framePeriod;
 	
-	private int spriteWidth;
-	private int spriteHeight;
+	protected int spriteWidth;
+	protected int spriteHeight;
 	private long cronometro;
 	
-	private Paint paint;
+	protected Paint paint;
 	
 	public Sprite(Bitmap bitmap,int frameNr, int fps)
 	{
@@ -67,7 +69,7 @@ public class Sprite
 	}
 	public void Draw(Canvas canvas, Rect destRect)
 	{
-		canvas.drawBitmap(this.bitmap, this.selectRect, destRect, paint);
+		canvas.drawBitmap(bitmap, selectRect, destRect, paint);
 	}
 	
 	

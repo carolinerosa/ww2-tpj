@@ -24,4 +24,8 @@ public class MapaServer {
 	public static int getAltura(){
 		return Altura;				
 	}
+	
+	public static String toStringCSV() {
+		return ""+x+","+y+";";
+	}
 }

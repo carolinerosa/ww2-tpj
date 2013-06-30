@@ -3,14 +3,14 @@ package com.nave.segundaguerra.game;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 
-public class Rect {
+public class RectClasse {
 	
 	private int x;
 	private int y;
 	private int height;
 	private int width;
 	private Paint paint;
-	public Rect(int x, int y, int height, int width, Paint paint) {
+	public RectClasse(int x, int y, int height, int width, Paint paint) {
 		this.x = x;
 		this.y = y;
 		this.height = height;

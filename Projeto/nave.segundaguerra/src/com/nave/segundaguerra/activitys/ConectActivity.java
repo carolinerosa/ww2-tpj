@@ -25,6 +25,7 @@ import com.nave.segundaguerra.servidorecliente.servidor.ControleDeUsuariosServid
 import com.nave.segundaguerra.servidorecliente.servidor.GerenteDEConexao;
 import com.nave.segundaguerra.servidorecliente.servidor.PlayerServer;
 import com.nave.segundaguerra.servidorecliente.util.Conexao;
+import com.nave.segundaguerra.servidorecliente.util.Const;
 import com.nave.segundaguerra.servidorecliente.util.DepoisDeReceberDados;
 import com.nave.segundaguerra.servidorecliente.util.DialogHelper;
 import com.nave.segundaguerra.servidorecliente.util.ElMatador;
@@ -67,12 +68,12 @@ public class ConectActivity extends Activity implements Killable
 
 	public void OnClickAzul(View sender)
 	{
-		PlayerServer.time = "Azul";
+		GerenciadorActivity.GetInstance().getPlayer().setTime(Const.TIMEAZUL);
 	}
 
 	public void OnClickVermelho(View sender)
 	{
-		PlayerServer.time = "Vermelho";
+		GerenciadorActivity.GetInstance().getPlayer().setTime(Const.TIMEVERMELHO);
 	}
 
 	public void Click_criarServidor(View sender)

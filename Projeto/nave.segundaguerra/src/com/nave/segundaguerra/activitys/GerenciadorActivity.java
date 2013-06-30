@@ -4,6 +4,10 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Struct;
 
+import com.nave.segundaguerra.game.SpriteBala;
+import com.nave.segundaguerra.game.SpritePlayer;
+import com.nave.segundaguerra.game.RectClasse;
+import com.nave.segundaguerra.game.Sprite;
 import com.nave.segundaguerra.servidorecliente.cliente.ControleDeUsuariosCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.JogadorCliente;
 import com.nave.segundaguerra.servidorecliente.util.Conexao;
@@ -18,6 +22,8 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Point;
+import android.graphics.Rect;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,7 +35,9 @@ public class GerenciadorActivity extends Activity implements Killable {
 	public static GerenciadorActivity Instance;
 	public static final String TAG = "GerenteCenas";
 	private Bitmap imagemPlayer;
+	private Rect playerRect;
 	private Bitmap imagemBala;
+	private Rect balaRect;
 	private Bitmap imagemMapa;
 	private JogadorCliente meuPlayer;
 	
@@ -72,7 +80,12 @@ public class GerenciadorActivity extends Activity implements Killable {
 			Log.e("hu3", "Erro carregando imagem");
 		}
 		
-		meuPlayer = new JogadorCliente("MyPlayer", 100, 50);
+		
+		playerRect = new Rect(-imagemPlayer.getHeight()/10, -imagemPlayer.getWidth()/10, imagemPlayer.getHeight()/10, imagemPlayer.getWidth()/10);
+		
+		balaRect = new Rect(-imagemBala.getHeight()/5, -imagemBala.getWidth()/5, imagemBala.getHeight()/5, imagemBala.getWidth()/5);
+		
+		meuPlayer = new JogadorCliente("", 100, 50);
 	}
 	
 	
@@ -86,8 +99,16 @@ public class GerenciadorActivity extends Activity implements Killable {
 		return imagemPlayer;
 	}
 	
+	public Rect getPlayerRect(){
+		return playerRect;
+	}
+	
 	public Bitmap getImageBala(){
 		return imagemBala;
+	}
+	
+	public Rect getBalaRect(){
+		return balaRect;
 	}
 	
 	public Bitmap getImageMapa(){

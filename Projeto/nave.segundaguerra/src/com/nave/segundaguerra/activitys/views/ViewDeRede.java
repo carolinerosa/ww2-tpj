@@ -23,6 +23,9 @@ import com.nave.segundaguerra.servidorecliente.cliente.JogadorCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.MapaCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.TiroCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.ViewPort;
+import com.nave.segundaguerra.servidorecliente.servidor.JogadorServer;
+import com.nave.segundaguerra.servidorecliente.servidor.PlayerServer;
+import com.nave.segundaguerra.servidorecliente.servidor.TiroServer;
 import com.nave.segundaguerra.servidorecliente.util.Conexao;
 import com.nave.segundaguerra.servidorecliente.util.ElMatador;
 import com.nave.segundaguerra.servidorecliente.util.Killable;
@@ -46,6 +49,13 @@ public class ViewDeRede extends View implements Runnable, Killable {
 	public ViewPort viewPort;
 	public MapaCliente mapa;
 	
+	private Point[] dedos = new Point[2];
+	
+	
+
+	PlayerServer JS;
+	TiroServer TS;
+	
 	public ViewDeRede(Context context, Conexao cliente,
 			ControleDeUsuariosCliente tratadorDeDadosDoCliente) {
 
@@ -67,7 +77,8 @@ public class ViewDeRede extends View implements Runnable, Killable {
 
 		
 		JogadorCliente meuJogador = GerenciadorActivity.GetInstance().getPlayer();
-		cliente.write(Protocolo.PROTOCOL_ID + "," + meuJogador.getNome() + ","+ meuJogador.getX() + "," + meuJogador.getY());
+		cliente.write(Protocolo.PROTOCOL_ID + "," + meuJogador.getNome() + ","+ meuJogador.getX() + "," + meuJogador.getY() 
+				+ "," + meuJogador.getTime());
 		
 		this.viewPort = new ViewPort(meuJogador);
 		this.mapa = new MapaCliente();
@@ -78,6 +89,7 @@ public class ViewDeRede extends View implements Runnable, Killable {
 
 		Thread thread = new Thread(this);
 		thread.start();
+		
 	}
 
 	public void draw(Canvas canvas) {
@@ -85,7 +97,6 @@ public class ViewDeRede extends View implements Runnable, Killable {
 
 		viewPort.setTela(this.getHeight(), this.getWidth());
 		viewPort.drawInViewPort(mapa, canvas);
-		//Log.i("viewPort", "o Width "+this.getWidth()+";  o Height "+this.getHeight());
 		
 		ConcurrentHashMap<String, JogadorCliente> jogadores = tratadorDeDadosDoCliente
 				.getJogadores();
@@ -103,10 +114,6 @@ public class ViewDeRede extends View implements Runnable, Killable {
 				{
 					raio = jogador.getImage().getHeight()/2;
 				}
-			canvas.drawText("<" + jogador.getNome() + ">", viewPort.getPosPlayerDraw().x - raio*2
-					, viewPort.getPosPlayerDraw().y + raio + margem + fontSize, paint);
-			
-			canvas.drawText("X: "+ jogador.getX() + " ; Y: "+ jogador.getY(), 10, 100,  paint);
 		}
 		
 		for(TiroCliente t : tiros)
@@ -138,32 +145,55 @@ public class ViewDeRede extends View implements Runnable, Killable {
 
 	public boolean onTouchEvent(MotionEvent event) {
 		int action = event.getAction();
-		Log.i(TAG, "ontouch: " + action);
+		Log.i("onTouch", "ontouch: " + action);
 
-		int id = event.getPointerId(event.getAction());
+		int id = 0;
 		Point playerDraw = viewPort.getPosPlayerDraw();
 
+		
+		for(int i = 0; i < dedos.length; i++)
+		{
+			if (i < event.getPointerCount())
+			{
+				id = event.getPointerId(i);
+				dedos[i] = new Point((int)(event.getX(id) - playerDraw.x),
+						(int) (event.getY(id) - playerDraw.y));
+			}
+		}
+		
+		
+		
 		switch (action) 
 		{
 		case MotionEvent.ACTION_DOWN:
-			dadosDoCliente.setX((int) (event.getX(id) - playerDraw.x));
-			dadosDoCliente.setY((int) (event.getY(id) - playerDraw.y));
+			dadosDoCliente.setX(dedos[0].x);
+			dadosDoCliente.setY(dedos[0].y);
+			Log.i("dedos", "1 dedo   " + dedos[0]);
 			break;
 			
 		case MotionEvent.ACTION_MOVE:
-			dadosDoCliente.setX((int) (event.getX(id) - playerDraw.x));
-			dadosDoCliente.setY((int) (event.getY(id) - playerDraw.y));
+			dadosDoCliente.setX(dedos[0].x);
+			dadosDoCliente.setY(dedos[0].y);
+			Log.i("dedos", "arrastou 1 dedos   " + dedos[0]);
 			break;
 			
-		case MotionEvent.ACTION_UP:
-			dadosDoCliente.sendTiro(new Point((int)(event.getX(id) - playerDraw.x), 
-					(int) (event.getY(id) - playerDraw.y)));
+        case MotionEvent.ACTION_UP:
+            Log.i(TAG, "Removeu primeiro toque");
+            dadosDoCliente.sendTiro(dedos[0]);
 			dadosDoCliente.setX(0);
 			dadosDoCliente.setY(0);
-			
-			
-			break;
-			
+			//Log.i("dedos", "sem 1 dedo   " + dedos[0]);
+            break;
+               
+        case MotionEvent.ACTION_POINTER_1_DOWN:
+            //dadosDoCliente.sendTiro(new Point((int)(event.getX(id) - playerDraw.x),
+            //              (int) (event.getY(id) - playerDraw.y)));
+            dadosDoCliente.sendTiro(dedos[1]);
+            Log.i("dedos", "2 dedos   " + dedos[1]);
+            
+            break;
+               
+               
 			
 		default:
 			break;

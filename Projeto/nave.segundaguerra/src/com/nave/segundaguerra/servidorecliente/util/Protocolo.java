@@ -12,4 +12,6 @@ public interface Protocolo {
 	public static final String PROTOCOL_ITEM = "ITEM :";
 	public static final String PROTOCOL_ASKITEM = "ASKITEM :";
 	public static final String PROTOCOL_SCORE = "SCORE :";
+	
+	public static final String PROTOCOL_MAPA = "MAPA :";
 }

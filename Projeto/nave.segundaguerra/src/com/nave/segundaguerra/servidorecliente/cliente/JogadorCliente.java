@@ -1,6 +1,7 @@
 package com.nave.segundaguerra.servidorecliente.cliente;
 
 import android.content.Context;
+import android.graphics.Point;
 import android.graphics.PointF;
 
 
@@ -9,7 +10,7 @@ public class JogadorCliente extends PlayerCliente {
 	//private String nome;
 
 	public JogadorCliente(String nome, int x, int y) {
-		super(nome, new PointF(x, y));
+		super(nome, new Point(x, y));
 		
 	}
 
@@ -31,6 +32,7 @@ public class JogadorCliente extends PlayerCliente {
 
 	public void setX(int x) {
 		this.x = x;
+		this.setPosition(new Point(x, this.y));
 	}
 
 	public int getY() {
@@ -39,11 +41,14 @@ public class JogadorCliente extends PlayerCliente {
 
 	public void setY(int y) {
 		this.y = y;
+		this.setPosition(new Point(this.x, y));
 	}
 
 	public String toStringCSV() {
 		return nome + "," + x + "," + y + ";";
 	}
+	
+	
 	
 
 }
