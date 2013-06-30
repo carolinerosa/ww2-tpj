@@ -135,7 +135,7 @@ public class GerenciadorActivity extends Activity implements Killable {
 		startActivity(intent);
 	}
 	
-	public void CenaJogo(){
+	public void CenaBatalha(){
 		Intent intent = new Intent(GerenciadorActivity.this, BatalhaActivity.class);
 		startActivity(intent);
 	}

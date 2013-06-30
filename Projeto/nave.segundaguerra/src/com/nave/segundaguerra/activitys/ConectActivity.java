@@ -45,6 +45,8 @@ public class ConectActivity extends Activity implements Killable
 	private String usuario;
 	private ViewDeRede viewDoJogo;
 	private Conexao conexao;
+	
+	private boolean escolheuNome, escolheuTime;
 
 	GerenciadorActivity gerenteCenas = null;
 
@@ -69,11 +71,13 @@ public class ConectActivity extends Activity implements Killable
 	public void OnClickAzul(View sender)
 	{
 		GerenciadorActivity.GetInstance().getPlayer().setTime(Const.TIMEAZUL);
+		escolheuTime = true;
 	}
 
 	public void OnClickVermelho(View sender)
 	{
 		GerenciadorActivity.GetInstance().getPlayer().setTime(Const.TIMEVERMELHO);
+		escolheuTime = true;
 	}
 
 	public void Click_criarServidor(View sender)
@@ -107,7 +111,13 @@ public class ConectActivity extends Activity implements Killable
 
 				DialogHelper.message(this, "Conecte-se a alguma rede");
 
-			} else
+			} else 
+				if(!escolheuNome){
+				DialogHelper.message(this, "Insira um nickname.");
+			}else 
+				if(!escolheuTime){
+				DialogHelper.message(this, "Escolha o seu Time.");
+			}else
 			{
 
 				DialogHelper
@@ -154,6 +164,7 @@ public class ConectActivity extends Activity implements Killable
 			GerenciadorActivity.GetInstance().getPlayer()
 					.setNome(editUsuario.getText().toString());
 			Log.i(TAG, "usuario salvo:" + usuario);
+			escolheuNome = true;
 
 		}
 	}
@@ -166,6 +177,14 @@ public class ConectActivity extends Activity implements Killable
 	public void Click_conectar(View sender)
 	{
 
+		if(!escolheuNome){
+			DialogHelper.message(this, "Insira um nickname.");
+		}
+		
+		if(!escolheuTime){
+			DialogHelper.message(this, "Escolha o seu Time.");
+		}
+		
 		String ip = editIP.getText().toString();
 
 		if (ip.trim().length() == 0)
