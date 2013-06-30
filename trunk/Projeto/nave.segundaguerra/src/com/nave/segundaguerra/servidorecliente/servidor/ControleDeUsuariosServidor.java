@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import android.graphics.Point;
 import android.graphics.PointF;
 import android.util.Log;
 
@@ -99,10 +100,13 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		String nome = array[1];
 		int x = Integer.parseInt(array[2]);
 		int y = Integer.parseInt(array[3]);
+		String time = array[4];
 
 		origem.setId(nome);
 		JogadorServer jogador = new JogadorServer(nome, x, y);
 		jogadores.put(nome, jogador);
+		jogador.setTime(time);
+		
 	}
 	
 	private void adicionaTiro(Conexao origem, String linha){
@@ -112,7 +116,7 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		int y = Integer.parseInt(array[3]);
 		
 		
-		tiroList.add(new TiroServer(jogadores.get(nome), new PointF(x, y)));
+		tiroList.add(new TiroServer(jogadores.get(nome), new Point(x, y)));
 		
 		atualizaTiros(origem);
 		
@@ -132,6 +136,13 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		}
 
 		origem.write(Protocolo.PROTOCOL_SHOOT + buffer.toString());
+	}
+	
+	
+	public void configuracaoPrimarias(Conexao origem) {
+		
+		origem.write(Protocolo.PROTOCOL_MAPA + MapaServer.toStringCSV());
+		
 	}
 
 }

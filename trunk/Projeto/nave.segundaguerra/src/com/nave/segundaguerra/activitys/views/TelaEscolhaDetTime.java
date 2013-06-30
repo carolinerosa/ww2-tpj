@@ -2,7 +2,7 @@ package com.nave.segundaguerra.activitys.views;
 
 import com.nave.segundaguerra.R;
 import com.nave.segundaguerra.R.drawable;
-import com.nave.segundaguerra.game.Rect;
+import com.nave.segundaguerra.game.RectClasse;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -22,8 +22,8 @@ public class TelaEscolhaDetTime extends View implements Runnable {
 	private Paint paint_Vermelho;
 	private Paint paint_Azul;
 	private boolean jogoIniciado = false;
-	private Rect botao_vermelho;
-	private Rect botao_azul;
+	private RectClasse botao_vermelho;
+	private RectClasse botao_azul;
 	private String Time = null;
 	private static boolean clicou;
 
@@ -32,8 +32,8 @@ public class TelaEscolhaDetTime extends View implements Runnable {
 
 		paint_Vermelho = new Paint();
 		paint_Azul = new Paint();
-		botao_vermelho = new Rect(50, 100, 80, 130, paint_Vermelho);
-		botao_azul = new Rect(230, 100, 260, 130, paint_Azul);
+		botao_vermelho = new RectClasse(50, 100, 80, 130, paint_Vermelho);
+		botao_azul = new RectClasse(230, 100, 260, 130, paint_Azul);
 		Thread minhaThread = new Thread(this);
 		minhaThread.setPriority(Thread.MIN_PRIORITY);
 		minhaThread.start();

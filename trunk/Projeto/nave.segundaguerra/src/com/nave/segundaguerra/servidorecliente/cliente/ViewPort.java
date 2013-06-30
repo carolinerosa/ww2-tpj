@@ -64,7 +64,10 @@ public class ViewPort {
 		player.setX((oldX - x));
 		player.setY((oldY - y));
 		
-		posPlayerDraw = new Point(oldX - x, oldY - y);
+		if(player.nome == jogador.nome)
+		{
+			posPlayerDraw = new Point(oldX - x, oldY - y);
+		}
 		player.draw(canvas);
 		
 		player.setX(oldX);
@@ -74,8 +77,8 @@ public class ViewPort {
 	
 	public void drawInViewPort(TiroCliente tiro, Canvas canvas){
 		
-		PointF old = tiro.getPosition();
-		PointF next = new PointF((old.x - x), (old.y - y));
+		Point old = tiro.getPosition();
+		Point next = new Point((old.x - x), (old.y - y));
 		
 		tiro.setPosition(next);
 		tiro.DrawTiro(canvas);

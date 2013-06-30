@@ -9,8 +9,8 @@ public class JogadorServer extends PlayerServer {
 	public JogadorServer(String nome, int x, int y) {
 				
 		this.nome = nome;
-		this.x = x;
-		this.y = y;
+		this.setPosition(new Point(x, y));
+		this.respawn();
 	}
 
 	public String toString() {
@@ -44,5 +44,7 @@ public class JogadorServer extends PlayerServer {
 	public String toStringCSV() {
 		return nome + "," + x + "," + y + ";";
 	}
+	
+	
 
 }

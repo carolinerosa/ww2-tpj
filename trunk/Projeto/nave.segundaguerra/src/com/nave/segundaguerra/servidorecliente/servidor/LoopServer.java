@@ -60,6 +60,10 @@ public class LoopServer implements Runnable, Killable{
 		
 		for(TiroServer t : tiroList){
 			t.update();
+			if(t.checarColisao(jogadores))
+			{
+				tiroList.remove(t);
+			}
 	    }
 		
 		Iterator iterator = jogadores.keySet().iterator();

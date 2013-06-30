@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Random;
 
+import com.nave.segundaguerra.activitys.GerenciadorActivity;
 import com.nave.segundaguerra.game.Angulator;
 import com.nave.segundaguerra.game.Player;
 import com.nave.segundaguerra.game.Pontos;
@@ -17,6 +18,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.util.Log;
 
 public class PlayerServer {
@@ -32,18 +34,19 @@ public class PlayerServer {
 	TiroServer lastDagameTaken;
 	PontosTime pontos;
 	public Angulator anguloTiro;
-	private int altura = 3;
-	private int largura = 3;
-
+	private Rect playerRect;
+	
 	// Grupo do Thyago
 	protected String nome;
-	public static String time;
+	public String time;
 
 	public static final String TAG = "Jogador";
 
 	public PlayerServer() {
 		this.life = 100;
 		pontos = new PontosTime();
+		Rect r = GerenciadorActivity.GetInstance().getPlayerRect();
+		this.playerRect = new Rect(r.left, r.top, r.right, r.bottom);
 
 	}
 
@@ -51,22 +54,22 @@ public class PlayerServer {
 
 		// if(destinationPosition.x != x || destinationPosition.y != y)
 
-		/*/ checa se está abaixo do ponto destino no eixo x
+		/*/ checa se estï¿½ abaixo do ponto destino no eixo x
 		if (x < destinationPosition.x) {
 			x += speed;
 		}
 
-		// checa se está abaixo do ponto destino no eixo x
+		// checa se estï¿½ abaixo do ponto destino no eixo x
 		if (x > destinationPosition.x) {
 			x -= speed;
 		}
 
-		// checa se está abaixo do ponto destino no eixo y
+		// checa se estï¿½ abaixo do ponto destino no eixo y
 		if (y < destinationPosition.y) {
 			y += speed;
 		}
 
-		// checa se está abaixo do ponto destino no eixo y
+		// checa se estï¿½ abaixo do ponto destino no eixo y
 		if (y > destinationPosition.y) {
 			y -= speed;
 		}
@@ -87,6 +90,8 @@ public class PlayerServer {
 		this.x += destinationPosition.x/20;
 		this.y += destinationPosition.y/20;
 		
+		this.setPosition(new Point(x, y));
+		
 	}
 
 	public int getLife() {
@@ -102,20 +107,26 @@ public class PlayerServer {
 	}
 
 	public void setPosition(Point pos) {
+		
 		this.x = pos.x;
 		this.y = pos.y;
+		
+		int tempX = this.x - this.playerRect.height()/2;
+		int tempY = this.y - this.playerRect.width()/2;
+		
+		playerRect.set(tempX, tempY, x + this.playerRect.height()/2, y + this.playerRect.height()/2);
 	}
 
 	public Point getPosition() {
-		return new Point(x, y);
+		return new Point(playerRect.centerX(), playerRect.centerY());
 	}
 
 	public int getLargura() {
-		return largura;
+		return playerRect.width();
 	}
 
 	public int getAltura() {
-		return altura;
+		return playerRect.height();
 	}
 
 	public Angulator getAngulo() {
@@ -130,12 +141,12 @@ public class PlayerServer {
 		ammo = 20;
 	}
 
-	private void respawn(int largura, int altura, PlayerServer player) {
+	public void respawn() {
 		Random random = new Random();
 		Point novaPosicao = new Point();
-		novaPosicao.x = random.nextInt(largura);
-		novaPosicao.y = random.nextInt(altura);
-		player.setPosition(novaPosicao);
+		novaPosicao.x = random.nextInt(MapaServer.getLargura());
+		novaPosicao.y = random.nextInt(MapaServer.getAltura());
+		this.setPosition(novaPosicao);
 	}
 
 	public void collisionTiro(TiroServer tiro, int dano, int largura, int altura) {
@@ -143,27 +154,47 @@ public class PlayerServer {
 		life -= dano;
 
 		if (life <= 0)
-			respawn(largura - this.largura, altura - this.altura, this);
+			respawn();
 	}
 
 	private void checkMapa() {
 		
 		if (this.x < MapaServer.getX()) {
-			this.x = MapaServer.getX();
+			this.setPosition(new Point(MapaServer.getX(), y));
 		}
 
 		if (this.y < MapaServer.getY()) {
-			this.y = MapaServer.getY();
+			this.setPosition(new Point(x, MapaServer.getY()));
 		}
 
 		if (this.x > MapaServer.getLargura()) {
-			this.x = MapaServer.getLargura();
+			this.setPosition(new Point(MapaServer.getLargura(), y));
 		}
 
 		if (this.y > MapaServer.getAltura()) {
-			this.y = MapaServer.getAltura();
+			this.setPosition(new Point(x, MapaServer.getAltura()));
 		}
 
+	}
+	
+	public int getHeight(){
+		return playerRect.height();
+	}
+	
+	public int getWidth(){
+		return playerRect.width();
+	}
+	
+	public void setTime(String time){
+		this.time = time;
+	}
+	
+	public String getTime(){
+		return this.time;
+	}
+	
+	public Rect getRect(){
+		return playerRect;
 	}
 
 }
