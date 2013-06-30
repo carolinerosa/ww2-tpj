@@ -179,19 +179,13 @@ public class ViewDeRede extends View implements Runnable, Killable {
 			
         case MotionEvent.ACTION_UP:
             Log.i(TAG, "Removeu primeiro toque");
-            //dadosDoCliente.sendTiro(dedos[0]);
+            dadosDoCliente.sendTiro(dedos[0]);
 			dadosDoCliente.setX(0);
 			dadosDoCliente.setY(0);
 			//Log.i("dedos", "sem 1 dedo   " + dedos[0]);
             break;
                
-        case MotionEvent.ACTION_POINTER_1_DOWN:
-            //dadosDoCliente.sendTiro(new Point((int)(event.getX(id) - playerDraw.x),
-            //              (int) (event.getY(id) - playerDraw.y)));
-            dadosDoCliente.sendTiro(dedos[1]);
-            Log.i("dedos", "2 dedos   " + dedos[1]);
-            
-            break;
+        
                
                
 			

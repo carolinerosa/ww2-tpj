@@ -7,6 +7,7 @@ import java.net.UnknownHostException;
 import android.os.Bundle;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.graphics.Typeface;
@@ -21,6 +22,7 @@ import android.widget.ImageButton;
 import com.nave.segundaguerra.R;
 import com.nave.segundaguerra.activitys.views.ViewDeRede;
 import com.nave.segundaguerra.servidorecliente.cliente.ControleDeUsuariosCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.SoundManager;
 import com.nave.segundaguerra.servidorecliente.servidor.ControleDeUsuariosServidor;
 import com.nave.segundaguerra.servidorecliente.servidor.GerenteDEConexao;
 import com.nave.segundaguerra.servidorecliente.servidor.PlayerServer;
@@ -45,7 +47,7 @@ public class ConectActivity extends Activity implements Killable
 	private String usuario;
 	private ViewDeRede viewDoJogo;
 	private Conexao conexao;
-	
+	private Context thisContext;
 	private boolean escolheuNome, escolheuTime;
 
 	GerenciadorActivity gerenteCenas = null;
@@ -59,12 +61,13 @@ public class ConectActivity extends Activity implements Killable
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
 		setContentView(R.layout.activity_conect);
 
 		editIP = (EditText) findViewById(R.id.IP);
 		editUsuario = (EditText) findViewById(R.id.Name);
-
+		thisContext = this;
 		gerenteCenas = GerenciadorActivity.GetInstance();
 	}
 
@@ -91,7 +94,7 @@ public class ConectActivity extends Activity implements Killable
 			{
 				gerente.killMeSoftly();
 			}
-
+			
 			gerente = new GerenteDEConexao(PORTA_PADRAO);
 
 			// gerente.iniciarServidor(new TratadorDeRedeECO());
@@ -119,6 +122,7 @@ public class ConectActivity extends Activity implements Killable
 				DialogHelper.message(this, "Escolha o seu Time.");
 			}else
 			{
+				SoundManager.getInstance().StopSong("MenuSound");
 
 				DialogHelper
 						.message(this, "endereco do servidor : " + serverIp);
@@ -198,6 +202,8 @@ public class ConectActivity extends Activity implements Killable
 
 			try
 			{
+				SoundManager.getInstance().StopSong("MenuSound");
+
 				DepoisDeReceberDados tratadorDeDadosDoCliente = new ControleDeUsuariosCliente();
 
 				usuario = GerenciadorActivity.GetInstance().getPlayer()
@@ -245,7 +251,11 @@ public class ConectActivity extends Activity implements Killable
 							public void onClick(DialogInterface dialog,
 									int which)
 							{
+								
+								SoundManager.getInstance().playSound(R.raw.menu, "MenuSound",true, thisContext);
+
 								killMeSoftly();
+
 							}
 
 						})

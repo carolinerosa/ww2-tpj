@@ -4,12 +4,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Struct;
 
+import com.nave.segundaguerra.R;
 import com.nave.segundaguerra.game.SpriteBala;
 import com.nave.segundaguerra.game.SpritePlayer;
 import com.nave.segundaguerra.game.RectClasse;
 import com.nave.segundaguerra.game.Sprite;
 import com.nave.segundaguerra.servidorecliente.cliente.ControleDeUsuariosCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.JogadorCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.SoundManager;
 import com.nave.segundaguerra.servidorecliente.util.Conexao;
 import com.nave.segundaguerra.servidorecliente.util.DepoisDeReceberDados;
 import com.nave.segundaguerra.servidorecliente.util.ElMatador;
@@ -49,7 +51,8 @@ public class GerenciadorActivity extends Activity implements Killable {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
 		GerenciadorActivity Inst = this;
 		Instance = Inst;
 		//setContentView(R.layout.activity_main);
@@ -116,11 +119,15 @@ public class GerenciadorActivity extends Activity implements Killable {
 	}
 	
 	public void CenaMenu(){
+
+		Log.i("MenuActivity", "Call");
+
 		Intent intent = new Intent(GerenciadorActivity.this, MenuActivity.class);
 		startActivity(intent);
 	}
 	
 	public void CenaConect(){
+
 		Intent intent = new Intent(GerenciadorActivity.this, ConectActivity.class);
 		startActivity(intent);
 	}

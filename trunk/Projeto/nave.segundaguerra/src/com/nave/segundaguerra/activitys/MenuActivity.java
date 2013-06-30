@@ -3,6 +3,7 @@ package com.nave.segundaguerra.activitys;
 
 
 import com.nave.segundaguerra.R;
+import com.nave.segundaguerra.servidorecliente.cliente.SoundManager;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -28,10 +29,14 @@ public class MenuActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
 		setContentView(R.layout.activity_menu);
+		SoundManager.getInstance().playSound(R.raw.menu, "MenuSound",true, this);
+
 		gerente = GerenciadorActivity.GetInstance();
 		
+
 //		Typeface tf = Typeface.createFromAsset(getAssets(), "aha.TTF");
 //		
 //		Button batalha = (Button)findViewById(R.id.Batalha);
@@ -44,7 +49,9 @@ public class MenuActivity extends Activity {
 //		dicas.setTypeface(tf);
 	}
 	
-	public void Click_Batalha(View v){
+	public void Click_Batalha(View v)
+	{
+
 		gerente.CenaConect();
 	}
 	
@@ -55,7 +62,24 @@ public class MenuActivity extends Activity {
 	public void Click_Dicas(View v){
 		gerente.CenaDicas();
 	}
-	
+    protected void onPause() 
+    {
+		SoundManager.getInstance().PauseSong("MenuSound");
+		super.onPause();
+    }
+    protected void onResume()
+    {
+		SoundManager.getInstance().StopAllSongs();
+
+		SoundManager.getInstance().playSound(R.raw.menu, "MenuSound",true, this);
+
+    	super.onResume();
+    }
+	protected void OnDestroy()
+	{
+		SoundManager.getInstance().StopAllSongs();
+		super.onDestroy();
+	}
 	
 	public void onBackPressed() {
 		
@@ -69,6 +93,7 @@ public class MenuActivity extends Activity {
 							public void onClick(DialogInterface dialog,
 									int which) {
 								gerente.killMeSoftly();
+								SoundManager.getInstance().StopAllSongs();
 								finish();
 							}
 
