@@ -33,8 +33,8 @@ public class TratamentoFimDEJogo extends View{
 	}
 	
 	/**
-	 * Classe que tratará os dados do Time para serem mostrados em FimDeJogoActivity
-	 * @param time ArrayList de <code>DadosJogador</code> que será usado para coletar a variável matou e morreu.
+	 * Classe que tratarï¿½ os dados do Time para serem mostrados em FimDeJogoActivity
+	 * @param time ArrayList de <code>DadosJogador</code> que serï¿½ usado para coletar a variï¿½vel matou e morreu.
 	 * @param matouEMorreu TextView que aparece em FimDeJogoActivity
 	 */
 	private void contarMatouEMorreu(ArrayList<DadosJogador> time, TextView matouEMorreu)
