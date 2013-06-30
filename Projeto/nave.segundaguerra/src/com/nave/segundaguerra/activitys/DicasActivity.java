@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.nave.segundaguerra.R;
 import com.nave.segundaguerra.game.Dicas_Base;
+import com.nave.segundaguerra.servidorecliente.cliente.SoundManager;
 
 public class DicasActivity extends Activity {
 
@@ -45,7 +46,8 @@ public class DicasActivity extends Activity {
 		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
 		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
+        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+
 		criarDicas();
 		
 		setContentView(R.layout.activity_dicas);
@@ -84,5 +86,7 @@ public class DicasActivity extends Activity {
 		tv.setText(dicas.get(contador).getText());
 		iv.setImageResource(dicas.get(contador).getImage());
 	}
+	
+
 
 }

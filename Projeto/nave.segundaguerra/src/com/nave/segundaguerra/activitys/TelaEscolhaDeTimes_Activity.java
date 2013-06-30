@@ -1,7 +1,9 @@
 package com.nave.segundaguerra.activitys;
 
 
+import com.nave.segundaguerra.R;
 import com.nave.segundaguerra.activitys.views.TelaEscolhaDetTime;
+import com.nave.segundaguerra.servidorecliente.cliente.SoundManager;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -24,8 +26,8 @@ public class TelaEscolhaDeTimes_Activity extends Activity implements Runnable {
 		thread.start();
 
 		setContentView(new TelaEscolhaDetTime(this));
-		
 	}
+
 
 	public void run() {
 		while (running) {
