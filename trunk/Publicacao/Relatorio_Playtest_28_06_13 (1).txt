@@ -1,0 +1,56 @@
+Legenda: // feito
+	 !! necessita de modificações
+
+
+teste de conexão:
+
+
+//
+erro de conexao. erro segundo player = saindo do mapa voltando as vezes para o mapa.
+erro com players, o ultimo a entrar empurra os outros para fora do mapa. Duplo click continua bugando.
+Feito.
+//
+
+
+//
+servidor = problemas de conexão. Jogador entrando sem nome
+Solução: Teclado alfanumérico
+Feito.
+//
+
+
+!!
+testes de colisão: problema de colisão com dois jogadores, um sobrepondo o outro.
+!!
+
+
+!!
+tiro = velocidade e direção alterados conforme a distância do toque em relação ao centro da tela. Mesma coisa acontecendo com velocidade do jogador, aumenta e diminui conforme a distância do toque em relação.
+!!
+
+!!
+Novo teste de Tiro: Identificação do segundo toque totalmente funcional, Identificação da direção do projétil quase perfeita (Tiro ainda indo num ângulo errado, próximo ao dedo do segundo toque) e Padronização da velocidade do projétil pronta.
+!!
+Creditos e dicas testados: So precissa ajeitar todas as imagens e botar elas codernadas com a dica
+
+
+!!
+Teclas: melhorar a distribuição das teclas na tela, aprendendo a separar palavras.
+!!
+
+!!
+Na escolha de times, talvez quando selecionar o time vermelho, o botão de seleção tivesse a cor do time, no caso vermelho.
+!!
+
+!!
+Saindo do jogo, ainda mantém um erro de sintaxe na frase "Então ta, fico + um pouco", mudando as letras para uma formatação desconhecida.
+!!
+
+!!
+Erro de criar servidor sem salvar o nome:
+O certo seria, no momento que cria um servidor mesmo colocando o nome sem salvar, mudar a mensagem para: "Salve seu nome, e se não digitou ainda, digite e salve seu nome"
+!!
+
+!!
+Colocar uma velocidade constante na movimentação do personagem: Quando clica próximo ao centro da tela, o personagem anda mais "lento" e quando clica distante do centro da tela, o personagem anda mais "rápido"
+!!
