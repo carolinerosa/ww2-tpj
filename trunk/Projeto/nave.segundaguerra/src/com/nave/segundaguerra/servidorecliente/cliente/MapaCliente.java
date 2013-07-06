@@ -9,12 +9,11 @@ import com.nave.segundaguerra.activitys.GerenciadorActivity;
 
 public class MapaCliente {
 
-	private int x = 0;
-	private int y = 0;
+	private static int x = 0;
+	private static int y = 0;
 	private Bitmap imagemMapa;
-	private int Largura;
-	private int Altura;
 	private Paint paint = new Paint();
+	private static MapaCliente instance;
 	
 	public MapaCliente(){
 		
@@ -22,10 +21,13 @@ public class MapaCliente {
 		paint.setColor(Color.BLACK);
 	}
 	
-	
-	public void update(){
-		this.Largura = this.imagemMapa.getWidth() + x;
-		this.Altura = this.imagemMapa.getHeight() + y;
+
+	public static MapaCliente getInstance(){
+		if(instance == null)
+		{
+			instance = new MapaCliente();
+		}
+		return instance;
 	}
 	
 	public void Draw(Canvas canvas){
@@ -35,25 +37,26 @@ public class MapaCliente {
 	public int getX(){
 		return x;
 	}
-	
-	public void setX(int x){
-		this.x = x;
+
+	public static void setX(int X){
+		x = X;
 	}
 	
 	public int getY(){
 		return y;
 	}
 	
-	public void setY(int y){
-		this.y = y;
+	public static void setY(int Y){
+		y = Y;
 	}
 	
 	public int getLargura(){
-		return Largura;
+		return imagemMapa.getWidth();
 	}
 	
 	public int getAltura(){
-		return Altura;				
+		return imagemMapa.getHeight();				
 	}
+	
 	
 }
