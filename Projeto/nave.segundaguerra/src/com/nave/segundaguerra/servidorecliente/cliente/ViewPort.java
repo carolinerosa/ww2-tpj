@@ -26,6 +26,7 @@ public class ViewPort {
 	Point posMapa;
 	int mapaVerifyContX = 0;
 	int mapaVerifyContY = 0;
+	MapaCliente map;
 	
 	public ViewPort(JogadorCliente playerCliente){
 		this.jogador = playerCliente;
@@ -37,7 +38,7 @@ public class ViewPort {
 		int oldY = MapaCliente.getInstance().getY();
 		
 		this.posMapa = new Point(oldX, oldY);
-		
+		map = MapaCliente.getInstance();
 	}
 	
 	public void update(){
@@ -96,8 +97,7 @@ public class ViewPort {
 			
 			
 			player.draw(canvas);
-			canvas.drawText("<" + player.getNome() + ">", player.x - 30
-					, player.y + 30, paint);
+			
 		}
 		
 		player.setX(oldX);
@@ -146,7 +146,7 @@ public class ViewPort {
 	
 public void checkMapa(){
 		
-		MapaCliente map = MapaCliente.getInstance();
+		
 		int centroTelaX = larguraTela/2;
 		int centroTelaY = alturaTela/2;
 		
