@@ -1,0 +1,22 @@
+mudar a cor da letra do menu principal - uma cor mais clara... branco
+
+tiro no mesmo click - o tiro ainda não foi para o segundo click
+
+tiro continua lento - quando clica perto do personagem o tiro sai em velocidade lenta
+
+tiro não está sendo destruido
+
+após certo número de tiros o personagem desaparece
+
+personagem movimenta rapido - dependendo da distância do click na tela o personagem se move mais rapido
+
+Letras com acento e caracteres especiais não aparecem
+
+seleção desnecessária de click nos créditos - voce pode selecionar o nome dos criadores do jogo sem necessidade
+
+conectando sem time e sem nome
+
+
+efeito do tiro sem som, créditos sem som, menu secundário sem som, dicas sem som
+
+ao chegar na ultima dica, voltar para a primeira
