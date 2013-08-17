@@ -3,15 +3,11 @@ package com.nave.segundaguerra.servidorecliente.servidor;
 import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 
-import android.content.Context;
 import android.graphics.Point;
-import android.graphics.PointF;
 import android.graphics.Rect;
-import android.graphics.RectF;
 import android.util.Log;
 
 import com.nave.segundaguerra.activitys.GerenciadorActivity;
-import com.nave.segundaguerra.game.Player;
 
 public class TiroServer {
 
@@ -19,6 +15,7 @@ public class TiroServer {
 	private Point velocidade;
 	private PlayerServer meuDono;
 	private Rect balaRect;
+	private int dano = 20;
 	
 	public TiroServer(PlayerServer player, Point touch){
 		
@@ -49,8 +46,8 @@ public class TiroServer {
 			if(this.getOwner().getTime() != jogador.getTime())
 				//Log.i("COLISAO TIRO", "Esse eh contra  " + jogador.nome);
 				if(balaRect.intersect(jogador.getRect())){
-					//jogador.Dano(this, 100);
-					jogador.respawn();
+					jogador.collisionTiro(this, dano);
+					
 					Log.i("COLISAO TIRO", "TOMOU   " + posicaoTiro);
 					return true;
 				}
