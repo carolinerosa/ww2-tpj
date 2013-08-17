@@ -1,25 +1,15 @@
 package com.nave.segundaguerra.servidorecliente.servidor;
 
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.Random;
 
-import com.nave.segundaguerra.activitys.GerenciadorActivity;
-import com.nave.segundaguerra.game.Angulator;
-import com.nave.segundaguerra.game.Player;
-import com.nave.segundaguerra.game.Pontos;
-import com.nave.segundaguerra.game.PontosTime;
-import com.nave.segundaguerra.game.Tiro;
-import com.nave.segundaguerra.servidorecliente.cliente.DadosDoCliente;
-
-import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
 import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
-import android.util.Log;
+
+import com.nave.segundaguerra.activitys.GerenciadorActivity;
+import com.nave.segundaguerra.game.Angulator;
+import com.nave.segundaguerra.game.PontosTime;
+import com.nave.segundaguerra.servidorecliente.cliente.DadosDoCliente;
 
 public class PlayerServer {
 	protected int x;
@@ -148,13 +138,16 @@ public class PlayerServer {
 		novaPosicao.y = random.nextInt(MapaServer.getAltura());
 		this.setPosition(novaPosicao);
 	}
-
-	public void collisionTiro(TiroServer tiro, int dano, int largura, int altura) {
+	
+	public void collisionTiro(TiroServer tiro, int dano) 
+	{
 		lastDagameTaken = tiro;
 		life -= dano;
 
 		if (life <= 0)
+		{
 			respawn();
+		}
 	}
 
 	private void checkMapa() {
