@@ -1,0 +1,7 @@
+Mini Game Leonardo
+
+1 - Fio fica sobreposto ao outro
+2 - Implementar Random de Cores
+3 - reparar multitoques depois de perder: o jogador vence se ficar clicando na tela, mesmo depois de perder.
+
+Até o momento todos os bugs foram consertados, faltando apenas um que ainda a equipe não descobriu o que ocasiona o erro.

@@ -1,0 +1,9 @@
+* Os alvos não estão passando no meio do ponto de tiro
+
+* Condição de vitória e de perda ainfa pra fazer
+
+* Sem menu
+
+* Jogo sem resizing
+
+*Alguns celulares a mira fica errada - Motorola ficou com erro, Sansung sem erro.
