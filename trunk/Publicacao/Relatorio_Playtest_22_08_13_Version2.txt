@@ -1,0 +1,7 @@
+Quando se conecta com o mesmo nome que uma pessoa, os dois controlam o mesmo personagem.
+
+Problemas no tiro - O que seria o terceiro toque na tela, vira o segundo: Clique pela primeira vez, pressionando, mantém o jogador andando. Segundo clique, nada acontece. Pressionando o segundo clique e retirando o primeiro clique, colocando um terceiro clique, os tiros são acionados.
+
+Com o problema do tiro, ao acertar um adversário, o aplicativo "explode".
+
+Nome dos jogadores adversários ficam com o nome em preto, ao invés da cor do time adversário correspondente.
