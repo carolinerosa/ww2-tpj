@@ -1,0 +1,7 @@
+Em qualquer view criada sem ser layout é impossível modificar o volume da mídia - Resolvido
+
+*Quanto mais longe o clique, maior a velocidade.
+
+*Tiro bugado - as vezes o segundo clique funciona, as vezes não.
+
+*Personagem indo na direção do primeiro clique - Alguma pessoa commitou errado, antigamente o personagem caminhava até a posição selecionada com o clique, agora o personagem corre infinitamente na direção do clique.
