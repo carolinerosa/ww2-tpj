@@ -7,11 +7,12 @@ import java.util.concurrent.CopyOnWriteArrayList;
 
 import com.nave.segundaguerra.game.Tiro;
 import com.nave.segundaguerra.servidorecliente.util.Killable;
+import com.nave.segundaguerra.servidorecliente.util.ViewUtil;
 
 import android.util.Log;
 
-public class LoopServer implements Runnable, Killable{
-
+public class LoopServer implements Runnable, Killable
+{
 	private static final int INTERVAL = 30;
 	public static final String TAG = "Segunda Guerra";
 	private boolean running = true;
@@ -21,7 +22,8 @@ public class LoopServer implements Runnable, Killable{
 	private List<TiroServer> tiroList = new CopyOnWriteArrayList();
 	
 	
-	public LoopServer(ControleDeUsuariosServidor servidor){
+	public LoopServer(ControleDeUsuariosServidor servidor)
+	{
 		this.servidor = servidor;
 		start();
 	}
@@ -39,7 +41,6 @@ public class LoopServer implements Runnable, Killable{
 
 	public void run() 
 	{
-		Log.i(TAG, "iniciou a trhead");
 		
 		while (running) 
 		{
@@ -56,18 +57,23 @@ public class LoopServer implements Runnable, Killable{
 		}
 	}
 
-	private void update(){
-		
-		for(TiroServer t : tiroList){
+	private void update()
+	{
+		for(TiroServer t : tiroList)
+		{
 			t.update();
-			if(t.checarColisao(jogadores))
+						
+			if(t.checarColisao(jogadores) || t.offsetScreen())
 			{
 				tiroList.remove(t);
+				Log.i("Tiro Server", "Tiro Removido");
 			}
 	    }
 		
 		Iterator iterator = jogadores.keySet().iterator();
-		while (iterator.hasNext()) {
+		
+		while (iterator.hasNext())
+		{
 			String key = (String) iterator.next();
 			JogadorServer jogador = jogadores.get(key);
 			jogador.update();

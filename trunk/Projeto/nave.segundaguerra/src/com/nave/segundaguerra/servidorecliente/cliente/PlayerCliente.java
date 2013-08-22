@@ -13,6 +13,7 @@ import com.nave.segundaguerra.game.Sprite;
 import com.nave.segundaguerra.game.SpritePlayer;
 import com.nave.segundaguerra.game.Tiro;
 import com.nave.segundaguerra.servidorecliente.util.Const;
+import com.nave.segundaguerra.servidorecliente.util.ImageLibrary;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -65,7 +66,7 @@ public class PlayerCliente
 		this.x = (int) position.x;
 		this.y = (int) position.y;
 		
-		this.imagemPlayer = GerenciadorActivity.GetInstance().getImagePlayer();
+		this.imagemPlayer = ImageLibrary.getInstance().getImage("Soldado");
 		
 		playerSprite = new SpritePlayer();
 		//sprite = new Sprite(this.imagemPlayer, 1, 3);

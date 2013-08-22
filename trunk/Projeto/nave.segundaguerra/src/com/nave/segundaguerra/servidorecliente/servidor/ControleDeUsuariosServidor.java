@@ -22,6 +22,7 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 
 	// notar que este tipo de hashmap eh sincronizado
 	// suportando acessos de multiplos threads
+	
 	private ConcurrentHashMap<String, JogadorServer> jogadores;
 	private List<TiroServer> tiroList = new CopyOnWriteArrayList();
 	
@@ -32,7 +33,8 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		return this.jogadores;
 	}
 	
-	public List<TiroServer> getTirosList(){
+	public List<TiroServer> getTirosList()
+	{
 		return this.tiroList;
 	}
 	
@@ -71,21 +73,22 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		}
 	}
 
-	private void informaTodosUsuarios(Conexao origem) {
-
+	private void informaTodosUsuarios(Conexao origem) 
+	{
 		StringBuffer buffer = new StringBuffer();
 		Iterator iterator = jogadores.keySet().iterator();
-		while (iterator.hasNext()) {
+		
+		while (iterator.hasNext()) 
+		{
 			String key = (String) iterator.next();
 			JogadorServer jogador = jogadores.get(key);
-			//jogador.update();
 			buffer.append(jogador.toStringCSV());
 		}
-
 		origem.write(Protocolo.PROTOCOL_MOVE + buffer.toString());
 	}
 
-	private void moveUsuario(Conexao origem, String linha) {
+	private void moveUsuario(Conexao origem, String linha)
+	{
 		String[] array = linha.split(",");
 		int x = Integer.parseInt(array[1]);
 		int y = Integer.parseInt(array[2]);
@@ -95,7 +98,8 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		jogador.setY(y);
 	}
 
-	private void adicionaNovoUsuario(Conexao origem, String linha) {
+	private void adicionaNovoUsuario(Conexao origem, String linha)
+	{
 		String[] array = linha.split(",");
 		String nome = array[1];
 		int x = Integer.parseInt(array[2]);
@@ -109,7 +113,8 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		
 	}
 	
-	private void adicionaTiro(Conexao origem, String linha){
+	private void adicionaTiro(Conexao origem, String linha)
+	{
 		String[] array = linha.split(",");
 		String nome = array[1];
 		int x = Integer.parseInt(array[2]);
@@ -119,15 +124,14 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		tiroList.add(new TiroServer(jogadores.get(nome), new Point(x, y)));
 		
 		atualizaTiros(origem);
-		
 	}
 	
-	private void atualizaTiros(Conexao origem) {
-
+	private void atualizaTiros(Conexao origem)
+	{
 		StringBuffer buffer = new StringBuffer();
 		
-		for(TiroServer t : tiroList){
-			
+		for(TiroServer t : tiroList)
+		{
 			int x = (int) t.getPosition().x;
 			int y = (int) t.getPosition().y;
 			String tiroToString = x + "," + y + ";";
@@ -138,11 +142,14 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		origem.write(Protocolo.PROTOCOL_SHOOT + buffer.toString());
 	}
 	
+	public void removerTiro(TiroServer tiro)
+	{
+		
+	}
 	
-	public void configuracaoPrimarias(Conexao origem) {
-		
-		origem.write(Protocolo.PROTOCOL_MAPA + MapaServer.toStringCSV());
-		
+	public void configuracaoPrimarias(Conexao origem)
+	{
+		origem.write(Protocolo.PROTOCOL_MAPA + MapaServer.toStringCSV());		
 	}
 
 }

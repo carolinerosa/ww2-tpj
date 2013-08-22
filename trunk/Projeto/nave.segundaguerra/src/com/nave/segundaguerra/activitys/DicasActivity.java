@@ -5,21 +5,21 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.os.Bundle;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.nave.segundaguerra.R;
 import com.nave.segundaguerra.game.Dicas_Base;
-import com.nave.segundaguerra.servidorecliente.cliente.SoundManager;
+import com.nave.segundaguerra.servidorecliente.util.ViewUtil;
 
 public class DicasActivity extends Activity {
 
 	ArrayList<Dicas_Base> dicas = new ArrayList<Dicas_Base>();
+	
 	int contador = 0;
 	
-	String[] todasDicas = {
+	String[] todasDicas = 
+	{
 			//"Na linha de tiro? Se esconda em uma trincheira próxima!",
 			//"Sacos de areia são excelentes para bloquear ataques!",
 			"Cuidado ao detonar a mina. Um aliado pode estar lá...",
@@ -30,41 +30,44 @@ public class DicasActivity extends Activity {
 			//"Artilharia e detonação trabalham bem em conjunto.",
 			"Equipe médica: não aja sozinha! Ajude seu time!",
 			"Ao plantar uma mina, você fica muito vulnerável. Cuidado!"
-			};
+	};
 	
-	int[] todasImagens = {
+	int[] todasImagens = 
+	{
 			R.drawable.mina_terrestre, R.drawable.pente,
 			R.drawable.caixa, R.drawable.bandeira_branca,
 			R.drawable.maleta_medica, R.drawable.mina_terrestre
 	};
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		
-		// Sem Activity e em modo Fullcreen.
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
+		ViewUtil.enableMainConfig(this);
+		
 		criarDicas();
 		
 		setContentView(R.layout.activity_dicas);
 	}
 
-	private void criarDicas() {
+	private void criarDicas() 
+	{
 
-		for (int i = 0; i < todasDicas.length; i++) {
+		for (int i = 0; i < todasDicas.length; i++) 
+		{
 			Dicas_Base tempDica = new Dicas_Base();
+			
 			tempDica.setImage(todasImagens[i]);
+			
 			tempDica.setText(todasDicas[i]);
 
 			dicas.add(tempDica);
 		}
 	}
-	public void trocaDica_Avancar(View v) {
-
+	
+	public void trocaDica_Avancar(View v) 
+	{
 		if (contador < todasDicas.length - 1)
 			contador++;
 		
@@ -75,8 +78,8 @@ public class DicasActivity extends Activity {
 		iv.setImageResource(dicas.get(contador).getImage());
 	}
 
-	public void trocaDica_Retroceder(View v) {
-
+	public void trocaDica_Retroceder(View v) 
+	{
 		if (contador != 0)
 			contador--;
 		
@@ -86,7 +89,4 @@ public class DicasActivity extends Activity {
 		tv.setText(dicas.get(contador).getText());
 		iv.setImageResource(dicas.get(contador).getImage());
 	}
-	
-
-
 }

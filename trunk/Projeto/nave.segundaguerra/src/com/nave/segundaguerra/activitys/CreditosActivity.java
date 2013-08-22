@@ -4,28 +4,22 @@ import java.util.ArrayList;
 
 import android.app.ListActivity;
 import android.os.Bundle;
-import android.view.Window;
-import android.view.WindowManager;
 
-import com.nave.segundaguerra.R;
 import com.nave.segundaguerra.listactivity.ListaDeNomes_Adapter;
 import com.nave.segundaguerra.listactivity.ListaDeNomes_Base;
-import com.nave.segundaguerra.servidorecliente.cliente.SoundManager;
+import com.nave.segundaguerra.servidorecliente.util.ViewUtil;
 
 public class CreditosActivity extends ListActivity {
 
 	ArrayList<ListaDeNomes_Base> integrantes;
 	
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
+	protected void onCreate(Bundle savedInstanceState) 
+	{
 		super.onCreate(savedInstanceState);
 		
-		// Sem Activity e em modo Fullcreen.
-		this.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
-        this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-
+		ViewUtil.enableMainConfig(this);
+		
 		integrantes = new ArrayList<ListaDeNomes_Base>();
 		
 		setIntegrantes();
@@ -34,7 +28,8 @@ public class CreditosActivity extends ListActivity {
 		
 	}
 
-	private void setIntegrantes(){
+	private void setIntegrantes()
+	{
 		
 		ListaDeNomes_Base ldb1 = new ListaDeNomes_Base();
 		ldb1.setIntegrantes("Brian Athayde");

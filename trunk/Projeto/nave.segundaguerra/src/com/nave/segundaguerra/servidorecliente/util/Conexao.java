@@ -39,82 +39,107 @@ public class Conexao implements Runnable, Killable {
 	 * @param depoisDeReceberDadosHandler
 	 * @throws IOException
 	 */
-	public Conexao(Socket conexao, String id,
-			DepoisDeReceberDados depoisDeReceberDadosHandler)
-			throws IOException {
-
+	
+	public Conexao(Socket conexao, String id,DepoisDeReceberDados depoisDeReceberDadosHandler) throws IOException 
+	{
 		this.conexao = conexao;
 		this.depoisDeReceberDadosHandler = depoisDeReceberDadosHandler;
 		this.id = id;
+			
 		ElMatador.getInstance().add(this);
 
-		leitor = new BufferedReader(new InputStreamReader(
-				conexao.getInputStream()));
-		escritor = new BufferedWriter(new OutputStreamWriter(
-				conexao.getOutputStream()));
+		leitor = new BufferedReader(new InputStreamReader(conexao.getInputStream()));
+			
+		escritor = new BufferedWriter(new OutputStreamWriter(conexao.getOutputStream()));
 
 		escutandoParaSempre = new Thread(this);
 		escutandoParaSempre.start();
 	}
 
-	public String getIP() {
-		if (conexao != null) {
+	public String getIP()
+	{
+		if (conexao != null) 
+		{
 			return conexao.getInetAddress().getHostAddress().toString();
 		}
+		
 		return null;
 	}
 
-	/**
-	 * le continuamente da conexao
-	 */
-	public void run() {
+	public void run() 
+	{
 		Log.i(TAG, "conexao esperando por dados : " + id);
 
-		while (ativo) {
-			try {
+		while (ativo) 
+		{
+			try 
+			{
 				// bloqueante !!
 				String linha = leitor.readLine();
 
 				// para cada linha nao nula chama o respectivo handler
-				if (linha != null) {
+				if (linha != null) 
+				{
 					Log.i(TAG, "linha recebida: " + linha);
-					if (depoisDeReceberDadosHandler != null) {
+					
+					if (depoisDeReceberDadosHandler != null) 
+					{
 						depoisDeReceberDadosHandler.execute(this, linha);
 					}
 				}
-			} catch (IOException e) {
+			} 
+			
+			catch (IOException e) 
+			{
 				Log.e(TAG, "erro lendo da conexao");
 			}
 		}
 
 	}
 
-	public void killMeSoftly() {
-		if (conexao != null) {
-			try {
+	public void killMeSoftly() 
+	{
+		if (conexao != null) 
+		{
+			try 
+			{
 				conexao.close();
-			} catch (IOException e) {
+			} 
+			
+			catch (IOException e) 
+			{
 				Log.e(TAG, "erro ao fechar conexao", e);
 			}
 		}
 
 		ativo = false;
-		try {
+		
+		try 
+		{
 			Thread.sleep(Const.ESPERA_CONEXAO_MORRER);
 			escutandoParaSempre.interrupt();
-		} catch (InterruptedException e) {
+		}
+		
+		catch (InterruptedException e) 
+		{
 			Log.e(TAG, "erro interrompendo conexao", e);
 		}
 
 		Log.i(TAG, "adeus() -- conexao CLIENTE encerrada.");
 	}
 
-	public void write(String string) {
+	public void write(String string) 
+	{
 		Log.i(TAG, "cliente.write:" + string);
-		try {
+		
+		try 
+		{
 			escritor.write(string + "\n");
 			escritor.flush();
-		} catch (IOException e) {
+		} 
+		
+		catch (IOException e)
+		{
 			Log.e(Const.TAG, "erro escrevendo na conexao");
 		}
 	}

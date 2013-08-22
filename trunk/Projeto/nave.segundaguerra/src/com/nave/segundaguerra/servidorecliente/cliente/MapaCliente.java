@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.nave.segundaguerra.activitys.GerenciadorActivity;
+import com.nave.segundaguerra.servidorecliente.util.ImageLibrary;
 
 public class MapaCliente {
 
@@ -17,7 +18,7 @@ public class MapaCliente {
 	
 	public MapaCliente(){
 		
-		this.imagemMapa = GerenciadorActivity.GetInstance().getImageMapa();
+		this.imagemMapa = ImageLibrary.getInstance().getImage("Cenario");
 		paint.setColor(Color.BLACK);
 	}
 	
