@@ -6,6 +6,7 @@ import java.io.InputStream;
 import com.nave.segundaguerra.activitys.GerenciadorActivity;
 import com.nave.segundaguerra.game.Player;
 import com.nave.segundaguerra.game.SpriteBala;
+import com.nave.segundaguerra.servidorecliente.util.ImageLibrary;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -27,7 +28,7 @@ public class TiroCliente {
 	public TiroCliente(Point pos){
 
 		this.posicaoTiro = pos;
-		this.tiro = GerenciadorActivity.GetInstance().getImageBala(); 
+		this.tiro = ImageLibrary.getInstance().getImage("Soldado");
 		balaSprite = new SpriteBala();
 		balaSprite.setPosition(pos);
 		

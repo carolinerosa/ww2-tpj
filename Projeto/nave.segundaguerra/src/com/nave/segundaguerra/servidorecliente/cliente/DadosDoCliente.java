@@ -19,33 +19,41 @@ public class DadosDoCliente implements Runnable, Killable {
 	private String nome;
 	private boolean ativo = true;
 
-	public DadosDoCliente(Conexao cliente, int updateTime) {
+	public DadosDoCliente(Conexao cliente, int updateTime) 
+	{
 		this.cliente = cliente;
 		this.nome = cliente.getId();
 		this.updateTime = updateTime;
 		ElMatador.getInstance().add(this);
 	}
 
-	public void run() {
-		while (ativo) {
-			try {
+	public void run() 
+	{
+		while (ativo) 
+		{
+			try 
+			{
 				Thread.sleep(updateTime);
-			} catch (InterruptedException e) {
+			} 
+			
+			catch (InterruptedException e) 
+			{
 				Log.e(ConectActivity.TAG, "interrupcao do run()");
 			}
 
-			//cliente.write(Protocolo.PROTOCOL_UPDATE);
 			cliente.write(Protocolo.PROTOCOL_MOVE + "," + x + "," + y);
 		}
 
 	}
 	
-	public String getNome(){
+	public String getNome()
+	{
 		return nome;
 	}
 	
 	
-	public int getX() {
+	public int getX()
+	{
 		return x;
 	}
 
@@ -61,18 +69,14 @@ public class DadosDoCliente implements Runnable, Killable {
 		this.y = y;
 	}
 
-	public void killMeSoftly() {
+	public void killMeSoftly() 
+	{
 		ativo = false;
 	}
 	
-	public void sendTiro(Point toque){
+	public void sendTiro(Point toque)
+	{
 		cliente.write(Protocolo.PROTOCOL_SHOOT + "," + nome + "," + toque.x + "," + toque.y);
 	}
-	
-/*
-	public void sendMove(int x, int y) {
-		cliente.write(Protocolo.PROTOCOL_MOVE + "," + x + "," + y);
-		
-	}
-*/
+
 }

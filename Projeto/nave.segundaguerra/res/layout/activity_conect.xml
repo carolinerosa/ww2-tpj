@@ -69,18 +69,6 @@
         <requestFocus />
     </EditText>
 
-    <Button
-        android:id="@+id/button3"
-        android:layout_width="3dp"
-        android:layout_height="50dp"
-        android:layout_alignBaseline="@+id/Name"
-        android:layout_alignBottom="@+id/Name"
-        android:layout_toLeftOf="@+id/radioGroup1"
-        android:layout_toRightOf="@+id/Name"
-        android:background="@drawable/botao"
-        android:onClick="Click_salvarUsuario"
-        android:text="Salvar" />
-
     <RadioGroup
         android:id="@+id/radioGroup1"
         android:layout_width="wrap_content"

@@ -6,6 +6,8 @@ import android.graphics.Point;
 import android.graphics.Rect;
 
 import com.nave.segundaguerra.activitys.GerenciadorActivity;
+import com.nave.segundaguerra.servidorecliente.util.ImageLibrary;
+import com.nave.segundaguerra.servidorecliente.util.RectLibrary;
 
 public class SpriteBala extends Sprite {
 
@@ -14,12 +16,13 @@ public class SpriteBala extends Sprite {
 	private Rect rect;
 	private Bitmap balaImage;
 
-	public SpriteBala() {
-		super(GerenciadorActivity.GetInstance().getImageBala(), 1, 3);
+	public SpriteBala() 
+	{
+		super(ImageLibrary.getInstance().getImage("Projetil"), 1, 3);
 		
-		balaImage = GerenciadorActivity.GetInstance().getImageBala();
+		balaImage = ImageLibrary.getInstance().getImage("Projetil");
 		
-		rect = new Rect(GerenciadorActivity.GetInstance().getBalaRect());
+		rect = RectLibrary.getInstance().getRect("Projetil");
 	
 	}
 
