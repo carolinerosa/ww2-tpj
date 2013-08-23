@@ -10,8 +10,10 @@ import com.nave.segundaguerra.activitys.GerenciadorActivity;
 import com.nave.segundaguerra.game.Angulator;
 import com.nave.segundaguerra.game.PontosTime;
 import com.nave.segundaguerra.servidorecliente.cliente.DadosDoCliente;
+import com.nave.segundaguerra.servidorecliente.util.RectLibrary;
 
-public class PlayerServer {
+public class PlayerServer 
+{
 	protected int x;
 	protected int y;
 	protected Point destinationPosition = new Point();
@@ -32,38 +34,18 @@ public class PlayerServer {
 
 	public static final String TAG = "Jogador";
 
-	public PlayerServer() {
+	public PlayerServer() 
+	{
 		this.life = 100;
 		pontos = new PontosTime();
-		Rect r = GerenciadorActivity.GetInstance().getPlayerRect();
-		this.playerRect = new Rect(r.left, r.top, r.right, r.bottom);
-
+		this.playerRect = new Rect(0,0,0,0);
+		this.playerRect = RectLibrary.getInstance().getRect("Soldado");
 	}
 
-	public void update() {
+	public void update() 
+	{
 
-		// if(destinationPosition.x != x || destinationPosition.y != y)
 
-		/*/ checa se est� abaixo do ponto destino no eixo x
-		if (x < destinationPosition.x) {
-			x += speed;
-		}
-
-		// checa se est� abaixo do ponto destino no eixo x
-		if (x > destinationPosition.x) {
-			x -= speed;
-		}
-
-		// checa se est� abaixo do ponto destino no eixo y
-		if (y < destinationPosition.y) {
-			y += speed;
-		}
-
-		// checa se est� abaixo do ponto destino no eixo y
-		if (y > destinationPosition.y) {
-			y -= speed;
-		}
-		*/
 		
 		if (life <= 0) {
 			if (lastDagameTaken.getOwner() == this) {
