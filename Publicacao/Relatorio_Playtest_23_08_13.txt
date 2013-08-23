@@ -1,0 +1,10 @@
+BUGS PARA SEREM CORRIGIDOS AGORA:
+
+
+* Tiro acionado no primeiro clique.
+
+* Tiro não é destruido.
+
+* Tiro se movimentando pela tela de acordo com a distância do clique em relação ao centro da tela.
+
+* Jogador chega até o limite da tela, mantendo seu "corpo" fora do mapa.
