@@ -27,6 +27,11 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 	public List<TiroCliente> getListTiros(){
 		return this.tiroList;
 	}
+	
+	public void setListTiros(List<TiroCliente> list)
+	{
+		this.tiroList = list;
+	}
 
 	public ControleDeUsuariosCliente() {
 		jogadores = new ConcurrentHashMap<String, JogadorCliente>();
@@ -75,6 +80,7 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 	public void moveTiros(Conexao origem, String linha){
 		
 		tiroList.clear();
+		
 		String[] lista = linha.split(";");
 		int i = 0;
 		for (String um : lista) {

@@ -38,6 +38,11 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		return this.tiroList;
 	}
 	
+	public void setListTiros(List<TiroServer> list)
+	{
+		this.tiroList = list;
+	}
+	
 	public ControleDeUsuariosServidor() {
 		jogadores = new ConcurrentHashMap<String, JogadorServer>();
 		loop = new LoopServer(this);
@@ -120,8 +125,10 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		int x = Integer.parseInt(array[2]);
 		int y = Integer.parseInt(array[3]);
 		
-		
-		tiroList.add(new TiroServer(jogadores.get(nome), new Point(x, y)));
+		//if(jogadores.get(nome).getMunicao() > 0)
+		//{
+			tiroList.add(new TiroServer(jogadores.get(nome), new Point(x, y)));
+		//}
 		
 		atualizaTiros(origem);
 	}

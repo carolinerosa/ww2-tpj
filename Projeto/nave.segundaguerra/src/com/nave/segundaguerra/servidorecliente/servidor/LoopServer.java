@@ -62,11 +62,14 @@ public class LoopServer implements Runnable, Killable
 		for(TiroServer t : tiroList)
 		{
 			t.update();
-						
+			
 			if(t.checarColisao(jogadores) || t.offsetScreen())
 			{
 				tiroList.remove(t);
+				
 				Log.i("Tiro Server", "Tiro Removido");
+				
+				servidor.setListTiros(tiroList);
 			}
 	    }
 		
