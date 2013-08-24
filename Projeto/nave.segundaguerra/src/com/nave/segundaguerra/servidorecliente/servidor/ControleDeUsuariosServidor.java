@@ -65,7 +65,6 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		if (linha.startsWith(Protocolo.PROTOCOL_MOVE)) {
 			moveUsuario(origem, linha);
 		}
-		
 		if(linha.startsWith(Protocolo.PROTOCOL_SHOOT)){
 			adicionaTiro(origem, linha);
 		}
@@ -118,7 +117,6 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		jogador.setTime(time);
 		
 	}
-	
 	private void adicionaTiro(Conexao origem, String linha)
 	{
 		String[] array = linha.split(",");

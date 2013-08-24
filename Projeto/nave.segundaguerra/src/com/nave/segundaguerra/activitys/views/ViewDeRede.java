@@ -51,7 +51,7 @@ public class ViewDeRede extends View implements Runnable, Killable {
 	public MapaCliente mapa;
 	
 	private Point[] dedos = new Point[2];
-	
+	PlayerCliente meuJogador;
 	
 
 	PlayerServer JS;
@@ -77,9 +77,10 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		paint.setTextSize(fontSize);
 
 		
-		PlayerCliente meuJogador = GerenciadorActivity.GetInstance().getPlayer();
+		meuJogador = GerenciadorActivity.GetInstance().getPlayer();
 		cliente.write(Protocolo.PROTOCOL_ID + "," + meuJogador.getNome() + ","+ meuJogador.getPosition().x + "," + meuJogador.getPosition().y 
 				+ "," + meuJogador.getTime());
+		//meuJogador = setMeuJogador(cliente);
 		
 		this.viewPort = new ViewPort(meuJogador);
 		this.mapa = new MapaCliente();
@@ -138,7 +139,6 @@ public class ViewDeRede extends View implements Runnable, Killable {
 
 	}
 
-
 	private void update() {
 		this.viewPort.update();
 		
@@ -177,7 +177,8 @@ public class ViewDeRede extends View implements Runnable, Killable {
 			break;
 		
 		case MotionEvent.ACTION_UP:
-			dadosDoCliente.sendTiro(dedos[0]);
+			//dadosDoCliente.sendTiro(dedos[0]);
+			meuJogador.sendTiro(this.dadosDoCliente, dedos[0]);
 			dadosDoCliente.setX(0);
 			dadosDoCliente.setY(0);
 			Log.i("Toque", "Retirado 1 toque");
@@ -194,7 +195,6 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		
 		return super.onTouchEvent(event);
 	}
-
 	
 	public void killMeSoftly() {
 		ativo = false;

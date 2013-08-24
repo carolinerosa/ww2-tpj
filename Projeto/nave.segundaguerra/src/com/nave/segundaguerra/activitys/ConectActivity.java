@@ -183,7 +183,6 @@ public class ConectActivity extends Activity implements Killable {
 
 				// garante que view possa recuperar a lista de usuarios atual e
 				// enviar dados pela rede
-
 				viewDoJogo = new ViewDeRede(this, conexao,
 						(ControleDeUsuariosCliente) tratadorDeDadosDoCliente);
 				setContentView(viewDoJogo);

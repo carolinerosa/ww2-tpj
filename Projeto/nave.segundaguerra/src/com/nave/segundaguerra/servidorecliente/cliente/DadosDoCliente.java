@@ -78,5 +78,8 @@ public class DadosDoCliente implements Runnable, Killable {
 	{
 		cliente.write(Protocolo.PROTOCOL_SHOOT + "," + nome + "," + toque.x + "," + toque.y);
 	}
+	public Conexao getCliente(){
+		return this.cliente;
+	}
 
 }
