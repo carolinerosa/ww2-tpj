@@ -69,15 +69,17 @@ public class PlayerServer
 	public int getLife() {
 		return life;
 	}
-
-	public void definirAngulo(PointF touch) {
-		anguloTiro = new Angulator(new PointF(x, y), touch);
+	
+	public String getNome() {
+		return nome;
 	}
-
-	public int getMunicao() {
-		return ammo;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
-
+	
+	public Point getPosition() {
+		return new Point(playerRect.centerX(), playerRect.centerY());
+	}
 	public void setPosition(Point pos) {
 		
 		this.x = pos.x;
@@ -88,27 +90,30 @@ public class PlayerServer
 		
 		playerRect.set(tempX, tempY, x + this.playerRect.height()/2, y + this.playerRect.height()/2);
 	}
-
-	public Point getPosition() {
-		return new Point(playerRect.centerX(), playerRect.centerY());
+	public void setDestino(Point destino){
+		this.destinationPosition = destino;
 	}
 
 	public int getLargura() {
-		return playerRect.width();
+		return this.playerRect.width();
 	}
-
 	public int getAltura() {
-		return playerRect.height();
+		return this.playerRect.height();
 	}
 
 	public Angulator getAngulo() {
 		return anguloTiro;
 	}
-
+	public void definirAngulo(PointF touch) {
+		anguloTiro = new Angulator(new PointF(x, y), touch);
+	}
+	
+	public int getMunicao() {
+		return ammo;
+	}
 	public void diminuirMunicao() {
 		this.ammo--;
 	}
-
 	public void Recarregar() {
 		ammo = 20;
 	}
@@ -152,24 +157,29 @@ public class PlayerServer
 
 	}
 	
-	public int getHeight(){
+	/*public int getHeight(){
 		return playerRect.height();
-	}
+	}*/
 	
-	public int getWidth(){
+	/*public int getWidth(){
 		return playerRect.width();
-	}
-	
-	public void setTime(String time){
-		this.time = time;
-	}
+	}*/
 	
 	public String getTime(){
 		return this.time;
+	}
+	public void setTime(String time){
+		this.time = time;
 	}
 	
 	public Rect getRect(){
 		return playerRect;
 	}
-
+	
+	public String toString() {
+		return "Jogador [nome=" + nome + ", x=" + x + ", y=" + y + "]";
+	}
+	public String toStringCSV() {
+		return nome + "," + x + "," + y + ";";
+	}
 }
