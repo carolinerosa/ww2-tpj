@@ -6,7 +6,9 @@ import android.graphics.Point;
 import android.os.Bundle;
 
 import com.nave.segundaguerra.servidorecliente.cliente.GeneralCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.MedicoCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.PlayerCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.SoldadoCliente;
 import com.nave.segundaguerra.servidorecliente.util.ElMatador;
 import com.nave.segundaguerra.servidorecliente.util.ImageLibrary;
 import com.nave.segundaguerra.servidorecliente.util.Killable;
@@ -18,14 +20,14 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 	public static GerenciadorActivity Instance;
 	
 	public static final String TAG = "GerenteCenas";
-	
-	private PlayerCliente meuPlayer;
+	GerenciadorClasse gerenciadorClasse = GerenciadorClasse.nenhum;
+	Object meuPlayer;
 	
 	public static GerenciadorActivity GetInstance()
 	{
 		return Instance;
 	}
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) 
 	{
@@ -47,10 +49,33 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 		
 		_rectLibrary.addRectFromBitmap("Soldado", "Soldado", 10);
 		_rectLibrary.addRectFromBitmap("Projetil", "Projetil", 5);
-
-		meuPlayer = new GeneralCliente("", new Point(100, 50));
+		
+		this.gerenciadorClasse = GerenciadorClasse.medico;
+		meuPlayer = selecionarPlayer(this.gerenciadorClasse);
 	}
 	
+	public PlayerCliente selecionarPlayer(GerenciadorClasse gerenciador){
+		
+		switch (gerenciador) {
+		
+		case general:
+		GeneralCliente general = new GeneralCliente("", new Point(100, 50));
+		general.CarregarImagem();
+		return general;
+		
+		case soldado:
+		SoldadoCliente soldado = new SoldadoCliente("", new Point(100, 50));
+		soldado.CarregarImagem();
+		return soldado;
+			
+		case medico:
+		MedicoCliente medico = new MedicoCliente("", new Point(100, 50));
+		medico.CarregarImagem();
+		return medico;
+			
+		}
+		return null;
+	}
 	
 	public void CenaMenu()
 	{		
@@ -79,7 +104,13 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 	
 	public PlayerCliente getPlayer()
 	{
-		return meuPlayer;
+		return (PlayerCliente)this.meuPlayer;
+	}
+	public GerenciadorClasse getGerenciador(){
+		return this.gerenciadorClasse;
+	}
+	public void setGerenciador(GerenciadorClasse gerenciador){
+		this.gerenciadorClasse = gerenciador;
 	}
 
 	public void onBackPressed() 

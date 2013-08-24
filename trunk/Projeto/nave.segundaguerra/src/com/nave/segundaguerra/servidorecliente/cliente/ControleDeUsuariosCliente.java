@@ -11,6 +11,7 @@ import android.graphics.PointF;
 import android.util.Log;
 
 import com.nave.segundaguerra.activitys.GerenciadorActivity;
+import com.nave.segundaguerra.servidorecliente.servidor.PlayerServer;
 import com.nave.segundaguerra.servidorecliente.util.Conexao;
 import com.nave.segundaguerra.servidorecliente.util.DepoisDeReceberDados;
 import com.nave.segundaguerra.servidorecliente.util.Protocolo;
@@ -23,7 +24,6 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 	public ConcurrentHashMap<String, PlayerCliente> getJogadores() {
 		return jogadores;
 	}
-	
 	public List<TiroCliente> getListTiros(){
 		return this.tiroList;
 	}
@@ -68,7 +68,7 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 
 			PlayerCliente jogador = jogadores.get(nome);
 			if (jogador == null) {
-				jogador = new PlayerCliente(nome, new Point(x, y));
+				jogador = new SoldadoCliente(nome, new Point(x, y));
 				jogadores.put(nome, jogador);
 			} else {
 				//jogador.setX(x);

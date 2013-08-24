@@ -16,12 +16,12 @@ public class SpritePlayer extends Sprite {
 	private Rect rect;
 	private Bitmap playerImage;
 
-	public SpritePlayer() 
+	public SpritePlayer(String nomeBitmap,int frameNr, int fps) 
 	{
-		super(ImageLibrary.getInstance().getImage("Soldado"), 1, 3);
-		playerImage = ImageLibrary.getInstance().getImage("Soldado");
+		super(ImageLibrary.getInstance().getImage(nomeBitmap), 1, 3);
+		playerImage = ImageLibrary.getInstance().getImage(nomeBitmap);
 		
-		rect = RectLibrary.getInstance().getRect("Soldado");
+		rect = RectLibrary.getInstance().getRect(nomeBitmap);
 	}
 
 	public void Draw(Canvas canvas){

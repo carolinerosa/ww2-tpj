@@ -14,6 +14,7 @@ import com.nave.segundaguerra.game.SpritePlayer;
 import com.nave.segundaguerra.game.Tiro;
 import com.nave.segundaguerra.servidorecliente.util.Const;
 import com.nave.segundaguerra.servidorecliente.util.ImageLibrary;
+import com.nave.segundaguerra.servidorecliente.util.Protocolo;
 
 import android.content.Context;
 import android.graphics.Bitmap;
@@ -33,7 +34,7 @@ public class PlayerCliente
 	protected int x;
 	protected int y;
 	private Paint paint;
-	DadosDoCliente dadosCliente;
+	//DadosDoCliente dadosCliente;
 	
 	private Bitmap imagemPlayer;
 	
@@ -43,14 +44,18 @@ public class PlayerCliente
 	
 	// Grupo do Thyago 
 	protected String nome;
+	private String minhaClasse;
 	//private Sprite sprite;
-	
-	public PlayerCliente(String nome, Point position)
+	public PlayerCliente(){
+		
+	}
+	public PlayerCliente(String nome, Point position, String minhaClasse)
 	{
 		
 		paint = new Paint();
 		paint.setColor(Color.BLACK);
 		paint.setTextSize(20);
+		this.minhaClasse = minhaClasse;
 		
 		if(time == Const.TIMEVERMELHO)
 		{
@@ -66,9 +71,9 @@ public class PlayerCliente
 		this.x = (int) position.x;
 		this.y = (int) position.y;
 		
-		this.imagemPlayer = ImageLibrary.getInstance().getImage("Soldado");
+		//this.imagemPlayer = ImageLibrary.getInstance().getImage("Soldado");
 		
-		playerSprite = new SpritePlayer();
+		playerSprite = new SpritePlayer(minhaClasse, 1, 3);
 		//sprite = new Sprite(this.imagemPlayer, 1, 3);
 		
 	}
@@ -110,7 +115,10 @@ public class PlayerCliente
 				, y + 30, paint);
 		
 	}
-
+	
+	public void CarregarImagem(){
+		
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -120,6 +128,9 @@ public class PlayerCliente
 	
 	public Bitmap getImage(){
 		return imagemPlayer;
+	}
+	public void setImage(Bitmap bitmap){
+		this.imagemPlayer = bitmap;
 	}
 	
 	public String getTime(){
@@ -145,5 +156,6 @@ public class PlayerCliente
 	playerSprite.setPosition(pos);
 	}
 
-	
+	public void sendTiro(DadosDoCliente dadosCliente, Point toque){
+	}
 }
