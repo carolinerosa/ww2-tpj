@@ -1,19 +1,20 @@
-package com.nave.segundaguerra.servidorecliente.servidor;
+package com.nave.segundaguerra.servidorecliente.cliente;
 
+import android.content.Context;
 import android.graphics.Point;
 import android.graphics.PointF;
 
-public class JogadorServer extends PlayerServer {
-	
 
-	public JogadorServer(String nome, int x, int y) {
-				
-		this.nome = nome;
-		this.setPosition(new Point(x, y));
-		this.respawn();
+
+public class GeneralCliente extends PlayerCliente {
+	//private String nome;
+
+	public GeneralCliente(String nome, Point position) {
+		super(nome, position);
+		
 	}
 
-	public String toString() {
+	/*public String toString() {
 		return "Jogador [nome=" + nome + ", x=" + x + ", y=" + y + "]";
 	}
 
@@ -26,24 +27,27 @@ public class JogadorServer extends PlayerServer {
 	}
 
 	public int getX() {
-		return  x;
+		return x;
 	}
 
 	public void setX(int x) {
-		this.destinationPosition.x = x;
+		this.x = x;
+		this.setPosition(new Point(x, this.y));
 	}
 
 	public int getY() {
-		return  y;
+		return y;
 	}
 
 	public void setY(int y) {
-		this.destinationPosition.y = y;
+		this.y = y;
+		this.setPosition(new Point(this.x, y));
 	}
 
 	public String toStringCSV() {
 		return nome + "," + x + "," + y + ";";
-	}
+	}*/
+	
 	
 	
 

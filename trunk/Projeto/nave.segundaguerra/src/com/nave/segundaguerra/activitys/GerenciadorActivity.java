@@ -2,9 +2,11 @@ package com.nave.segundaguerra.activitys;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Point;
 import android.os.Bundle;
 
-import com.nave.segundaguerra.servidorecliente.cliente.JogadorCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.GeneralCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.PlayerCliente;
 import com.nave.segundaguerra.servidorecliente.util.ElMatador;
 import com.nave.segundaguerra.servidorecliente.util.ImageLibrary;
 import com.nave.segundaguerra.servidorecliente.util.Killable;
@@ -17,7 +19,7 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 	
 	public static final String TAG = "GerenteCenas";
 	
-	private JogadorCliente meuPlayer;
+	private PlayerCliente meuPlayer;
 	
 	public static GerenciadorActivity GetInstance()
 	{
@@ -46,7 +48,7 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 		_rectLibrary.addRectFromBitmap("Soldado", "Soldado", 10);
 		_rectLibrary.addRectFromBitmap("Projetil", "Projetil", 5);
 
-		meuPlayer = new JogadorCliente("", 100, 50);
+		meuPlayer = new GeneralCliente("", new Point(100, 50));
 	}
 	
 	
@@ -75,7 +77,7 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 	}
 
 	
-	public JogadorCliente getPlayer()
+	public PlayerCliente getPlayer()
 	{
 		return meuPlayer;
 	}

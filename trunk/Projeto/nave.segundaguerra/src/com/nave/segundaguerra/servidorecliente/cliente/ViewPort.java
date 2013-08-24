@@ -16,7 +16,7 @@ public class ViewPort {
 	int x, y;
 	int altura, largura;
 	int alturaTela, larguraTela;
-	JogadorCliente jogador;
+	PlayerCliente jogador;
 	Point posPlayerDraw;
 
 	private boolean SeguirPlayerX = false;
@@ -28,7 +28,7 @@ public class ViewPort {
 	int mapaVerifyContY = 0;
 	MapaCliente map;
 	
-	public ViewPort(JogadorCliente playerCliente){
+	public ViewPort(PlayerCliente playerCliente){
 		this.jogador = playerCliente;
 		paint = new Paint();
 		paint.setColor(Color.BLACK);
@@ -69,20 +69,20 @@ public class ViewPort {
 		return false;
 	}
 	
-	public void drawInViewPort(JogadorCliente player, Canvas canvas){
+	public void drawInViewPort(PlayerCliente player, Canvas canvas){
 		
-		int oldX = player.getX();
-		int oldY = player.getY();
+		int oldX = player.getPosition().x;
+		int oldY = player.getPosition().y;
 		
 		//Acompanha o Player
 		if(SeguirPlayerX)
 		{
-			this.x = jogador.getX() - (larguraTela/2);
+			this.x = jogador.getPosition().x - (larguraTela/2);
 			
 		}
 		if(SeguirPlayerY)
 		{
-			this.y = jogador.getY() - (alturaTela/2);
+			this.y = jogador.getPosition().y - (alturaTela/2);
 		}
 		
 		if(player.nome == jogador.nome)
@@ -92,16 +92,17 @@ public class ViewPort {
 		
 		if(this.checkDraw(oldX - x, oldY - y))
 		{
-			player.setX((oldX - x));
-			player.setY((oldY - y));
-			
+			//player.setX((oldX - x));
+			//player.setY((oldY - y));
+			player.setPosition(new Point((oldX - x),(oldY - y)));
 			
 			player.draw(canvas);
 			
 		}
 		
-		player.setX(oldX);
-		player.setY(oldY);
+		//player.setX(oldX);
+		//player.setY(oldY);
+		player.setPosition(new Point(oldX,oldY));
 		
 	}
 	

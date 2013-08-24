@@ -52,7 +52,7 @@ public class TiroServer
 		return false;
 	}
 	
-	public boolean checarColisao(ConcurrentHashMap<String, JogadorServer> jogadores)
+	public boolean checarColisao(ConcurrentHashMap<String, PlayerServer> jogadores)
 	{
 
 		Iterator iterator = jogadores.keySet().iterator();
@@ -60,7 +60,7 @@ public class TiroServer
 		while (iterator.hasNext()) 
 		{
 			String key = (String) iterator.next();
-			JogadorServer jogador = jogadores.get(key);
+			PlayerServer jogador = jogadores.get(key);
 			
 			if(this.getOwner().getTime() != jogador.getTime())
 			{
@@ -76,7 +76,7 @@ public class TiroServer
 
 	}
 
-	private boolean Intersect(JogadorServer player)
+	private boolean Intersect(PlayerServer player)
 	{
 		if(this.balaRect.intersect(player.getRect()))
 			return true;

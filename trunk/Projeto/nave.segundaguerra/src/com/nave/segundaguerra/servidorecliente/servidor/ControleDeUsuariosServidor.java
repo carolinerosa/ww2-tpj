@@ -23,13 +23,13 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 	// notar que este tipo de hashmap eh sincronizado
 	// suportando acessos de multiplos threads
 	
-	private ConcurrentHashMap<String, JogadorServer> jogadores;
+	private ConcurrentHashMap<String, PlayerServer> jogadores;
 	private List<TiroServer> tiroList = new CopyOnWriteArrayList();
 	
 	private LoopServer loop;
 	
 	
-	public ConcurrentHashMap<String, JogadorServer> getJogadoresList(){
+	public ConcurrentHashMap<String, PlayerServer> getJogadoresList(){
 		return this.jogadores;
 	}
 	
@@ -44,7 +44,7 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 	}
 	
 	public ControleDeUsuariosServidor() {
-		jogadores = new ConcurrentHashMap<String, JogadorServer>();
+		jogadores = new ConcurrentHashMap<String, PlayerServer>();
 		loop = new LoopServer(this);
 	}
 	
@@ -86,7 +86,7 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		while (iterator.hasNext()) 
 		{
 			String key = (String) iterator.next();
-			JogadorServer jogador = jogadores.get(key);
+			PlayerServer jogador = jogadores.get(key);
 			buffer.append(jogador.toStringCSV());
 		}
 		origem.write(Protocolo.PROTOCOL_MOVE + buffer.toString());
@@ -98,9 +98,10 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		int x = Integer.parseInt(array[1]);
 		int y = Integer.parseInt(array[2]);
 
-		JogadorServer jogador = jogadores.get(origem.getId());
-		jogador.setX(x);
-		jogador.setY(y);
+		PlayerServer jogador = jogadores.get(origem.getId());
+		//jogador.setX(x);
+		//jogador.setY(y);
+		jogador.setDestino(new Point(x,y));
 	}
 
 	private void adicionaNovoUsuario(Conexao origem, String linha)
@@ -112,7 +113,7 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		String time = array[4];
 
 		origem.setId(nome);
-		JogadorServer jogador = new JogadorServer(nome, x, y);
+		PlayerServer jogador = new GeneralServer(nome, new Point(x, y));
 		jogadores.put(nome, jogador);
 		jogador.setTime(time);
 		

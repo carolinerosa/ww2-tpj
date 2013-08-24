@@ -110,21 +110,35 @@ public class PlayerCliente
 				, y + 30, paint);
 		
 	}
-	
 
-	public Bitmap getImage(){
-		return imagemPlayer;
+	public String getNome() {
+		return nome;
+	}
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 	
-	
-	public void setTime(String time){
-		this.time = time;
+	public Bitmap getImage(){
+		return imagemPlayer;
 	}
 	
 	public String getTime(){
 		return this.time;
 	}
+	public void setTime(String time){
+		this.time = time;
+	}
 	
+	public String toString() {
+		return "Jogador [nome=" + nome + ", x=" + x + ", y=" + y + "]";
+	}
+	public String toStringCSV() {
+		return nome + "," + x + "," + y + ";";
+	}
+	
+	public Point getPosition() {
+		return new Point(this.x, this.y);
+	}
 	public void setPosition(Point pos) {
 	this.x = pos.x;
 	this.y = pos.y;

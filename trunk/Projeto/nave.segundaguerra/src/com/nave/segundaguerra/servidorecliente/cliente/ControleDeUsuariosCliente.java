@@ -17,10 +17,10 @@ import com.nave.segundaguerra.servidorecliente.util.Protocolo;
 
 public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 
-	private ConcurrentHashMap<String, JogadorCliente> jogadores;
+	private ConcurrentHashMap<String, PlayerCliente> jogadores;
 	private List<TiroCliente> tiroList = new CopyOnWriteArrayList();
 
-	public ConcurrentHashMap<String, JogadorCliente> getJogadores() {
+	public ConcurrentHashMap<String, PlayerCliente> getJogadores() {
 		return jogadores;
 	}
 	
@@ -34,7 +34,7 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 	}
 
 	public ControleDeUsuariosCliente() {
-		jogadores = new ConcurrentHashMap<String, JogadorCliente>();
+		jogadores = new ConcurrentHashMap<String, PlayerCliente>();
 		
 	}
 
@@ -66,13 +66,14 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 			int x = Integer.parseInt(separado[1]);
 			int y = Integer.parseInt(separado[2]);
 
-			JogadorCliente jogador = jogadores.get(nome);
+			PlayerCliente jogador = jogadores.get(nome);
 			if (jogador == null) {
-				jogador = new JogadorCliente(nome, x, y);
+				jogador = new PlayerCliente(nome, new Point(x, y));
 				jogadores.put(nome, jogador);
 			} else {
-				jogador.setX(x);
-				jogador.setY(y);
+				//jogador.setX(x);
+				//jogador.setY(y);
+				jogador.setPosition(new Point(x,y));
 			}
 		}
 	}
@@ -98,8 +99,8 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 	
 	public void iniciarJogo(){
 		
-		JogadorCliente meuJogador = GerenciadorActivity.GetInstance().getPlayer();
-		JogadorCliente jogador = jogadores.get(meuJogador.getNome());
+		PlayerCliente meuJogador = GerenciadorActivity.GetInstance().getPlayer();
+		PlayerCliente jogador = jogadores.get(meuJogador.getNome());
 		if (jogador == null) {
 			jogadores.put(meuJogador.getNome(), meuJogador);
 		}

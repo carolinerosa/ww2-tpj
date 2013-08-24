@@ -18,7 +18,7 @@ public class LoopServer implements Runnable, Killable
 	private boolean running = true;
 	
 	private ControleDeUsuariosServidor servidor;
-	private ConcurrentHashMap<String, JogadorServer> jogadores;
+	private ConcurrentHashMap<String, PlayerServer> jogadores;
 	private List<TiroServer> tiroList = new CopyOnWriteArrayList();
 	
 	
@@ -78,7 +78,7 @@ public class LoopServer implements Runnable, Killable
 		while (iterator.hasNext())
 		{
 			String key = (String) iterator.next();
-			JogadorServer jogador = jogadores.get(key);
+			PlayerServer jogador = jogadores.get(key);
 			jogador.update();
 		}
 		

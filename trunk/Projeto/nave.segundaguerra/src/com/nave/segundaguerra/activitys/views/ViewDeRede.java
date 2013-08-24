@@ -19,11 +19,12 @@ import com.nave.segundaguerra.activitys.GerenciadorActivity;
 import com.nave.segundaguerra.game.Tiro;
 import com.nave.segundaguerra.servidorecliente.cliente.ControleDeUsuariosCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.DadosDoCliente;
-import com.nave.segundaguerra.servidorecliente.cliente.JogadorCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.GeneralCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.MapaCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.PlayerCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.TiroCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.ViewPort;
-import com.nave.segundaguerra.servidorecliente.servidor.JogadorServer;
+import com.nave.segundaguerra.servidorecliente.servidor.GeneralServer;
 import com.nave.segundaguerra.servidorecliente.servidor.PlayerServer;
 import com.nave.segundaguerra.servidorecliente.servidor.TiroServer;
 import com.nave.segundaguerra.servidorecliente.util.Conexao;
@@ -76,8 +77,8 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		paint.setTextSize(fontSize);
 
 		
-		JogadorCliente meuJogador = GerenciadorActivity.GetInstance().getPlayer();
-		cliente.write(Protocolo.PROTOCOL_ID + "," + meuJogador.getNome() + ","+ meuJogador.getX() + "," + meuJogador.getY() 
+		PlayerCliente meuJogador = GerenciadorActivity.GetInstance().getPlayer();
+		cliente.write(Protocolo.PROTOCOL_ID + "," + meuJogador.getNome() + ","+ meuJogador.getPosition().x + "," + meuJogador.getPosition().y 
 				+ "," + meuJogador.getTime());
 		
 		this.viewPort = new ViewPort(meuJogador);
@@ -98,7 +99,7 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		viewPort.setTela(this.getHeight(), this.getWidth());
 		viewPort.drawInViewPort(mapa, canvas);
 		
-		ConcurrentHashMap<String, JogadorCliente> jogadores = tratadorDeDadosDoCliente
+		ConcurrentHashMap<String, PlayerCliente> jogadores = tratadorDeDadosDoCliente
 				.getJogadores();
 		
 		List<TiroCliente> tiros = tratadorDeDadosDoCliente.getListTiros();
@@ -106,7 +107,7 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		Iterator<String> iterator = jogadores.keySet().iterator();
 		while (iterator.hasNext()) {
 			String key = iterator.next();
-			JogadorCliente jogador = jogadores.get(key);
+			PlayerCliente jogador = jogadores.get(key);
 			
 				this.viewPort.drawInViewPort(jogador, canvas);
 				
@@ -176,13 +177,14 @@ public class ViewDeRede extends View implements Runnable, Killable {
 			break;
 		
 		case MotionEvent.ACTION_UP:
+			dadosDoCliente.sendTiro(dedos[0]);
 			dadosDoCliente.setX(0);
 			dadosDoCliente.setY(0);
 			Log.i("Toque", "Retirado 1 toque");
 			break;
 		
         case MotionEvent.ACTION_POINTER_DOWN:
-            dadosDoCliente.sendTiro(dedos[1]);
+            //dadosDoCliente.sendTiro(dedos[1]);
             Log.i("Toque", "Segundo toque");
 			break;
 
