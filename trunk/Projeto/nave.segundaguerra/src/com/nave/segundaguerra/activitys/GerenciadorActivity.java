@@ -50,7 +50,7 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 		_rectLibrary.addRectFromBitmap("Soldado", "Soldado", 10);
 		_rectLibrary.addRectFromBitmap("Projetil", "Projetil", 5);
 		
-		this.gerenciadorClasse = GerenciadorClasse.medico;
+		this.gerenciadorClasse = GerenciadorClasse.soldado;
 		meuPlayer = selecionarPlayer(this.gerenciadorClasse);
 	}
 	

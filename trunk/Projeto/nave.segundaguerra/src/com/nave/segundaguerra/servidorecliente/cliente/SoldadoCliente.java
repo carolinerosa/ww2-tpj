@@ -19,6 +19,6 @@ public class SoldadoCliente extends PlayerCliente{
 	
 	@Override
 	public void sendTiro(DadosDoCliente dadosCliente, Point toque){
-		//dadosCliente.getCliente().write(Protocolo.PROTOCOL_SHOOT + "," + nome + "," + toque.x + "," + toque.y);
+		dadosCliente.getCliente().write(Protocolo.PROTOCOL_SHOOT + "," + nome + "," + toque.x + "," + toque.y);
 	}
 }
