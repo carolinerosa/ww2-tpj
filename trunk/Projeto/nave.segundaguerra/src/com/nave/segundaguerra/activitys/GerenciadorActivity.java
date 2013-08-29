@@ -50,8 +50,6 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 		_rectLibrary.addRectFromBitmap("Soldado", "Soldado", 10);
 		_rectLibrary.addRectFromBitmap("Projetil", "Projetil", 5);
 		
-		this.gerenciadorClasse = GerenciadorClasse.soldado;
-		meuPlayer = selecionarPlayer(this.gerenciadorClasse);
 	}
 	
 	public PlayerCliente selecionarPlayer(GerenciadorClasse gerenciador){
@@ -95,12 +93,17 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 		startActivity(intent);
 	}
 	
+	public void ClasseCena()
+	{
+		Intent intent = new Intent(GerenciadorActivity.this,ClasseActivity.class);
+		startActivity(intent);
+	}
+	
 	public void CenaDicas()
 	{
 		Intent intent = new Intent(GerenciadorActivity.this,DicasActivity.class);
 		startActivity(intent);
 	}
-
 	
 	public PlayerCliente getPlayer()
 	{

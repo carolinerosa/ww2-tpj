@@ -31,7 +31,7 @@ public class MenuActivity extends Activity implements ActivityManager{
 	
 	public void Click_Batalha(View v)
 	{
-		gerente.CenaConect();
+		gerente.ClasseCena();
 	}
 	
 	public void Click_Creditos(View v)

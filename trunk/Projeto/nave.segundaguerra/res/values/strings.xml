@@ -20,5 +20,6 @@
     <string name="DICAS_Retroceder">Retroceder</string>
     <string name="DICAS_Avancar">Avançar</string>
     <string name="DICAS_Texto">Cuidado ao detonar a mina. Um aliado pode estar lá…</string>
+    <string name="title_activity_classe">ClasseActivity</string>
 
 </resources>

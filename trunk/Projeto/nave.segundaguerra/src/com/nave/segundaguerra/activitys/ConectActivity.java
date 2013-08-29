@@ -6,13 +6,18 @@ import java.net.UnknownHostException;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Point;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.nave.segundaguerra.R;
 import com.nave.segundaguerra.activitys.views.ViewDeRede;
 import com.nave.segundaguerra.servidorecliente.cliente.ControleDeUsuariosCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.GeneralCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.MedicoCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.SoldadoCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.SoundManager;
 import com.nave.segundaguerra.servidorecliente.servidor.ControleDeUsuariosServidor;
 import com.nave.segundaguerra.servidorecliente.servidor.GerenteDEConexao;
@@ -57,10 +62,30 @@ public class ConectActivity extends Activity implements Killable {
 
 		editIP = (EditText) findViewById(R.id.IP);
 		editUsuario = (EditText) findViewById(R.id.Name);
-
+		TextView text = (TextView) findViewById(R.id.Classe);
+		gerenteCenas = GerenciadorActivity.GetInstance();
+		
+		String classeName = "";
+		
+		switch(gerenteCenas.gerenciadorClasse)
+		{
+			case general:
+			classeName = "Classe - General";
+			break;
+		
+			case soldado:
+			classeName = "Classe - Soldado";
+			break;
+			
+			case medico:
+			classeName = "Classe - Médico";
+			break;
+		}
+		
+		text.setText(classeName);
+		
 		thisContext = this;
 
-		gerenteCenas = GerenciadorActivity.GetInstance();
 	}
 
 	public void OnClickAzul(View sender) {
@@ -198,9 +223,8 @@ public class ConectActivity extends Activity implements Killable {
 		}
 	}
 
-	public void onBackPressed() {
-		SoundManager.getInstance().playSound(R.raw.menu, "MenuSound", true,
-				thisContext);
+	public void onBackPressed() 
+	{
 		killMeSoftly();
 	}
 

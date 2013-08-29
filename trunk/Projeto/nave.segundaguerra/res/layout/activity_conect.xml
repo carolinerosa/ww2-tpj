@@ -39,25 +39,6 @@
         android:layout_alignLeft="@+id/Name"
         android:ems="10" />
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginTop="17dp"
-        android:text="Nome"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/IP"
-        android:layout_centerVertical="true"
-        android:text="Endereço de IP"
-        android:textAppearance="?android:attr/textAppearanceLarge" />
-
     <EditText
         android:id="@+id/Name"
         android:layout_width="wrap_content"
@@ -82,13 +63,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="OnClickAzul"
+            android:textColor="@color/body" 
             android:text="Azul" />
 
         <RadioButton
             android:id="@+id/radio1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Vermelho" 
+            android:text="Vermelho"
+            android:textColor="@color/body" 
             android:onClick="OnClickVermelho"
             />
     </RadioGroup>
@@ -100,6 +83,37 @@
         android:layout_alignBottom="@+id/textView1"
         android:layout_alignLeft="@+id/radioGroup1"
         android:text="Time"
+        android:textColor="@color/body"
         android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/Name"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="30dp"
+        android:text="Nome"
+        android:textColor="@color/body"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/IP"
+        android:layout_alignLeft="@+id/IP"
+        android:text="Endereço de IP"
+        android:textColor="@color/body"
+        android:textAppearance="?android:attr/textAppearanceLarge" />
+
+    <TextView
+        android:id="@+id/Classe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:text="Classe                 "
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="@color/body" />
 
 </RelativeLayout>
