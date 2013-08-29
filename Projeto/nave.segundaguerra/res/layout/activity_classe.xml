@@ -1,8 +1,12 @@
-<?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".ClasseActivity" >
 
     <Button
         android:id="@+id/Soldado"
@@ -18,7 +22,7 @@
         android:layout_width="150dp"
         android:layout_height="100dp"
         android:layout_marginLeft="80dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="150dp"
         android:onClick="player_Medico"
         android:text="Médico" />
     
@@ -26,11 +30,11 @@
         android:id="@+id/General"
         android:layout_width="150dp"
         android:layout_height="100dp"
-        android:layout_marginLeft="300dp"
-        android:layout_marginTop="-220dp"
+        android:layout_marginLeft="270dp"
+        android:layout_marginTop="20dp"
         android:onClick="player_General"
         android:text="General" />
 
 
 
-</LinearLayout>
+</RelativeLayout>

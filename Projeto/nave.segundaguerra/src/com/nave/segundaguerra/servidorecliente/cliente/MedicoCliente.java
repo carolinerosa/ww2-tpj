@@ -8,7 +8,7 @@ import com.nave.segundaguerra.servidorecliente.util.Protocolo;
 public class MedicoCliente extends PlayerCliente{
 	
 	public MedicoCliente(String nome, Point position) {
-		super(nome, position, "Projetil");
+		super(nome, position, "Soldado");
 		//Coloquei 'Projetil' pq não há assets do Médico. por: Nuno
 		
 	}
