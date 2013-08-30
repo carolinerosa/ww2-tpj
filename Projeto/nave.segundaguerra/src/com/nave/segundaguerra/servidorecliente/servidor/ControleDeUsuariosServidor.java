@@ -131,7 +131,7 @@ private PlayerServer selecionarPlayerServer(String classe, String nome, Point po
 		return soldado;
 		}
 		else{
-		MedicoServer medico = new MedicoServer(nome, position);
+		MedicoServer medico = new MedicoServer(nome, position,this);
 		return medico;
 		}
 	}
