@@ -65,10 +65,14 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 			String nome = separado[0];
 			int x = Integer.parseInt(separado[1]);
 			int y = Integer.parseInt(separado[2]);
-
+			String classe = separado[3];
+			String time = separado[4];
+			
 			PlayerCliente jogador = jogadores.get(nome);
 			if (jogador == null) {
-				jogador = new SoldadoCliente(nome, new Point(x, y));
+				//jogador = new SoldadoCliente(nome, new Point(x, y));
+				selecionarPlayerCliente(classe, nome, new Point(x, y));
+				jogador.setTime(time);
 				jogadores.put(nome, jogador);
 			} else {
 				//jogador.setX(x);
@@ -77,7 +81,21 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 			}
 		}
 	}
-	
+	private PlayerCliente selecionarPlayerCliente(String classe, String nome, Point position){
+		
+		if (classe == "General") {
+		GeneralCliente general = new GeneralCliente(nome, position);
+		return general;
+		}
+		else if(classe == "Soldado"){
+		SoldadoCliente soldado = new SoldadoCliente(nome, position);
+		return soldado;
+		}
+		else{
+		MedicoCliente medico = new MedicoCliente(nome, position);
+		return medico;
+		}
+	}
 	public void moveTiros(Conexao origem, String linha){
 		
 		tiroList.clear();

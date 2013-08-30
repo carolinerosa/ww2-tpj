@@ -110,12 +110,30 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		int x = Integer.parseInt(array[2]);
 		int y = Integer.parseInt(array[3]);
 		String time = array[4];
-
-		origem.setId(nome);
-		PlayerServer jogador = new GeneralServer(nome, new Point(x, y));
-		jogadores.put(nome, jogador);
-		jogador.setTime(time);
+		String classe = array[5];
 		
+		origem.setId(nome);
+		//PlayerServer jogador = new GeneralServer(nome, new Point(x, y));
+		PlayerServer jogador = selecionarPlayerServer(classe, nome, new Point(x, y));
+		jogador.setTime(time);
+		jogador.setMinhaClasse(classe);
+		jogadores.put(nome, jogador);
+		
+	}
+private PlayerServer selecionarPlayerServer(String classe, String nome, Point position){
+		
+		if (classe == "General") {
+		GeneralServer general = new GeneralServer(nome, position);
+		return general;
+		}
+		else if(classe == "Soldado"){
+		SoldadoServer soldado = new SoldadoServer(nome, position);
+		return soldado;
+		}
+		else{
+		MedicoServer medico = new MedicoServer(nome, position);
+		return medico;
+		}
 	}
 	private void adicionaTiro(Conexao origem, String linha)
 	{

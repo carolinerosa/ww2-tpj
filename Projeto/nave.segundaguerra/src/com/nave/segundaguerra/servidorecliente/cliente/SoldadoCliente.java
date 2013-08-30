@@ -13,12 +13,18 @@ public class SoldadoCliente extends PlayerCliente{
 	}
 	
 	@Override
-	public void CarregarImagem(){
+	public void CarregarImagem(int larguraTela, int alturaTela){
 		this.setImage(ImageLibrary.getInstance().getImage("Soldado"));
 	}
 	
 	@Override
 	public void sendTiro(DadosDoCliente dadosCliente, Point toque){
-		//dadosCliente.getCliente().write(Protocolo.PROTOCOL_SHOOT + "," + nome + "," + toque.x + "," + toque.y);
+		dadosCliente.getCliente().write(Protocolo.PROTOCOL_SHOOT + "," + nome + "," + toque.x + "," + toque.y);
+	}
+	@Override
+	public void setPos(DadosDoCliente dadosCliente, Point pos){
+		//dadosCliente.setPos(pos);
+		dadosCliente.setX(pos.x);
+		dadosCliente.setY(pos.y);
 	}
 }

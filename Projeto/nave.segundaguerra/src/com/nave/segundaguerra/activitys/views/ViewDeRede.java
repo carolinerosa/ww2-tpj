@@ -79,7 +79,7 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		
 		meuJogador = GerenciadorActivity.GetInstance().getPlayer();
 		cliente.write(Protocolo.PROTOCOL_ID + "," + meuJogador.getNome() + ","+ meuJogador.getPosition().x + "," + meuJogador.getPosition().y 
-				+ "," + meuJogador.getTime());
+				+ "," + meuJogador.getTime() + "," + meuJogador.getMinhaClasse());
 		//meuJogador = setMeuJogador(cliente);
 		
 		this.viewPort = new ViewPort(meuJogador);
@@ -110,7 +110,12 @@ public class ViewDeRede extends View implements Runnable, Killable {
 			String key = iterator.next();
 			PlayerCliente jogador = jogadores.get(key);
 			
+			if(!this.meuJogador.verificarTelaCheia()){
 				this.viewPort.drawInViewPort(jogador, canvas);
+			}else{
+				GeneralCliente tempGeneral = (GeneralCliente) this.meuJogador;
+				this.viewPort.drawInViewPortFull(jogador, canvas, tempGeneral);
+			}
 				
 				if(jogador.getImage() != null)
 				{
@@ -165,22 +170,25 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		switch (action & MotionEvent.ACTION_MASK) 
 		{
 		case MotionEvent.ACTION_DOWN:
-			dadosDoCliente.setX(dedos[0].x);
-			dadosDoCliente.setY(dedos[0].y);
+			/*dadosDoCliente.setX(dedos[0].x);
+			dadosDoCliente.setY(dedos[0].y);*/
+			meuJogador.verificarZoom(event.getX(), event.getY(), this.getHeight(),this.getWidth());
 			Log.i("Toque", "Primeiro toque");
 			break;
 			
 		case MotionEvent.ACTION_MOVE:
-			dadosDoCliente.setX(dedos[0].x);
-			dadosDoCliente.setY(dedos[0].y);
+			/*dadosDoCliente.setX(dedos[0].x);
+			dadosDoCliente.setY(dedos[0].y);*/
+			meuJogador.setPos(dadosDoCliente,dedos[0]);
 			Log.i("Toque", "Movendo toque");
 			break;
 		
 		case MotionEvent.ACTION_UP:
 			//dadosDoCliente.sendTiro(dedos[0]);
 			meuJogador.sendTiro(this.dadosDoCliente, dedos[0]);
-			dadosDoCliente.setX(0);
-			dadosDoCliente.setY(0);
+			meuJogador.setPos(dadosDoCliente, new Point(0,0));
+			/*dadosDoCliente.setX(0);
+			dadosDoCliente.setY(0);*/
 			Log.i("Toque", "Retirado 1 toque");
 			break;
 		

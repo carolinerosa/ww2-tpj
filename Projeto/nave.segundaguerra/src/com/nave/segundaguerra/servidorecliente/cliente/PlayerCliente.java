@@ -33,8 +33,9 @@ public class PlayerCliente
 
 	protected int x;
 	protected int y;
-	private Paint paint;
+	protected Paint paint;
 	//DadosDoCliente dadosCliente;
+	protected boolean telaCheia = false;
 	
 	private Bitmap imagemPlayer;
 	
@@ -73,7 +74,9 @@ public class PlayerCliente
 		
 		//this.imagemPlayer = ImageLibrary.getInstance().getImage("Soldado");
 		
-		playerSprite = new SpritePlayer(minhaClasse, 1, 3);
+			if(this.minhaClasse != "General"){
+			playerSprite = new SpritePlayer(minhaClasse, 1, 3);
+			}
 		//sprite = new Sprite(this.imagemPlayer, 1, 3);
 		
 	}
@@ -107,16 +110,16 @@ public class PlayerCliente
 			
 			playerSprite.Draw(canvas);
 			
-		}else{
+		}/*else{
 			canvas.drawCircle(x, y, 10, paint);
-		}
+		}*/
 		
 		canvas.drawText("<" + nome + ">", x - 30
 				, y + 30, paint);
 		
 	}
 	
-	public void CarregarImagem(){
+	public void CarregarImagem(int larguraTela, int alturaTela){
 		
 	}
 	public String getNome() {
@@ -138,6 +141,19 @@ public class PlayerCliente
 	}
 	public void setTime(String time){
 		this.time = time;
+		atualizarPaint();
+	}
+	private void atualizarPaint(){
+		if(this.time == Const.TIMEVERMELHO)
+		{
+			this.paint.setColor(Color.RED);
+		}else 
+			if(this.time == Const.TIMEAZUL)
+		{
+			this.paint.setColor(Color.BLUE);
+		}else{
+			this.paint.setColor(Color.WHITE);
+		}
 	}
 	
 	public String toString() {
@@ -153,9 +169,21 @@ public class PlayerCliente
 	public void setPosition(Point pos) {
 	this.x = pos.x;
 	this.y = pos.y;
-	playerSprite.setPosition(pos);
+		if(this.minhaClasse != "General"){
+		playerSprite.setPosition(pos);
+		}
 	}
-
+	public String getMinhaClasse(){
+		return this.minhaClasse;
+	}
+	public boolean verificarTelaCheia(){
+		return this.telaCheia;
+	}
+	public void verificarZoom(float x, float y, int altura, int largura){
+	}
+	
 	public void sendTiro(DadosDoCliente dadosCliente, Point toque){
+	}
+	public void setPos(DadosDoCliente dadosCliente, Point pos){
 	}
 }
