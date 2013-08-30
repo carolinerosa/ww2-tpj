@@ -58,6 +58,11 @@
             android:label="@string/title_activity_conect"
             android:screenOrientation="landscape" >
         </activity>
+         <activity
+            android:name="com.nave.segundaguerra.activitys.ClasseActivity"
+            android:label="@string/title_activity_classe"
+            android:screenOrientation="landscape" >
+        </activity>
     </application>
 
 </manifest>

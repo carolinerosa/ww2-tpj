@@ -44,10 +44,13 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 		
 	
 		_library.addImage("Soldado","soldado.png",this);
-		_library.addImage("Projetil","projetil.png",this);
+		_library.addImage("Medico","Medico.jpg",this);
 		_library.addImage("Cenario","Cenario1.jpg",this);
+		_library.addImage("Projetil","projetil.png",this);
+		_library.addImage("ZoomGeneral","ZoomGeneral.png",this);
 		
 		_rectLibrary.addRectFromBitmap("Soldado", "Soldado", 10);
+		_rectLibrary.addRectFromBitmap("Medico", "Medico", 10);
 		_rectLibrary.addRectFromBitmap("Projetil", "Projetil", 5);
 		
 	}
@@ -58,17 +61,14 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 		
 		case general:
 		GeneralCliente general = new GeneralCliente("", new Point(100, 50));
-		general.CarregarImagem();
 		return general;
 		
 		case soldado:
 		SoldadoCliente soldado = new SoldadoCliente("", new Point(100, 50));
-		soldado.CarregarImagem();
 		return soldado;
 			
 		case medico:
 		MedicoCliente medico = new MedicoCliente("", new Point(100, 50));
-		medico.CarregarImagem();
 		return medico;
 			
 		}

@@ -31,7 +31,7 @@ public class PlayerServer
 	// Grupo do Thyago
 	protected String nome;
 	public String time;
-
+	private String minhaClasse;
 	public static final String TAG = "Jogador";
 
 	public PlayerServer() 
@@ -69,7 +69,12 @@ public class PlayerServer
 	public int getLife() {
 		return life;
 	}
-	
+	public String getMinhaClasse() {
+		return this.minhaClasse;
+	}
+	public void setMinhaClasse(String classe) {
+		this.minhaClasse = classe;
+	}
 	public String getNome() {
 		return nome;
 	}
@@ -180,6 +185,6 @@ public class PlayerServer
 		return "Jogador [nome=" + nome + ", x=" + x + ", y=" + y + "]";
 	}
 	public String toStringCSV() {
-		return nome + "," + x + "," + y + ";";
+		return nome + "," + x + "," + y + "," + minhaClasse + "," + time + ";";
 	}
 }

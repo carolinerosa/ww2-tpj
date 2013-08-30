@@ -10,6 +10,7 @@ import android.view.View;
 
 import com.nave.segundaguerra.activitys.GerenciadorActivity;
 import com.nave.segundaguerra.activitys.views.ViewDeRede;
+import com.nave.segundaguerra.servidorecliente.util.ImageLibrary;
 
 public class ViewPort {
 
@@ -71,6 +72,9 @@ public class ViewPort {
 	
 	public void drawInViewPort(PlayerCliente player, Canvas canvas){
 		
+		if(player.getImage() == null){
+			player.CarregarImagem(this.larguraTela, this.alturaTela);
+		}
 		int oldX = player.getPosition().x;
 		int oldY = player.getPosition().y;
 		
@@ -105,7 +109,15 @@ public class ViewPort {
 		player.setPosition(new Point(oldX,oldY));
 		
 	}
-	
+	public void drawInViewPortFull(PlayerCliente player, Canvas canvas, GeneralCliente general){
+		
+		float posX = ((this.alturaTela * player.getPosition().x) / ImageLibrary.getInstance().getImage("Cenario").getHeight()) * 1.25f;
+		float posY = ((this.larguraTela * player.getPosition().y) /  ImageLibrary.getInstance().getImage("Cenario").getWidth()) / 1.25f;
+		if(player.getMinhaClasse() != "General"){
+		canvas.drawCircle(posX,posY,5, player.paint);
+		}
+		canvas.drawBitmap(general.getBotao(), general.getPosBotao().x, general.getPosBotao().y, general.paint);
+	}
 	public void drawInViewPort(TiroCliente tiro, Canvas canvas){
 		
 		Point old = tiro.getPosition();

@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 
 import com.nave.segundaguerra.activitys.GerenciadorActivity;
+import com.nave.segundaguerra.game.CalculoImagem;
 import com.nave.segundaguerra.servidorecliente.util.ImageLibrary;
 
 public class MapaCliente {
@@ -58,6 +59,8 @@ public class MapaCliente {
 	public int getAltura(){
 		return imagemMapa.getHeight();				
 	}
-	
+	public void setImage(float width, float height){
+		this.imagemMapa = CalculoImagem.getInstance().RedimensionarImagem(this.imagemMapa, width, height);
+	}
 	
 }
