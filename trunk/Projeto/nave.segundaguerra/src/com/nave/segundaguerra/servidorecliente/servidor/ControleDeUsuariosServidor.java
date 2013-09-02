@@ -25,6 +25,7 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 	
 	private ConcurrentHashMap<String, PlayerServer> jogadores;
 	private List<TiroServer> tiroList = new CopyOnWriteArrayList();
+	private List<ItemServer> itemList = new CopyOnWriteArrayList();
 	
 	private LoopServer loop;
 	
@@ -36,6 +37,10 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 	public List<TiroServer> getTirosList()
 	{
 		return this.tiroList;
+	}
+	
+	public List<ItemServer> getItemList(){
+		return this.itemList;
 	}
 	
 	public void setListTiros(List<TiroServer> list)
@@ -67,6 +72,12 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		}
 		if(linha.startsWith(Protocolo.PROTOCOL_SHOOT)){
 			adicionaTiro(origem, linha);
+		}
+		
+		if(linha.startsWith(Protocolo.PROTOCOL_ITEM))
+		{
+			adicionaItem(origem, linha);
+			Log.i(Const.TAG, "Entrou no protocolo do item.");
 		}
 		
 		informaTodosUsuarios(origem);
@@ -120,7 +131,8 @@ public class ControleDeUsuariosServidor implements DepoisDeReceberDados {
 		jogadores.put(nome, jogador);
 		
 	}
-private PlayerServer selecionarPlayerServer(String classe, String nome, Point position){
+	
+	private PlayerServer selecionarPlayerServer(String classe, String nome, Point position){
 		
 		if (classe == "General") {
 		GeneralServer general = new GeneralServer(nome, position);
@@ -135,6 +147,7 @@ private PlayerServer selecionarPlayerServer(String classe, String nome, Point po
 		return medico;
 		}
 	}
+	
 	private void adicionaTiro(Conexao origem, String linha)
 	{
 		String[] array = linha.split(",");
@@ -164,6 +177,37 @@ private PlayerServer selecionarPlayerServer(String classe, String nome, Point po
 		}
 
 		origem.write(Protocolo.PROTOCOL_SHOOT + buffer.toString());
+	}
+	
+	private void adicionaItem(Conexao origem, String linha)
+	{
+		String[] array = linha.split(",");
+		String nome = array[1];
+		int x = Integer.parseInt(array[2]);
+		int y = Integer.parseInt(array[3]);
+
+		itemList.add(new ItemServer(new Point(x, y),nome));
+		//	itemList.add(new ItemServer(jogadores.get(nome), new Point(x, y)));
+		//	itemList.add(new ItemServer(jogadores.get(nome), new Point(x, y)));
+			
+		atualizaItens(origem);
+		
+	}
+	
+	private void atualizaItens(Conexao origem) {
+
+		StringBuffer buffer = new StringBuffer();
+		
+		for(ItemServer t : itemList){
+			
+			int x = (int) t.getPosition().x;
+			int y = (int) t.getPosition().y;
+			String itemToString = x + "," + y + ";";
+			
+			buffer.append(itemToString);
+		}
+
+		origem.write(Protocolo.PROTOCOL_ITEM + buffer.toString());
 	}
 	
 	public void removerTiro(TiroServer tiro)

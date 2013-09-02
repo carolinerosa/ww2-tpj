@@ -48,7 +48,9 @@ public class GerenciadorActivity extends Activity implements Killable,ActivityMa
 		_library.addImage("Cenario","Cenario1.jpg",this);
 		_library.addImage("Projetil","projetil.png",this);
 		_library.addImage("ZoomGeneral","ZoomGeneral.png",this);
+		_library.addImage("Caixa","caixaMunicao.png",this);
 		
+		_rectLibrary.addRectFromBitmap("Caixa", "Caixa", 10);		
 		_rectLibrary.addRectFromBitmap("Soldado", "Soldado", 10);
 		_rectLibrary.addRectFromBitmap("Medico", "Medico", 10);
 		_rectLibrary.addRectFromBitmap("Projetil", "Projetil", 5);
