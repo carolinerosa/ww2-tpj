@@ -20,6 +20,7 @@ import com.nave.segundaguerra.game.Tiro;
 import com.nave.segundaguerra.servidorecliente.cliente.ControleDeUsuariosCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.DadosDoCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.GeneralCliente;
+import com.nave.segundaguerra.servidorecliente.cliente.ItemCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.MapaCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.PlayerCliente;
 import com.nave.segundaguerra.servidorecliente.cliente.TiroCliente;
@@ -104,6 +105,7 @@ public class ViewDeRede extends View implements Runnable, Killable {
 				.getJogadores();
 		
 		List<TiroCliente> tiros = tratadorDeDadosDoCliente.getListTiros();
+		List<ItemCliente> item = tratadorDeDadosDoCliente.getItemList();
 		
 		Iterator<String> iterator = jogadores.keySet().iterator();
 		while (iterator.hasNext()) {
@@ -127,6 +129,11 @@ public class ViewDeRede extends View implements Runnable, Killable {
 		{  
 			this.viewPort.drawInViewPort(t, canvas);
 	    }
+		
+		for(ItemCliente i : item){
+			Log.i("Qant: ",""+ item.size());
+			this.viewPort.drawInViewPort(i,canvas);
+		}
 
 	}
 

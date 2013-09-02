@@ -20,13 +20,20 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 
 	private ConcurrentHashMap<String, PlayerCliente> jogadores;
 	private List<TiroCliente> tiroList = new CopyOnWriteArrayList();
-
+	private List<ItemCliente> itemList = new CopyOnWriteArrayList();
+	
+	
 	public ConcurrentHashMap<String, PlayerCliente> getJogadores() {
 		return jogadores;
 	}
 	public List<TiroCliente> getListTiros(){
 		return this.tiroList;
 	}
+	
+	public List<ItemCliente> getItemList(){
+		return this.itemList;
+	}
+
 	
 	public void setListTiros(List<TiroCliente> list)
 	{
@@ -54,6 +61,12 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 			
 			String[] lista = linha.split(":");
 			moveTiros(origem, lista[1]);
+		}
+		
+		if (linha.startsWith(Protocolo.PROTOCOL_ITEM))
+		{
+			String[] lista = linha.split(":");
+			InstantiateCaixa(origem, lista[1]);
 		}
 	}
 	
@@ -114,6 +127,25 @@ public class ControleDeUsuariosCliente implements DepoisDeReceberDados {
 		}
 	}
 	
+	public void InstantiateCaixa(Conexao origem, String linha)
+	{
+		Log.i("Caixa !", "Caixaaaaa");
+		String[] lista = linha.split(";");
+		
+		int i = 0;
+		for (String um : lista) {
+			String[] separado = um.split(",");
+			int x = Integer.parseInt(separado[0]);
+			
+			int y = Integer.parseInt(separado[1]);
+			
+			itemList.add(i, new ItemCliente(new Point(x, y)));
+			i++;
+			Log.i("Caixa !", "adicionando na lista");
+		}
+		
+		
+	}
 	
 	public void iniciarJogo(){
 		

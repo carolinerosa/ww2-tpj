@@ -148,6 +148,21 @@ public class ViewPort {
 		
 	}
 	
+	public void drawInViewPort(ItemCliente item, Canvas canvas){
+		
+		Point old = item.getPosition();
+		Point next = new Point((old.x - x), (old.y - y));
+		
+		if(this.checkDraw(next.x, next.y))
+		{
+			item.setPosition(next);
+			item.DrawItem(canvas);
+		}
+		
+		item.setPosition(old);
+
+	}
+	
 	public Point getPosPlayerDraw(){
 		return posPlayerDraw;
 	}

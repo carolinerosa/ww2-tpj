@@ -49,7 +49,8 @@ public class GeneralCliente extends PlayerCliente{
 	
 	@Override
 	public void sendTiro(DadosDoCliente dadosCliente, Point toque){
-		//dadosCliente.getCliente().write(Protocolo.PROTOCOL_SHOOT + "," + nome + "," + toque.x + "," + toque.y);
+		dadosCliente.getCliente().write(Protocolo.PROTOCOL_ITEM + "," + "MunicaoArma" + "," + toque.x + "," + toque.y);
+		Log.i(Const.TAG,"Entrou no general.");
 	}
 	
 	@Override
